@@ -1,0 +1,11 @@
+server_host = localhost
+search_base  =  dc=machinet       
+version = 3
+bind = no
+search_attribute = member
+query_filter = (&(objectclass=groupofnames)(cn=%s))
+result_attribute = mail
+special_result_attribute = member
+
+
+

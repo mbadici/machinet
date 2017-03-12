@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{$pagetitle}</title>
+    <link rel="stylesheet" href="{$skin_path}style.css" />
+    <link rel="shortcut icon" type="image/png" href="{$skin_path}images/favicon.png" />
+</head>
+<body>
+    <div id="message" class="error" style="display: block">
+        <div>
+            <span><b>{$engine->translate('error')} {$error_code}:</b><br />{$error_message}</span>
+        </div>
+    </div>
+    <div id="logo"></div>
+    <div id="topmenu"></div>
+    <div id="navigation"></div>
+    <div id="task_navigation"></div>
+    <div id="content"></div>
+    <div id="footer">
+        {include file="footer.html"}
+    </div>
+</body>
+</html>

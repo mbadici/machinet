@@ -1,0 +1,10 @@
+#!/bin/bash
+for MAILBOX in `ls  /var/spool/mail`
+do
+
+SIZE=`ls -s /var/spool/mail/$MAILBOX|cut -f1 -d" "`
+if [ "$SIZE" -gt 375000 ]
+then
+echo $SIZE $MAILBOX
+fi
+done

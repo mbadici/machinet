@@ -1,0 +1,24 @@
+#!/bin/bash
+
+user=$1.$2
+echo "user:" $user
+ echo "generating ldif"
+#rootpass=`cat /etc/openldap/slapd.conf|grep rootpw|cut -f3`
+rootpass='secret'
+ldiffile=$user".ldif"
+nume=`echo $2 |sed -re 's/(^)(.)/\u&/'`
+prenume=`echo $1 |sed -re 's/(^)(.)/\u&/'`
+ echo "dn: cn=$nume $prenume,ou=users,dc=machinet
+	cn: $nume $prenume
+	objectclass: inetOrgPerson
+	objectclass: vacation
+	objectclass: mailaccount
+	objectclass: accountable
+	gn: $prenume
+	sn: $nume
+	mobile:0
+	vacationactive: FALSE
+	userPassword: 1234abcd.
+	uid:$user@4data.ro
+	mail:$user@4data.ro"	 > /tmp/$ldiffile
+ldapadd  -D "cn=Manager,dc=machinet" -x -w $rootpass -f  /tmp/$ldiffile

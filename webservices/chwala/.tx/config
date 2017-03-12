@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+lang_map = en: en_US, de: de_DE, es: es_ES, fi: fi_FI, fr: fr_FR, ja: ja_JP, nl: nl_NL, cs: cs_CZ
+
+[kolab.kolab-chwala]
+file_filter = lib/locale/<lang>.php
+source_file = lib/locale/en_US.php
+source_lang = en_US

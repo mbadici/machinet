@@ -1,0 +1,19 @@
+#!/bin/bash
+rsync -av webservices/roundcubemail*  /usr/share/
+rsync -av webservices/mcConsolette  /usr/share/
+rsync -av webservices/chwala*  /usr/share/
+rsync -av webservices/kolab-syncroton*  /usr/share/
+chown -R www-data:www-data /usr/share/mcConsolette
+chown -R www-data:www-data /usr/share/roundcubemail
+chown -R www-data:www-data /usr/share/chwala
+chown -R www-data:www-data /usr/share/kolab-syncroton
+
+cp webservices/httpd-machinet.conf /etc/apache2/sites-available
+a2ensite httpd-machinet.conf
+service apache2 restart
+echo "Enter mysql root password:"
+mysql -u root -p  < webservices/kolab-3.3.sql
+cd /usr/share
+ln -s roundcubemail* roundcubemail
+ln -s chwala* chwala
+ln -s kolab-syncroton* kolab-syncroton

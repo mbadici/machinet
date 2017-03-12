@@ -1,0 +1,19 @@
+Date: Thu, 09 Aug 2012 13:18:31 +0000
+Subject: Fwd: test html xx
+Message-ID: <qma5x35ckynysjn2ee1jwwn8.1344518311869@email.android.com>
+From: user@domain.tld
+To: kolab@domain.tld
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="BOUNDARY"
+
+--BOUNDARY
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: base64
+
+ZWVl
+--BOUNDARY
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+
+aaa
+--BOUNDARY--

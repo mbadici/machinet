@@ -1,0 +1,1 @@
+/usr/share/roundcubemail-0.9/config/db.inc.php

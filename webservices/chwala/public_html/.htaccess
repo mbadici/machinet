@@ -1,0 +1,6 @@
+php_flag  session.auto_start   Off
+php_flag  display_errors       Off
+php_flag  log_errors           On
+php_value error_log            ../logs/errors
+php_value post_max_size        20M
+php_value upload_max_filesize  20M

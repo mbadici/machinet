@@ -1,0 +1,81 @@
+<?php
+
+// This file lists all ActiveSync-related configuration options
+
+// Enables ActiveSync protocol debuging
+$config['activesync_debug'] = true;
+
+// Enables logging to a separate directory for every user/device
+$config['activesync_user_log'] = false;
+
+// Enable per-user debugging only if /var/log/syncroton/<username>/ folder exists
+$config['activesync_user_debug'] = false;
+
+// If specified all ActiveSync-related logs will be saved to this file
+// Note: This doesn't change Roundcube Framework log locations
+$config['activesync_log_file'] = null;
+
+// Type of ActiveSync cache. Supported values: 'db', 'apc' and 'memcache'.
+// Note: This is only for some additional data like timezones mapping.
+$config['activesync_cache'] = 'db';
+
+// lifetime of ActiveSync cache
+// possible units: s, m, h, d, w
+$config['activesync_cache_ttl'] = '1d';
+
+// Type of ActiveSync Auth cache. Supported values: 'db', 'apc' and 'memcache'.
+// Note: This is only for username canonification map.
+$config['activesync_auth_cache'] = 'db';
+
+// lifetime of ActiveSync Auth cache
+// possible units: s, m, h, d, w
+$config['activesync_auth_cache_ttl'] = '1d';
+
+// List of global addressbooks (GAL)
+// Note: If empty 'autocomplete_addressbooks' setting will be used
+$config['activesync_addressbooks'] = array();
+
+// ActiveSync => Roundcube contact fields map for GAL search
+/* Default: array(
+       'alias'         => 'nickname',
+       'company'       => 'organization',
+       'displayName'   => 'name',
+       'emailAddress'  => 'email',
+       'firstName'     => 'firstname',
+       'lastName'      => 'surname',
+       'mobilePhone'   => 'phone.mobile',
+       'office'        => 'office',
+       'picture'       => 'photo',
+       'phone'         => 'phone',
+       'title'         => 'jobtitle',
+);
+*/
+$config['activesync_gal_fieldmap'] = null;
+
+// List of Roundcube plugins
+// WARNING: Not all plugins used in Roundcube can be listed here
+$config['activesync_plugins'] = array();
+
+// Defines for how many seconds we'll sleep between every
+// action for detecting changes in folders. Default: 60
+$config['activesync_ping_timeout'] = 60;
+
+// We start detecting changes n seconds since the last sync of a folder
+// Default: 180
+$config['activesync_quiet_time'] = 180;
+
+// When a device is reqistered, by default a set of folders are
+// subscribed for syncronization, i.e. INBOX and personal folders with
+// defined folder type:
+//     mail.drafts, mail.wastebasket, mail.sentitems, mail.outbox,
+//     event, event.default,
+//     contact, contact.default,
+//     task, task.default
+// This default set can be extended by adding following values:
+//     1 - all subscribed folders in personal namespace
+//     2 - all folders in personal namespace
+//     4 - all subscribed folders in other users namespace
+//     8 - all folders in other users namespace
+//    16 - all subscribed folders in shared namespace
+//    32 - all folders in shared namespace
+$config['activesync_init_subscriptions'] = 0;

@@ -1,0 +1,2 @@
+<?php
+$labels['listname'] = 'Nom';

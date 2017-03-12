@@ -1,0 +1,8 @@
+server_host = localhost
+search_base  =  ou=domains,dc=machinet       
+version = 3
+bind = no
+query_filter = (&(objectclass=dnsdomain)(dc=%s))
+result_attribute = dc
+
+

@@ -1,0 +1,9 @@
+server_host = localhost
+search_base  =  dc=machinet       
+version = 3
+bind = no
+search_attribute = maildropplace
+query_filter = (mail=%s)
+result_attribute = maildropplace
+
+

@@ -1,0 +1,12 @@
+#!/bin/bash
+MAXSIZE=30;
+for MBOX in `ls /home/dovecot`
+do
+MSIZE=`du -s /home/dovecot/$MBOX|cut -f1` 
+if [ "$MSIZE" -gt $MAXSIZE ];
+then
+ echo $MBOX
+
+echo "Mailboxul dvs se apropie de limita maxima (500M)" | mail -s "Dimensiune mailbox" "$MBOX@machinet.ro" 
+fi
+done 

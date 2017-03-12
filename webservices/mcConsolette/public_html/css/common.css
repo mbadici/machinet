@@ -1,0 +1,30 @@
+/* CSS Document */
+
+.header {
+         height: 100px;
+		 border: #003399 double 2px;
+		 background: #CCCC66;
+		 text-align:center;
+		 font:Verdana, Arial, Helvetica, sans-serif;
+		 font-size: 21px;
+		 }
+		 
+
+	 
+.continut {
+         
+		   border: #003399 double 2px;
+		   background: #CCCC99;
+		   text-align:left;
+		   font-size: 21px;
+		   font:Verdana, Arial, Helvetica, sans-serif;
+		   line-height: 30px;
+		   }
+		   
+.footer {
+         height: 100px;
+		 border: #003399 double 2px;
+		 background: #CCCC66;
+		 text-align:center;
+		 font:Verdana, Arial, Helvetica, sans-serif;}
+		 

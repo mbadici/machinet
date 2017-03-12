@@ -1,0 +1,40 @@
+Message-ID: <52B02B8F.9010500@domain.de>
+Date: Tue, 17 Dec 2013 11:46:39 +0100
+From: Sender <sender@domain.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
+To: Verborgene_Empfaenger:;
+Subject: Weihnachtsbrief
+Content-Type: multipart/mixed;
+ boundary="------------000801030509090203070207"
+
+This is a multi-part message in MIME format.
+--------------000801030509090203070207
+Content-Type: multipart/alternative;
+ boundary="------------060305070900000101080707"
+
+
+--------------060305070900000101080707
+Content-Type: text/plain; charset=ISO-8859-15; format=flowed
+Content-Transfer-Encoding: base64
+
+SGVyemxpY2hlIEFkdmVudHNncvzfZQ==
+--------------060305070900000101080707
+Content-Type: text/html; charset=ISO-8859-15
+Content-Transfer-Encoding: base64
+
+PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEgVHJhbnNpdGlvbmFs
+Ly9FTiI+DQo8aHRtbD4NCiAgPGhlYWQ+DQogICAgPG1ldGEgaHR0cC1lcXVpdj0iY29udGVudC10
+eXBlIiBjb250ZW50PSJ0ZXh0L2h0bWw7IGNoYXJzZXQ9SVNPLTg4NTktMTUiPg0KICA8L2hlYWQ+
+DQogIDxib2R5IGJnY29sb3I9IiNmZmZmZmYiIHRleHQ9IiMwMDAwMDAiPg0KICAgIEhlcnpsaWNo
+ZSBBZHZlbnRzZ3L832U8YnI+DQogIDwvYm9keT4NCjwvaHRtbD4=
+--------------060305070900000101080707--
+
+--------------000801030509090203070207
+Content-Type: application/pdf;
+ name="Weihnachtsbrief13.pdf"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename="Weihnachtsbrief13.pdf"
+
+JVBERi0 [...shortened...] DYKJSVFT0YK
+--------------000801030509090203070207--

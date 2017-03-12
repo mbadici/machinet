@@ -1,0 +1,38 @@
+#!/bin/bash
+#mv /etc/ldap/schema  /etc/ldap/schema.back
+#cp /etc/machiNET/ldap/rc.slapd /etc/rc.d/rc.slapd
+#cp openldap/ISPEnv2.schema /etc/ldap/schema/
+#cp openldap/slapd.conf /etc/ldap/
+#cp openldap/ldap.conf /etc/ldap/
+#cp openldap/DB_CONFIG /var/lib/ldap/
+mkdir /etc/ldap/users
+echo "backup the old config"
+cp /etc/ldap/slapd.d /etc/ldap/slapd.d.back-machinet
+#mkdir /etc/ldap/slapd.d
+#chown  -R openldap:openldap /etc/ldap/slapd.d
+echo "restarting slapd...."
+#slaptest -f /etc/ldap/slapd.conf -F /etc/ldap/slapd.d
+#chown -R openldap:openldap /etc/ldap/slapd.d
+ldapadd -Y EXTERNAL -H ldapi:/// -D "cn=admin,cn=config" -W -f openldap/ispenv2.ldif
+
+service slapd restart
+#/usr/libexec/slapd
+echo populate the directory:
+#rootpass=`cat /etc/openldap/slapd.conf|grep rootpw|cut -f3`
+rootpass='secret'
+#ldapadd -D "cn=admin,dc=machinet" -c -x -w $rootpass -f openldap/root.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -D "cn=admin,cn=config" -W -f openldap/machinet.ldif
+
+ldapadd -D "cn=Manager,dc=machinet" -c -x -w $rootpass -f openldap/root.ldif
+
+ldapadd -D "cn=Manager,dc=machinet" -c -x -w $rootpass -f openldap/templates.ldif
+#ldapadd -Y EXTERNAL -H ldapi:/// -D "cn=Manager,dc=machinet" -W -f openldap/templates.ldif
+
+ldapadd -D "cn=Manager,dc=machinet" -c -x -w $rootpass -f openldap/groups.ldif
+#ldapadd -Y EXTERNAL -H ldapi:/// -D ""cn=Manager,dc=machinet"" -W -f openldap/groups.ldif
+
+ldapadd -D "cn=Manager,dc=machinet" -c -x -w $rootpass -f openldap/domains.ldif
+#ldapadd -Y EXTERNAL -H ldapi:/// -D ""cn=Manager,dc=machinet"" -W -f openldap/domains.ldif
+
+
+

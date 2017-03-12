@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{$pagetitle}</title>
+    <link rel="stylesheet" href="{$skin_path}style.css" />
+    <link rel="shortcut icon" type="image/png" href="{$skin_path}images/favicon.png" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/files_api.js"></script>
+    <script src="js/files_ui.js"></script>
+    <script src="{$skin_path}ui.js"></script>
+</head>
+<body>
+    <div id="logo"></div>
+    <div id="topmenu">
+        <span class="logout link" onclick="window.close()">{$engine->translate('close')}</span>
+    </div>
+    <div id="content" class="fileopen">
+        <div id="actionbar">
+            <a id="file-edit-button" class="disabled" onclick="ui.command('file.edit')"><span>{$engine->translate('file.edit')}</span></a>
+            <a id="file-save-button" class="disabled" onclick="ui.command('file.save')"><span>{$engine->translate('file.save')}</span></a>
+            <a id="file-download-button" class="disabled" onclick="ui.command('file.download')"><span>{$engine->translate('file.download')}</span></a>
+            <a id="file-delete-button" class="disabled" onclick="ui.command('file.delete')"><span>{$engine->translate('file.delete')}</span></a>
+        </div>
+        <div id="filedata">
+            {$engine->file_open_data()}
+        </div>
+        <div id="taskcontent">
+            {$engine->file_open_frame()}
+        </div>
+    </div>
+    <div id="footer">
+        {include file="footer.html"}
+    </div>
+    <div id="loader"><img src="{$skin_path}images/loading_circle.gif"><span>{$engine->translate('loading')}</span></div>
+{$script}
+</body>
+</html>

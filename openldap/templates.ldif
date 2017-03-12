@@ -1,0 +1,12 @@
+dn: ou=templates,dc=machinet
+ou: templates
+objectclass: organizationalunit
+
+dn: cn= Doae Ion,ou=templates,dc=machinet
+objectclass: inetorgperson
+objectclass: accountable
+cn: Doae Ion
+sn: Doae
+givenname: Ion
+uid: ion.doae
+mail: ion.doae@machinet.ro

@@ -1,0 +1,3 @@
+16.06.2015 Support for jessie kolab plugins in enable_kolab
+16.06.2015  Add missing  classic profile in calendar plugin
+16.06.2015  Fix sieve path 

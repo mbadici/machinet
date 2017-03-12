@@ -1,0 +1,13 @@
+<phpunit backupGlobals="false"
+    bootstrap="bootstrap.php"
+    colors="true">
+    <testsuites>
+        <testsuite name="All Tests">
+            <file>body_converter.php</file>
+            <file>data.php</file>
+            <file>data_tasks.php</file>
+            <file>message.php</file>
+            <file>timezone_converter.php</file>
+        </testsuite>
+    </testsuites>
+</phpunit>

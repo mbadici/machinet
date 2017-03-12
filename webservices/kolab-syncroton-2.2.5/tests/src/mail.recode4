@@ -1,0 +1,47 @@
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="=_421c567043d5df058671910ddb659fc5"
+Date: Thu, 06 Feb 2014 13:59:33 +0000
+From: alec <test@test.cc>
+To: <test2@test.cc>
+Subject: test html + image
+Message-ID: <6c821c802bc5293e179f9bcb5d4d8279@klab.cc>
+User-Agent: Roundcube Webmail/1.0-git
+
+--=_421c567043d5df058671910ddb659fc5
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=UTF-8
+
+ 
+
+test message with inline image żąść 
+
+ 
+--=_421c567043d5df058671910ddb659fc5
+Content-Type: multipart/related;
+ boundary="=_61b68141aaee8dc5b321e6059b43bb78"
+
+--=_61b68141aaee8dc5b321e6059b43bb78
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<html><body style=3D'font-size: 10pt; font-family: Verdana,Geneva,sans-seri=
+f'>
+<p>test message with inline image =C5=BC=C4=85=C5=9B=C4=87</p>
+<p><img src=3D"cid:139169517352f395455c016176663627@test.cc" alt=3D"logo.gif" /></p>
+</body></html>
+
+--=_61b68141aaee8dc5b321e6059b43bb78
+Content-Transfer-Encoding: base64
+Content-ID: <139169517352f395455c016176663627@test.cc>
+Content-Type: image/jpeg;
+ name=logo.gif
+Content-Disposition: inline;
+ filename=logo.gif;
+ size=25745
+
+/9j/4AAQSkZJRgABAgEASABIAAD/4QqARXhpZgAATU0AKgAAAAgABwESAAMAAAABAAEAAAEaAAUA
+--=_61b68141aaee8dc5b321e6059b43bb78--
+
+--=_421c567043d5df058671910ddb659fc5--

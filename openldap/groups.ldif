@@ -1,0 +1,12 @@
+dn: ou=groups,dc=machinet
+objectclass: top
+objectclass: organizationalUnit
+ou: groups
+description: user groups
+
+dn: ou=users,dc=machinet
+objectclass: top
+objectclass: organizationalUnit
+ou: users
+description: users
+

@@ -1,0 +1,19 @@
+dn: olcDatabase={2}mdb,cn=config
+objectClass: olcDatabaseConfig
+objectClass: olcMdbConfig
+olcDatabase: {2}mdb
+olcSuffix: dc=machinet
+olcDbDirectory: /var/lib/ldap
+olcRootDN: cn=Manager,dc=machinet
+olcRootPW: secret
+olcDbIndex: cn,sn,uid pres,eq,approx,sub
+olcDbIndex: objectClass eq
+olcAccess: to attrs=userPassword
+   by self write
+   by anonymous auth
+   by dn.base="cn=Manager,dc=machinet" write
+   by * none
+olcAccess: to *
+   by self write
+   by dn.base="cn=Manager,dc=machinet" write
+   by * read

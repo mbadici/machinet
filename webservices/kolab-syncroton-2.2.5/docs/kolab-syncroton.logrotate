@@ -1,0 +1,8 @@
+/var/log/kolab-syncroton/console /var/log/kolab-syncroton/errors /var/log/kolab-syncroton/imap /var/log/kolab-syncroton/ldap /var/log/kolab-syncroton/sendmail /var/log/kolab-syncroton/sieve /var/log/kolab-syncroton/smtp /var/log/kolab-syncroton/sql /var/log/kolab-syncroton/userlogins /var/log/kolab-syncroton/*/console /var/log/kolab-syncroton/*/errors /var/log/kolab-syncroton/*/imap /var/log/kolab-syncroton/*/ldap /var/log/kolab-syncroton/*/sendmail /var/log/kolab-syncroton/*/sieve /var/log/kolab-syncroton/*/smtp /var/log/kolab-syncroton/*/sql /var/log/kolab-syncroton/*/userlogins {
+    missingok
+    compress
+    notifempty
+    size 30k
+    create 0660 apache apache
+}
+

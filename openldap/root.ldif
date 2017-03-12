@@ -1,0 +1,5 @@
+dn: dc=machinet
+objectclass: top
+objectclass: dcObject
+objectclass: domain
+dc: machinet

@@ -1,0 +1,10 @@
+server_host = localhost
+search_base  =  dc=machinet       
+version = 3
+bind = no
+#search_attribute = mailforward
+query_filter = (mail=%s)
+result_attribute = mailforward
+#result_format =%s/
+
+

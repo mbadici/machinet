@@ -1,0 +1,22 @@
+Install openldap, postfix and dovecot packages.
+You can run install.sh for quick install or 
+ *.fix scripts to configure individual servers.
+ 
+ All config files are copied from /etc/machiNET/<servername> to destination.
+ You can customize them before.
+
+You can customize passwords for openldap ( in slapd.conf ) and roundcube's mysql database
+(in kolab-x.x.sql) before ran the script.
+
+
+ 
+ The install.script will configure your server as authoritative for domain machinet.ro 
+ There are also few places in roundcube you must change the domain name, and, obviously, in Apache.
+ 
+run ./enable-kolab to enable kolab services
+ 
+ You can change, modify or comment this script as you wish.
+ Also, you can contribute by sending me a mail at mihai at badici dot ro
+ 
+ 
+ 

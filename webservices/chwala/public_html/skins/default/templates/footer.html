@@ -1,0 +1,13 @@
+<table width="100%" cellpadding="0">
+    <tr>
+        <td width="99%">
+            {$engine->translate('about.community')}<br />
+            {$engine->translate('about.warranty')}<br />
+            {$engine->translate('about.support')}
+        </td>
+        <td width="1%" class="foot">
+            {if $max_upload}{$engine->translate('maxupload', $max_upload)}<br />{/if}
+            <span id="reqtime">{$engine->translate('reqtime', $engine->gentime())}</span>
+        </td>
+    </tr>
+</table>

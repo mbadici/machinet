@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{$pagetitle}</title>
+    <link rel="stylesheet" href="{$skin_path}style.css" />
+    <link rel="stylesheet" href="{$skin_path}images/mimetypes/style.css" />
+    <link rel="shortcut icon" type="image/png" href="{$skin_path}images/favicon.png" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/files_api.js"></script>
+    <script src="js/files_ui.js"></script>
+    <script src="{$skin_path}ui.js"></script>
+    <script src="js/wModal.js"></script>
+</head>
+<body>
+    <div id="logo" onclick="document.location='.'"></div>
+    <div id="topmenu">
+        <span class="login">{$user.username}</span>
+        <span class="logout link" onclick="ui.main_logout()">{$engine->translate('logout')}</span>
+    </div>
+    <div id="navigation">{$main_menu}</div>
+    <div id="task_navigation">{$task_menu}</div>
+    <div id="content">
+        <div id="actionbar">
+            <a id="folder-create-button" onclick="ui.command('folder.create')" class="disabled"><span>{$engine->translate('folder.createtitle')}</span></a>
+            <form id="uploadform" name="uploadform" method="post" enctype="multipart/form-data">
+                <a id="file-upload-button" class="disabled"><span>{$engine->translate('file.upload')}</span></a>
+            </form>
+            <a id="file-search-button" onclick="ui.command('file.search')" class="disabled"><span>{$engine->translate('search')}</span></a>
+        </div>
+        <div id="folderlist">
+            <div class="scroller">
+                <table></table>
+            </div>
+            <div class="boxfooter">
+                <a href="#" onclick="ui.command('folder.edit')" alt="" id="folder-edit-button" class="button edit disabled">{$engine->translate('folder.edit')}</a>
+                <a href="#" onclick="ui.command('folder.delete')" alt="" id="folder-delete-button" class="button delete disabled">{$engine->translate('folder.delete')}</a>
+            </div>
+        </div>
+        <div id="forms">
+            {$engine->folder_create_form()}
+            {$engine->folder_edit_form()}
+            {$engine->file_search_form()}
+        </div>
+        <div id="taskcontent">
+            <div class="scroller">
+                <table id="filelist" class="list">
+                    <thead>
+                        <tr>
+                            <td class="filename" onclick="file_list_sort('name', this)">{$engine->translate('file.name')}</td>
+                            <td class="filemtime" onclick="file_list_sort('mtime', this)">{$engine->translate('file.mtime')}</td>
+                            <td class="filesize" onclick="file_list_sort('size', this)">{$engine->translate('file.size')}</td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="boxfooter">
+                <a href="#" onclick="ui.command('file.delete')" alt="" id="file-delete-button" class="button delete disabled">{$engine->translate('file.delete')}</a>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        {include file="footer.html"}
+    </div>
+    <div id="file-menu" class="popup">
+        <ul>
+            <li class="file-open"><a id="file-open-button" href="#">{$engine->translate('file.open')}</a></li>
+            <li class="file-download"><a id="file-download-button" href="#">{$engine->translate('file.download')}</a></li>
+            <li class="file-delete"><a id="file-delete-button" href="#">{$engine->translate('file.delete')}</a></li>
+            <li class="file-rename"><a id="file-rename-button" href="#">{$engine->translate('file.rename')}</a></li>
+        </ul>
+    </div>
+    <div id="file-drag-menu" class="popup">
+        <ul>
+            <li class="file-move"><a id="file-move-button" href="#">{$engine->translate('file.move')}</a></li>
+            <li class="file-copy"><a id="file-copy-button" href="#">{$engine->translate('file.copy')}</a></li>
+        </ul>
+    </div>
+{$script}
+</body>
+</html>

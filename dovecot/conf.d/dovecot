@@ -1,0 +1,4 @@
+Apr 17 22:16:10 master: Info: Dovecot v2.1.4 starting up (core dumps disabled)
+Apr 17 22:17:33 master: Warning: Killed with signal 15 (by pid=1084 uid=0 code=kill)
+Apr 17 22:17:38 master: Info: Dovecot v2.1.4 starting up (core dumps disabled)
+Apr 17 22:19:10 master: Warning: Killed with signal 15 (by pid=1141 uid=0 code=kill)

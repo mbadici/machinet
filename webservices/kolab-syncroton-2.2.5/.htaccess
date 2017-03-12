@@ -1,0 +1,14 @@
+<IfModule mod_php5.c>
+php_flag	display_errors	Off
+php_flag	log_errors	On
+# php_value	error_log	logs/errors
+
+php_flag	magic_quotes_gpc			Off
+php_flag	magic_quotes_runtime		Off
+php_flag	zend.ze1_compatibility_mode	Off
+php_flag	suhosin.session.encrypt		Off
+php_flag	session.auto_start			Off
+
+php_value	mbstring.func_overload	0
+
+</IfModule>

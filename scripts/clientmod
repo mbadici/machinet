@@ -1,0 +1,6 @@
+#!/bin/bash
+
+user=$1
+rootpass=`cat /etc/openldap/slapd.conf|grep rootpw|cut -f3`
+ldiffile=$user".ldif"
+ldapadd  -D "cn=Manager,dc=machinet" -x -w $rootpass -f  /etc/openldap/users/$ldiffile

@@ -1,0 +1,10 @@
+#/bin/bash
+#useradd postfix -s /bin/false
+#groupadd postdrop
+#we like aliases inside the postfix dir
+ln -s /etc/aliases /etc/postfix/aliases
+postalias /etc/postfix/aliases
+postfix set-permissions
+mkdir /etc/postfix.back-machinet
+cp /etc/postfix/* /etc/postfix.back-machinet
+cp postfix/* /etc/postfix

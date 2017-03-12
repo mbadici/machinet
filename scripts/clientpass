@@ -1,0 +1,5 @@
+#!/bin/bash
+DN=`ldapsearch -x   uid=$1 dn|grep dn:|cut -f2-5 -d" "` 
+echo $DN
+rootpass=`cat /etc/openldap/slapd.conf|grep rootpw|cut -f3`
+ldappasswd -D cn=Manager,dc=machinet -x -w $rootpass -S "$DN"

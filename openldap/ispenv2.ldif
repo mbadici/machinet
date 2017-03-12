@@ -1,0 +1,118 @@
+# AUTO-GENERATED FILE - DO NOT EDIT!! Use ldapmodify.
+# CRC32 8fbd3707
+dn: cn=ispenv2,cn=schema,cn=config
+objectClass: olcSchemaConfig
+cn: ispenv2
+olcAttributeTypes: {0}( 1.3.6.1.4.1.11048.1.1.1.1 NAME 'vacationActive' DESC '
+ A flag, for marking the user as being away' EQUALITY booleanMatch SYNTAX 1.3.
+ 6.1.4.1.1466.115.121.1.7 SINGLE-VALUE )
+olcAttributeTypes: {1}( 1.3.6.1.4.1.11048.1.1.1.2 NAME 'webAccess' DESC 'A fla
+ g for (de-)activating access to the proxy server' EQUALITY booleanMatch SYNTA
+ X 1.3.6.1.4.1.1466.115.121.1.7 SINGLE-VALUE )
+olcAttributeTypes: {2}( 1.3.6.1.4.1.11048.1.1.1.3 NAME 'vacationInfo' DESC 'Ab
+ sentee note to leave behind, while on vacation' EQUALITY octetStringMatch SYN
+ TAX 1.3.6.1.4.1.1466.115.121.1.40 SINGLE-VALUE )
+olcAttributeTypes: {3}( 1.3.6.1.4.1.11048.1.1.1.4 NAME 'vacationStart' DESC 'B
+ eginning of vacation' EQUALITY octetStringMatch SYNTAX 1.3.6.1.4.1.1466.115.1
+ 21.1.40 SINGLE-VALUE )
+olcAttributeTypes: {4}( 1.3.6.1.4.1.11048.1.1.1.5 NAME 'vacationEnd' DESC 'End
+  of vacation' EQUALITY octetStringMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.40 
+ SINGLE-VALUE )
+olcAttributeTypes: {5}( 1.3.6.1.4.1.11048.1.1.1.6 NAME 'maildropPlace' DESC 'L
+ ocation of the mailbox' EQUALITY caseExactIA5Match SUBSTR caseExactIA5Substri
+ ngsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 )
+olcAttributeTypes: {6}( 1.3.6.1.4.1.11048.1.1.1.7 NAME 'mailForward' DESC 'Add
+ ress to forward email to' EQUALITY caseIgnoreIA5Match SUBSTR caseIgnoreIA5Sub
+ stringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{256} )
+olcAttributeTypes: {7}( 1.3.6.1.4.1.11048.1.1.1.8 NAME 'proxyHost' DESC 'Fully
+  qualified hostname of a proxyserver' EQUALITY caseIgnoreIA5Match SYNTAX 1.3.
+ 6.1.4.1.1466.115.121.1.26{256} )
+olcAttributeTypes: {8}( 1.3.6.1.4.1.11048.1.1.1.9 NAME 'mailHost' DESC 'Fully 
+ qualified hostname of a mailserver' EQUALITY caseIgnoreIA5Match SUBSTR caseIg
+ noreIA5SubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{256} )
+olcAttributeTypes: {9}( 1.3.6.1.4.1.11048.1.1.1.10 NAME 'vacationForward' DESC
+  'Where to forward mails to, while on vacation' EQUALITY caseIgnoreIA5Match S
+ UBSTR caseIgnoreIA5SubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{256} 
+ )
+olcAttributeTypes: {10}( 1.3.6.1.4.1.11048.1.1.1.11 NAME 'custID' DESC 'Unique
+  ID value to identify a specific customer' EQUALITY caseExactMatch SYNTAX 1.3
+ .6.1.4.1.1466.115.121.1.15 )
+olcAttributeTypes: {11}( 1.3.6.1.4.1.11048.1.1.1.12 NAME 'billPaid' DESC 'Paym
+ ent status of a specific resource' EQUALITY booleanMatch SYNTAX 1.3.6.1.4.1.1
+ 466.115.121.1.7 SINGLE-VALUE )
+olcAttributeTypes: {12}( 1.3.6.1.4.1.11048.1.1.1.13 NAME 'note' DESC 'A generi
+ c note' EQUALITY octetStringMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.40 )
+olcAttributeTypes: {13}( 1.3.6.1.4.1.11048.1.1.1.14 NAME 'uucpHost' DESC 'Next
+  hop in a uucp network' EQUALITY caseIgnoreIA5Match SYNTAX 1.3.6.1.4.1.1466.1
+ 15.121.1.26{256} )
+olcAttributeTypes: {14}( 1.3.6.1.4.1.11048.1.1.1.15 NAME 'type' DESC 'For clas
+ sifying an entry without using an objectclass' EQUALITY caseExactIA5Match SUB
+ STR caseExactIA5SubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 )
+olcAttributeTypes: {15}( 1.3.6.1.4.1.11048.1.1.1.16 NAME 'status' DESC 'For ad
+ ding status information to an entry' EQUALITY caseExactIA5Match SUBSTR caseEx
+ actIA5SubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 )
+olcAttributeTypes: {16}( 1.3.6.1.4.1.11048.1.1.1.17 NAME 'dunningCounter' DESC
+  'How many times the bill was not paid' EQUALITY integerMatch SYNTAX 1.3.6.1.
+ 4.1.1466.115.121.1.27 SINGLE-VALUE )
+olcAttributeTypes: {17}( 1.3.6.1.4.1.11048.1.1.1.18 NAME 'price' DESC 'How muc
+ h to charge for a specific resource' EQUALITY caseIgnoreIA5Match SUBSTR caseI
+ gnoreIA5SubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+olcAttributeTypes: {18}( 1.3.6.1.4.1.11048.1.1.1.19 NAME 'currency' DESC 'The 
+ currency, payment is expected in' EQUALITY caseIgnoreIA5Match SYNTAX 1.3.6.1.
+ 4.1.1466.115.121.1.26 SINGLE-VALUE )
+olcAttributeTypes: {19}( 1.3.6.1.4.1.11048.1.1.1.20 NAME 'payperiod' DESC 'The
+  timeperiod, recurring payment is expected in' EQUALITY caseIgnoreIA5Match SY
+ NTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+olcAttributeTypes: {20}( 1.3.6.1.4.1.11048.1.1.1.21 NAME 'payday' DESC 'On whi
+ ch day payment is expected' EQUALITY caseIgnoreIA5Match SYNTAX 1.3.6.1.4.1.14
+ 66.115.121.1.26 )
+olcAttributeTypes: {21}( 1.3.6.1.4.1.11048.1.1.1.22 NAME 'productcode' DESC 'A
+ rticlegroup identifier' EQUALITY caseExactIA5Match SUBSTR caseExactIA5Substri
+ ngsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+olcAttributeTypes: {22}( 1.3.6.1.4.1.11048.1.1.1.23 NAME 'filePerm' DESC 'file
+  permission field' EQUALITY caseExactIA5Match SUBSTR caseExactIA5SubstringsMa
+ tch SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+olcAttributeTypes: {23}( 1.3.6.1.4.1.11048.1.1.1.24 NAME 'fileContent' DESC 'f
+ ile content' SYNTAX 1.3.6.1.4.1.1466.115.121.1.5 SINGLE-VALUE )
+olcAttributeTypes: {24}( 1.3.6.1.4.1.11048.1.1.1.25 NAME 'fileName' DESC 'rela
+ tive filename' EQUALITY caseExactIA5Match SUBSTR caseExactIA5SubstringsMatch 
+ SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+olcAttributeTypes: {25}( 1.3.6.1.4.1.11048.1.1.1.26 NAME 'filePath' DESC 'path
+  to the file' EQUALITY caseExactIA5Match SUBSTR caseExactIA5SubstringsMatch S
+ YNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+olcAttributeTypes: {26}( 1.3.6.1.4.1.11048.1.1.1.27 NAME 'fileType' DESC 'type
+  of file' EQUALITY caseExactIA5Match SUBSTR caseExactIA5SubstringsMatch SYNTA
+ X 1.3.6.1.4.1.1466.115.121.1.26 )
+olcObjectClasses: {0}( 1.3.6.1.4.1.11048.1.1.2.1 NAME 'Vacation' DESC 'Users v
+ acation status information' SUP top AUXILIARY MUST vacationActive MAY ( vacat
+ ionInfo $ vacationStart $ vacationEnd $ vacationForward ) )
+olcObjectClasses: {1}( 1.3.6.1.4.1.11048.1.1.2.2 NAME 'mailAccount' DESC 'Emai
+ laccount, associated with a user' SUP top AUXILIARY MUST ( uid $ userPassword
+  $ mail ) MAY ( mailForward $ mailHost $ cn $ maildropPlace ) )
+olcObjectClasses: {2}( 1.3.6.1.4.1.11048.1.1.2.3 NAME 'caretaker' DESC 'For im
+ plementing administrative access control. This objectclass should be used to 
+ allow programs to bind to the LDAP tree.' SUP top STRUCTURAL MUST ( uid $ use
+ rPassword ) MAY ( description $ owner ) )
+olcObjectClasses: {3}( 1.3.6.1.4.1.11048.1.1.2.4 NAME 'proxyAccount' DESC 'Acc
+ ount for accessing the proxy server' SUP top AUXILIARY MUST ( webAccess $ uid
+  $ userPassword ) MAY proxyHost )
+olcObjectClasses: {4}( 1.3.6.1.4.1.11048.1.1.2.5 NAME 'customer' DESC 'Custome
+ r information (container class)' SUP top STRUCTURAL MUST ( cn $ custID ) MAY 
+ ( postalAddress $ telephoneNumber $ fax $ street $ postalCode $ description $
+  mail ) )
+olcObjectClasses: {5}( 1.3.6.1.4.1.11048.1.1.2.6 NAME 'genericAccount' DESC 'T
+ he most abstract form of an account' SUP top AUXILIARY MUST uid MAY ( userPas
+ sword $ userCertificate ) )
+olcObjectClasses: {6}( 1.3.6.1.4.1.11048.1.1.2.7 NAME 'uucpAccount' DESC 'Acco
+ unt for UUCP connections' SUP top AUXILIARY MUST ( uid $ userPassword $ dc $ 
+ uucpHost ) )
+olcObjectClasses: {7}( 1.3.6.1.4.1.11048.1.1.2.8 NAME 'metaInfo' DESC 'Easy wa
+ y to bind additional information to an entry without deploying a specific obj
+ ectclass' SUP top AUXILIARY MAY ( note $ type $ status $ cn $ description ) )
+olcObjectClasses: {8}( 1.3.6.1.4.1.11048.1.1.2.9 NAME 'accountable' DESC 'Mark
+ s a resource (an entry) as being subject to payment' SUP top AUXILIARY MAY ( 
+ billpaid $ price $ currency $ payperiod $ payday $ dunningCounter $ productco
+ de ) )
+olcObjectClasses: {9}( 1.3.6.1.4.1.11048.1.1.2.10 NAME 'file' DESC 'Used to st
+ ore files in LDAP' SUP top STRUCTURAL MUST fileName MAY ( filePath $ filePerm
+  $ fileContent $ fileType ) )

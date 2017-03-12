@@ -1,0 +1,8 @@
+#!/bin/bash
+DN=`ldapsearch -x   uid=$1 dn|grep dn:|cut -f2-5 -d" "` 
+echo "deleting" $DN
+#rootpass=`cat /etc/openldap/slapd.conf|grep rootpw|cut -f3`
+rootpass='secret'
+
+ldapdelete -D cn=Manager,dc=machinet -x -w $rootpass  "$DN"
+ 

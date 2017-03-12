@@ -1,0 +1,46 @@
+Message-ID: <52B02B8F.9010500@domain.de>
+Date: Tue, 17 Dec 2013 11:46:39 +0100
+From: Sender <sender@domain.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.2.13) Gecko/20101207 Thunderbird/3.1.7
+To: Verborgene_Empfaenger:;
+Subject: Weihnachtsbrief
+Content-Type: multipart/mixed;
+ boundary="------------000801030509090203070207"
+
+This is a multi-part message in MIME format.
+--------------000801030509090203070207
+Content-Type: multipart/alternative;
+ boundary="------------060305070900000101080707"
+
+
+--------------060305070900000101080707
+Content-Type: text/plain; charset=ISO-8859-15; format=flowed
+Content-Transfer-Encoding: 8bit
+
+Herzliche Adventsgrüße
+
+--------------060305070900000101080707
+Content-Type: text/html; charset=ISO-8859-15
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-15">
+  </head>
+  <body bgcolor="#ffffff" text="#000000">
+    Herzliche Adventsgrüße<br>
+  </body>
+</html>
+
+--------------060305070900000101080707--
+
+--------------000801030509090203070207
+Content-Type: application/pdf;
+ name="Weihnachtsbrief13.pdf"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename="Weihnachtsbrief13.pdf"
+
+JVBERi0 [...shortened...] DYKJSVFT0YK
+--------------000801030509090203070207--
