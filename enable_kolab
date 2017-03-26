@@ -1,15 +1,15 @@
 #!/bin/bash
 #add kolab repository
-echo "deb http://xi.rename-it.nl/debian/ stable-auto/dovecot-2.2  main" > /etc/apt/sources.list.d/dovecot-2.2.15.list
+#echo "deb http://xi.rename-it.nl/debian/ stable-auto/dovecot-2.2  main" > /etc/apt/sources.list.d/dovecot-2.2.15.list
 echo "deb http://obs.kolabsys.com/repositories/Kolab:/3.3/Debian_8.1/ ./
 deb http://obs.kolabsys.com/repositories/Kolab:/3.3:/Updates/Debian_8.1/ ./
 " > /etc/apt/sources.list.d/kolab-3.3.list
 # activate dovecot metadata
-sed -i s/#machinet-disabled#//g  /etc/dovecot/conf.d/20-imap.conf
-sed -i s/#machinet-disabled#//g  /etc/dovecot/conf.d/10-mail.conf
+#sed -i s/#machinet-disabled#//g  /etc/dovecot/conf.d/20-imap.conf
+#sed -i s/#machinet-disabled#//g  /etc/dovecot/conf.d/10-mail.conf
 
 apt-get update
-apt-get install dovecot
+#apt-get install dovecot
 apt-get install php-kolabformat
 apt-get install php-pear
 pear install HTTP_Request2
