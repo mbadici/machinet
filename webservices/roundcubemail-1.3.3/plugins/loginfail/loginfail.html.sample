@@ -1,0 +1,17 @@
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.loginfail').fadeIn(1000);
+    })
+</script>
+
+
+<div class="loginfail" style="display: none; position: relative; align: center;">
+    <br clear="all" />
+    <hr width="30%" />
+    <div align="center">
+        <p>
+            <i>This is an example placeholder for information about your login having failed.</i>
+        </p>
+    </div>
+</div>
+

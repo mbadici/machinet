@@ -1,0 +1,78 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2014, roundcube.net
+# This file is distributed under the same license as the Roundcube Webmail Help package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: Kolab Documentation\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-26 23:28+0100\n"
+"PO-Revision-Date: 2014-11-27 23:34+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Hungarian (Hungary) (http://www.transifex.com/kolab/kolab-documentation/language/hu_HU/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hu_HU\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../en_US/_plugins/kolab_addressbook/addressbook.rst:9
+msgid "Sharing Address Books"
+msgstr ""
+
+#: ../../en_US/_plugins/kolab_addressbook/addressbook.rst:11
+msgid ""
+"Just like calendars or regular email folders, personal address books can "
+"also be shared with other users in your workgroup."
+msgstr ""
+
+#: ../../en_US/_plugins/kolab_addressbook/addressbook.rst:16
+msgid "Share Contacts with others"
+msgstr ""
+
+#: ../../en_US/_plugins/kolab_addressbook/addressbook.rst:22
+msgid ""
+"Settings for sharing is controlled through the address book properties "
+"accessible through the *More actions* menu behind the gear icon the footer "
+"in the :ref:`addressbook-groups` list."
+msgstr ""
+
+#: ../../en_US/_plugins/kolab_addressbook/addressbook.rst:25
+msgid "Select the address book you want to share."
+msgstr ""
+
+#: ../../en_US/_plugins/kolab_addressbook/addressbook.rst:26
+msgid "Choose *Edit address book* from the actions menu."
+msgstr ""
+
+#: ../../en_US/_plugins/kolab_addressbook/addressbook.rst:27
+msgid "Switch to the *Sharing* tab in the properties form on the right."
+msgstr ""
+
+#: ../../en_US/_plugins/kolab_addressbook/addressbook.rst:29
+msgid ""
+"The table displays who already has permission to see and modify the selected"
+" address book. Here you can manage permissions the same way as :ref:`Sharing"
+" a Folder <settings-folder-sharing>`."
+msgstr ""
+
+#: ../../en_US/_plugins/kolab_addressbook/addressbook.rst:34
+msgid "Subscribe to Shared Address Books"
+msgstr ""
+
+#: ../../en_US/_plugins/kolab_addressbook/addressbook.rst:36
+msgid ""
+"Address books shared by others are not showing up right away in the "
+"directories list of the web client. Switch to :ref:`Settings > Folders "
+"<settings-folders>` to see all resources you can access. There's a shortcut "
+"to this: click *Manage folders* in the actions menu behind the gear icon "
+"located the footer of the directory list."
+msgstr ""
+
+#: ../../en_US/_plugins/kolab_addressbook/addressbook.rst:41
+msgid ""
+"In order to make a shared address book appear in the address book view, "
+"locate it in the folder manager and check the *Subscribed* mark in the list."
+" Only subscribed directories are visible in the address book view."
+msgstr ""

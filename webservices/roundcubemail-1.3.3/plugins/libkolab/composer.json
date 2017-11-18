@@ -1,0 +1,31 @@
+{
+    "name": "kolab/libkolab",
+    "type": "roundcube-plugin",
+    "description": "Plugin to setup a basic environment for the interaction with a Kolab server.",
+    "homepage": "https://git.kolab.org/diffusion/RPK/",
+    "license": "AGPLv3",
+    "version": "3.3.4",
+    "authors": [
+        {
+            "name": "Thomas Bruederli",
+            "email": "bruederli@kolabsys.com",
+            "role": "Lead"
+        },
+        {
+            "name": "Aleksander Machniak",
+            "email": "machniak@kolabsys.com",
+            "role": "Developer"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://plugins.roundcube.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "roundcube/plugin-installer": ">=0.1.3",
+        "caxy/php-htmldiff": "dev-master"
+    }
+}

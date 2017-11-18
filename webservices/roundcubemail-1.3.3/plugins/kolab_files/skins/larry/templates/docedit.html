@@ -1,0 +1,67 @@
+<roundcube:object name="doctype" value="html5" />
+<html>
+<head>
+<title><roundcube:object name="pagetitle" /></title>
+<roundcube:include file="/includes/links.html" />
+<script src="plugins/kolab_files/skins/larry/ui.js" type="text/javascript"></script>
+</head>
+<body class="files noscroll extwin">
+
+<roundcube:include file="/includes/header.html" />
+
+<div id="mainscreen" class="<roundcube:var name="env:editor_type" />">
+
+<h1 class="voice"><roundcube:label name="kolab_files.docedit" /></h1>
+
+<h2 id="aria-label-toolbar" class="voice"><roundcube:label name="arialabeltoolbar" /></h2>
+<div id="filestoolbar" class="toolbar" role="toolbar" aria-labelledby="aria-label-toolbar">
+<!--
+    <roundcube:button command="files-delete" type="link" class="button delete disabled" classAct="button delete" classSel="button delete pressed" label="delete" title="kolab_files.deletefile" />
+-->
+    <roundcube:button command="document-close" type="link" class="button delete disabled" classAct="button delete" classSel="button delete pressed" label="kolab_files.terminate" title="kolab_files.terminatesession" />
+    <span class="dropbutton">
+        <roundcube:button command="document-export" type="link" class="button export disabled" classAct="button export" classSel="button export pressed" label="kolab_files.get" title="kolab_files.getfile" />
+        <a href="#export" class="dropbuttontip" id="exportmenulink" onclick="UI.toggle_popup('exportmenu',event);return false" aria-haspopup="true" aria-expanded="false" aria-owns="exportmenu-menu" tabindex="0">Export options</a>
+    </span>
+<roundcube:if condition="env:editor_type == 'wopi'" />
+    <roundcube:button command="document-print" type="link" class="button print disabled" classAct="button print" classSel="button print pressed" label="print" title="kolab_files.printfile" />
+<roundcube:endif />
+    <roundcube:button command="document-save" type="link" class="button save disabled" classAct="button save" classSel="button save pressed" label="kolab_files.save" title="kolab_files.savefile" />
+<roundcube:if condition="env:editor_type != 'wopi'" />
+    <span class="spacer"></span>
+    <label for="document-title"><roundcube:label name="kolab_files.documenttitle" />&nbsp;<input id="document-title" type="text" value="" /></label>
+<roundcube:endif />
+</div>
+
+<h2 id="aria-label-collaborators" class="voice"><roundcube:label name="kolab_files.arialabelcollaborators" /></h2>
+<div id="collaborators" class="toolbar" role="toolbar" aria-labelledby="aria-label-collaborators">
+    <roundcube:button command="document-editors" type="link" class="button add disabled" classAct="button add" classSel="button add pressed" content=" " title="kolab_files.manageeditors" />
+    <div id="members"></div>
+</div>
+
+<div id="filecontent" class="uibox docedit">
+    <div class="iframebox">
+        <roundcube:object name="filepreviewframe" id="fileframe" frameborder="0" title="kolab_files.arialabelfilecontent" />
+    </div>
+</div>
+
+</div>
+
+<div id="exportmenu" class="popupmenu" aria-hidden="true">
+    <h3 id="aria-label-exportmenu" class="voice"><roundcube:label name="kolab_files.arialabelexportoptions" /></h3>
+    <ul id="exportmenu-menu" class="toolbarmenu" role="menu" aria-labelledby="aria-label-exportmenu"></ul>
+</div>
+
+<div id="document-editors-dialog" class="uidialog" data-editable="true" role="dialog" aria-labelledby="aria-label-doceditorsdialog" aria-hidden="true">
+    <h3 id="aria-label-doceditorsdialog" class="voice"><roundcube:label name="kolab_files.arialabeldoceditorsdialog" /></h3>
+    <roundcube:object name="document-editors-dialog" />
+</div>
+
+<roundcube:include file="/includes/footer.html" />
+
+<script type="text/javascript">
+kolab_files_ui_init();
+</script>
+
+</body>
+</html>

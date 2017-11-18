@@ -1,0 +1,33 @@
+<?php
+$labels['tabtitle'] = 'Activesync';
+$labels['activesynctitle'] = 'Управление устройствами ActiveSync';
+$labels['devices'] = 'Устройства';
+$labels['devicealias'] = 'Имя устройства';
+$labels['synchronize'] = 'Синхронизовать';
+$labels['withalarms'] = 'С напоминаниями';
+$labels['syncsettings'] = 'Настройки синхронизации';
+$labels['deviceconfig'] = 'Конфигурация устройства';
+$labels['folderstosync'] = 'Каталоги для синхронизации';
+$labels['mail'] = 'Почта';
+$labels['contact'] = 'Адресные книги';
+$labels['event'] = 'Календари';
+$labels['task'] = 'Задачи';
+$labels['note'] = 'Заметки';
+$labels['configuration'] = 'Конфигурация';
+$labels['deletedevice'] = 'Удалить устройство';
+$labels['nodevices'] = 'У вас нет зарегистрированных устройств.<br/><br/>Для того, чтобы зарегистрировать устройство, подключите его к серверу, согласно инструкциям на <a href="$url" target="_blank">этой странице</a>. После этого устройство должно стать доступным для конфигурации здесь.';
+$labels['savingdata'] = 'Сохранение данных...';
+$labels['savingerror'] = 'Не удалось сохранить конфигурацию';
+$labels['notsupported'] = 'Ваш сервер не поддерживает метаданные/аннотации';
+$labels['devicedeleteconfirm'] = 'Вы действительно хотите удалить конфигурацию для этого устройства?';
+$labels['successfullydeleted'] = 'Конфигурация для устройства была успешно удалена.';
+$labels['devicenotfound'] = 'Не удалось прочитать конфигурацию для устройства';
+$labels['devicetype'] = 'Тип устройства';
+$labels['acsversion'] = 'Версия протокола';
+$labels['useragent'] = 'User agent';
+$labels['friendlyname'] = 'Имя для отображения';
+$labels['os'] = 'Операционная система';
+$labels['oslanguage'] = 'Язык ОС';
+$labels['phonenumber'] = 'Телефон';
+$labels['arialabeldeviceframe'] = 'Форма управления настройками синхронизации';
+?>

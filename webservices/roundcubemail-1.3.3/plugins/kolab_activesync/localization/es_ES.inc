@@ -1,0 +1,33 @@
+<?php
+$labels['tabtitle'] = 'Activesync';
+$labels['activesynctitle'] = 'Administrar dispositivos ActiveSync';
+$labels['devices'] = 'Dispositivos';
+$labels['devicealias'] = 'Nombre del dispositivo';
+$labels['synchronize'] = 'Sincronizar';
+$labels['withalarms'] = 'Con alarmas';
+$labels['syncsettings'] = 'Ajustes de sincronización';
+$labels['deviceconfig'] = 'Configuración del dispositivo';
+$labels['folderstosync'] = 'Carpetas para sincronizar';
+$labels['mail'] = 'Correo electrónico';
+$labels['contact'] = 'Libreta de direcciones';
+$labels['event'] = 'Calendarios';
+$labels['task'] = 'Tareas';
+$labels['note'] = 'Notas';
+$labels['configuration'] = 'Configuración';
+$labels['deletedevice'] = 'Borrar dispositivo';
+$labels['nodevices'] = 'Actualmente no hay dispositivos registrados. <br/> <br/> Para registrar un dispositivo, primero conéctelo al servidor usando las instrucciones de <a href="$url" target="_blank"> esta página < / A>. A continuación, el dispositivo debe estar disponible para la configuración aquí.';
+$labels['savingdata'] = 'Guardando datos...';
+$labels['savingerror'] = 'Error al guardar la configuración';
+$labels['notsupported'] = 'Su servidor no admite metadatos/anotaciones';
+$labels['devicedeleteconfirm'] = '¿Esta seguro de eliminar la configuración de este dispositivo?';
+$labels['successfullydeleted'] = 'La configuración del dispositivo se ha eliminado con éxito';
+$labels['devicenotfound'] = 'No puede leerse la configuración del dispositivo';
+$labels['devicetype'] = 'Tipo de dispositivo';
+$labels['acsversion'] = 'Versión del protocolo';
+$labels['useragent'] = 'Agente de usuario';
+$labels['friendlyname'] = 'Nombre amigable';
+$labels['os'] = 'Sistema operativo';
+$labels['oslanguage'] = 'Idioma del SI';
+$labels['phonenumber'] = 'Número de teléfono';
+$labels['arialabeldeviceframe'] = 'Formulario de configuración de sincronización de dispositivos';
+?>

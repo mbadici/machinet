@@ -1,0 +1,67 @@
+<roundcube:object name="doctype" value="html5" />
+<html>
+<head>
+<title><roundcube:object name="pagetitle" /></title>
+<roundcube:include file="/includes/links.html" />
+</head>
+<body class="iframe notesview notesdialog noscroll">
+
+<div id="notedetailsbox">
+    <div id="notesdialogheader" class="boxtitle">
+        <roundcube:object name="plugin.notetitle" id="notedetailstitle" class="notetitle" />
+        <div class="notebookselect" style="display:none">
+            <label for="notebook"><roundcube:label name="kolab_notes.savein" /></label>
+            <roundcube:object name="plugin.notebooks" id="kolab-notebook" type="select" />
+        </div>
+    </div>
+    <roundcube:object name="plugin.editform" id="noteform" class="noteform" />
+    <roundcube:object name="plugin.detailview" id="notedetails" class="notedetails scroller" />
+    <div id="notereferences">
+        <roundcube:object name="plugin.attachments_list" id="attachment-list" class="attachmentslist" />
+    </div>
+</div>
+
+<script type="text/javascript">
+
+// UI startup
+var UI = new rcube_mail_ui();
+
+$(document).ready(function(e){
+    function layout_view()
+    {
+        var form = $('#noteform, #notedetails'),
+            content = $('#notecontent'),
+            header = $('#notesdialogheader'),
+            w, h;
+
+        form.css('top', header.outerHeight()+'px');
+
+        w = form.outerWidth();
+        h = form.outerHeight();
+        content.width(w).height(h);
+
+        $('#noteform > div.mce-tinymce').width(w);
+
+        h = h - 4 - $('div.mce-toolbar').height();
+
+        $('#notecontent_ifr').width(w).height(h);
+
+        // fixes issue when toolbar is not ready yet and content
+        // area height is set to 0, wait and try again later...
+        if (h < 40)
+            setTimeout(function() { layout_view(); }, 100);
+    }
+
+    $(window).resize(function(e){
+        layout_view();
+    });
+
+    rcmail.addEventListener('kolab_notes_render', function(p){
+        $('#notesdialogheader .notebookselect')[p.readonly ? 'hide' : 'show']();
+    });
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<?php
+$labels['tabtitle'] = 'アクティブシンク';
+$labels['activesynctitle'] = 'アクティブシンクデバイス管理';
+$labels['devices'] = '機器';
+$labels['devicealias'] = '機器名';
+$labels['synchronize'] = '同期';
+$labels['withalarms'] = 'アラーム付';
+$labels['syncsettings'] = '同期設定';
+$labels['deviceconfig'] = 'デバイス設定';
+$labels['folderstosync'] = '同期するフォルダ';
+$labels['mail'] = 'Eメール';
+$labels['contact'] = 'アドレス帳';
+$labels['event'] = 'カレンダー';
+$labels['task'] = 'タスク';
+$labels['note'] = 'ノート';
+$labels['configuration'] = '設定';
+$labels['deletedevice'] = '機器の削除';
+$labels['nodevices'] = '現在どのデバイスも登録されてません。<br/><br/>デバイスを登録するには、まずデバイスをサーバへ接続してください、そして<a href="$url" target="_blank">このページ</a>の説明に従ってください。その後、ここでデバイスが設定できるようになります。';
+$labels['savingdata'] = 'データを保存中…';
+$labels['savingerror'] = '設定の保存に失敗しました';
+$labels['notsupported'] = 'サーバはmetadata/annotionsをサポートしていません';
+$labels['devicedeleteconfirm'] = '本当にこのデバイスの設定を削除しますか？';
+$labels['successfullydeleted'] = 'デヴァイスの削除に成功しました';
+$labels['devicenotfound'] = 'デヴァイスの設定を読込めません';
+$labels['devicetype'] = 'デバイスタイプ';
+$labels['acsversion'] = 'プロトコルバージョン';
+$labels['useragent'] = 'ユーザエージェント';
+$labels['friendlyname'] = '表示名';
+$labels['os'] = 'OS';
+$labels['oslanguage'] = 'OS言語';
+$labels['phonenumber'] = '電話番号';
+$labels['arialabeldeviceframe'] = 'デバイス同期設定元';
+?>

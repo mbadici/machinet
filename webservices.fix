@@ -1,4 +1,6 @@
 #!/bin/bash
+apt-get install mariadb-server libapache2-mod-php  php-mysql php-mbstring php-ldap
+
 rsync -av webservices/roundcubemail*  /usr/share/
 rsync -av webservices/mcConsolette  /usr/share/
 rsync -av webservices/chwala*  /usr/share/
@@ -14,6 +16,9 @@ service apache2 restart
 echo "Enter mysql root password:"
 mysql -u root -p  < webservices/kolab-3.3.sql
 cd /usr/share
-ln -s roundcubemail* roundcubemail
+ln -s roundcubemail-* roundcubemail
 ln -s chwala* chwala
-ln -s kolab-syncroton* kolab-syncroton
+ln -s kolab-syncroton-* kolab-syncroton
+mkdir /var/log/roundcubemail/
+chown www-data:www-data /var/log/roundcubemail
+ln -s /var/log/roundcubemail /usr/share/roundcubemail/logs

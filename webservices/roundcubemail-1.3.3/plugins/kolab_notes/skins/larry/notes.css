@@ -1,0 +1,684 @@
+/**
+ * Kolab Notes plugin styles for skin "Larry"
+ *
+ * Copyright (C) 2014-2015, Kolab Systems AG <contact@kolabsys.com>
+ * Screendesign by FLINT / Büro für Gestaltung, bueroflint.com
+ *
+ * The contents are subject to the Creative Commons Attribution-ShareAlike
+ * License. It is allowed to copy, distribute, transmit and to adapt the work
+ * by keeping credits to the original autors in the README file.
+ * See http://creativecommons.org/licenses/by-sa/3.0/ for details.
+ */
+
+
+#taskbar a.button-notes span.button-inner {
+	background-image: url('sprites.png');
+	background-position: 0 0;
+}
+
+#taskbar a.button-notes:hover span.button-inner,
+#taskbar a.button-notes.button-selected span.button-inner {
+	background-image: url('sprites.png');
+	background-position: 0 -26px;
+}
+
+.notesview div.uidialog {
+	display: none;
+}
+
+.notesview #sidebar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 240px;
+}
+
+.notesview #notestoolbar {
+	position: absolute;
+	top: -6px;
+	left: 0;
+	width: 100%;
+	height: 40px;
+	white-space: nowrap;
+}
+
+.notesview #notestoolbar a.button.createnote {
+	background-image: url('sprites.png');
+	background-position: center -54px;
+}
+
+.notesview #notestoolbar a.button.sendnote {
+	background-position: left -650px;
+}
+
+.notesview #quicksearchbar {
+	top: 2px;
+}
+
+.notesview #searchmenulink {
+	width: 15px;
+}
+
+.notesview #mainview-right {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	top: 0;
+	left: 252px;
+}
+
+.notesview #tagsbox {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 240px;
+}
+
+.notesview #notebooksbox {
+	position: absolute;
+	top: 252px;
+	left: 0;
+	width: 100%;
+	bottom: 0px;
+}
+
+.notesview #noteslistbox {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 240px;
+	bottom: 0px;
+}
+
+.notesview #kolabnoteslist li {
+	border-left: 2px solid transparent;
+}
+
+.notesview #kolabnoteslist.focus li.focused {
+	border-left: 2px solid #739da8;
+}
+
+.notesview #kolabnoteslist .title {
+	display: block;
+	padding: 4px 6px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	outline: none;
+}
+
+.notesview #kolabnoteslist .date {
+	display: block;
+	padding: 0px 6px 4px 6px;
+	color: #777;
+	font-weight: normal;
+}
+
+.notesview .boxpagenav a.icon.sortoptions {
+	background: url(sprites.png) center -93px no-repeat;
+}
+
+.notesview .toolbarmenu.iconized .selected span.icon {
+	background: url(sprites.png) -4px -110px no-repeat;
+}
+
+.notesview #notedetailsbox {
+	position: absolute;
+	top: 0;
+	left: 252px;
+	right: 0;
+	bottom: 0px;
+	background-image: url(../../../../skins/larry/images/watermark.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.notesdialog #notedetailsbox {
+	left: 0;
+}
+
+.notesview #notedetailsbox .formbuttons {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 8px 12px;
+	background: #f9f9f9;
+}
+
+.notesview #notedetailsbox .footerright {
+	float: right;
+}
+
+.notesview #notedetailsbox .formbuttons:after {
+	content: "";
+	display: inline;
+	clear: both;
+}
+
+.notesview .btn-note-history {
+	display: inline-block;
+	padding: 2px;
+	text-decoration: none;
+	visibility: hidden;
+}
+
+.notesview .btn-note-history.active {
+	visibility: visible;
+	color: #333;
+}
+
+.notesview .btn-note-history:before {
+	content: "";
+	display: inline-block;
+	position: relative;
+	top: 4px;
+	width: 16px;
+	height: 16px;
+	margin-right: 4px;
+	background: url('sprites.png') -1px -302px no-repeat;
+}
+
+.notesview .btn-note-history.active:hover {
+	text-decoration: underline;
+}
+
+.notesview .noteform,
+.notesview .notedetails {
+	display: none;
+	position: absolute;
+	top: 82px;
+	left: 0;
+	bottom: 41px;
+	width: 100%;
+}
+
+.notesview .notedetails {
+	padding: 8px;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	    -ms-box-sizing: border-box;
+	        box-sizing: border-box;
+	border-bottom: 1px solid #dfdfdf;
+	background: #fff;
+}
+
+.notesdialog .noteform,
+.notesdialog .notedetails {
+	bottom: 30px;
+}
+
+.notesview .notedetails pre {
+	font-family: "Lucida Grande", Verdana,  Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	margin: 0;
+}
+
+.notesview #notecontent {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border: 0;
+	border-radius: 0;
+	padding: 8px 0 8px 8px;
+	resize: none;
+	font-family: "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	outline: none;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	    -ms-box-sizing: border-box;
+	        box-sizing: border-box;
+	-webkit-box-shadow: inset 0 0 2px 1px rgba(0,0,0, 0.2);
+	   -moz-box-shadow: inset 0 0 2px 1px rgba(0,0,0, 0.2);
+	     -o-box-shadow: inset 0 0 2px 1px rgba(0,0,0, 0.2);
+	        box-shadow: inset 0 0 2px 1px rgba(0,0,0, 0.2);
+}
+
+.notesview #notecontent:active,
+.notesview #notecontent:focus {
+	-webkit-box-shadow: inset 0 0 3px 2px rgba(71,135,177, 0.9);
+	   -moz-box-shadow: inset 0 0 3px 2px rgba(71,135,177, 0.9);
+	     -o-box-shadow: inset 0 0 3px 2px rgba(71,135,177, 0.9);
+	        box-shadow: inset 0 0 3px 2px rgba(71,135,177, 0.9);
+}
+
+.notesview .mce-panel {
+	border: 0;
+}
+
+.notesview .ui-dialog-content .noteform,
+.notesview .ui-dialog-content .notedetails,
+.notesview .ui-dialog-content .notereferences {
+	position: relative;
+	width: auto;
+	height: auto;
+	top: auto;
+	bottom: auto;
+	overflow: visible;
+	border: 0;
+}
+
+.notesview .notetitle {
+	height: auto;
+	min-height: 20px;
+}
+
+.notesview .ui-dialog-content .notetitle {
+	padding: 0 0 6px 0;
+	margin-top: -6px;
+	border-bottom: 0;
+}
+
+.notesview .ui-dialog-content .tagline {
+	display: none !important;
+}
+
+.notesview .notetitle .disabled .tagedit-list,
+.notesview .notetitle input.inline-edit:disabled {
+	outline: none;
+	padding-left: 0;
+	border: 0;
+	background: rgba(255,255,255,0.01);
+	-webkit-box-shadow: none;
+	   -moz-box-shadow: none;
+	     -o-box-shadow: none;
+	        box-shadow: none;
+}
+
+.notesview .notetitle input.notetitle,
+.notesview .notetitle input.notetitle:focus {
+	width: 100%;
+	font-size: 14px;
+	font-weight: bold;
+	color: #333;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	    -ms-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+
+.notesview .ui-dialog-content .formbuttons,
+.notesview .ui-dialog-content .notetitle input {
+	display: none !important;
+}
+
+.notesview .notetitle .dates,
+.notesview .notetitle .tagline,
+.notesdialog .notebookselect label {
+	color: #999;
+	font-weight: normal;
+	font-size: 0.9em;
+	margin-top: 6px;
+}
+
+.notesview .notebookselect {
+	margin-top: 4px;
+}
+
+.notesview .notetitle .tagline {
+	position: relative;
+	cursor: text;
+	margin: 4px 0 0 0;
+}
+
+.notesview .notetitle .tagline.disabled {
+	margin-top: 0;
+}
+
+.notesview .notetitle .tagline .placeholder {
+	position: absolute;
+	top: 6px;
+	left: 6px;
+	z-index: 2;
+}
+
+.notesview .notetitle .tagline.disabled .placeholder {
+	left: 0;
+}
+
+.notesview .notetitle .tagedit-list {
+	position: relative;
+	z-index: 1;
+	min-height: 32px;
+/*	padding: 2px; */
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	    -ms-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+
+/* Firefox 3.6 */
+_:not(), _:-moz-handler-blocked, .notesview .notetitle .tagedit-list {
+	min-height: 26px;
+}
+
+.notesview .notetitle .disabled .tagedit-list {
+	min-height: 26px;
+}
+
+.notesview .notetitle #tagedit-input {
+	background: none;
+}
+
+.notesview .tag-draghelper {
+	z-index: 1000;
+}
+
+.notesview .notetitle .notecreated,
+.notesview .notetitle .notechanged {
+	display: inline-block;
+	padding-left: 0.4em;
+	padding-right: 2em;
+	color: #777;
+}
+
+.notesview .notereferences {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 41px;
+	height: 27px;
+	background: #fff;
+	padding-left: 10px;
+}
+
+.notesdialog .notereferences {
+	bottom: 0;
+}
+
+.notesview #notediff .note-title,
+.notesview #notediff .note-title-new {
+	margin-top: 0;
+}
+
+.notesview .note-title.diff-text-old {
+	margin-bottom: 0;
+}
+
+.notesview .diff-text-diff del,
+.notesview .diff-text-diff ins {
+	text-decoration: none;
+	color: inherit;
+}
+
+.notesview .diff-text-old,
+.notesview .diff-text-diff del {
+	background-color: #fdd;
+	text-decoration: line-through;
+}
+
+.notesview .diff-text-new,
+.notesview .diff-text-diff ins,
+.notesview .diff-text-diff .diffmod img {
+	background-color: #dfd;
+}
+
+.notesview .diff-text-diff img {
+	border: 1px solid #999;
+}
+
+.notesview #notebooksbox .scroller {
+	top: 34px;
+}
+
+.notesview #notebooks li {
+	margin: 0;
+	display: block;
+	position: relative;
+}
+
+.notesview #notebooks li > div.folder,
+.notesview #notebooksbox .searchresults li > div.folder {
+	position: relative;
+	padding: 0;
+	height: 28px;
+}
+
+.notesview #notebooks li.virtual > div.folder {
+	height: 22px;
+}
+
+.notesview #notebooks li .listname {
+	display: block;
+	cursor: default;
+	margin: 0;
+	height: 24px;
+	padding-bottom: 0;
+	padding-right: 26px;
+	color: #004458;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.notesview #notebooks li.virtual > div > .listname {
+	color: #aaa;
+	height: 18px;
+	padding-top: 3px;
+}
+
+.notesview #notebooksbox .treelist div span.actions {
+	display: inline-block;
+	position: absolute;
+	top: 2px;
+	right: 2px;
+	padding: 5px 20px 0 6px;
+	min-width: 20px;
+	height: 19px;
+	text-align: right;
+}
+
+.notesview #notebooksbox .treelist div:hover span.actions {
+	top: 1px;
+	right: 1px;
+	border: 1px solid #c6c6c6;
+	border-radius: 4px;
+	background: #f7f7f7;
+	background: -moz-linear-gradient(top, #f9f9f9 0%, #e6e6e6 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9f9f9), color-stop(100%,#e6e6e6));
+	background: -o-linear-gradient(top, #f9f9f9 0%, #e6e6e6 100%);
+	background: -ms-linear-gradient(top, #f9f9f9 0%, #e6e6e6 100%);
+	background: linear-gradient(top, #f9f9f9 0%, #e6e6e6 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e6e6e6', GradientType=0);
+}
+
+.notesview #notebooksbox .treelist div a.remove,
+.notesview #notebooksbox .treelist div a.subscribed {
+	display: inline-block;
+	position: absolute;
+	top: 5px;
+	right: 4px;
+	height: 16px;
+	width: 16px;
+	padding: 0;
+	background: url(sprites.png) -100px 0 no-repeat;
+	overflow: hidden;
+	text-indent: -5000px;
+	cursor: pointer;
+}
+
+.notesview #notebooksbox .treelist div a.subscribed:focus,
+.notesview #notebooksbox .treelist div:hover a.subscribed {
+	background-position: 0 -266px;
+}
+
+.notesview #notebooksbox .treelist div.subscribed a.subscribed {
+	background-position: -16px -266px;
+}
+
+.notesview #notebooksbox .treelist div a.remove {
+	position: relative;
+	top: 0;
+	left: 0;
+	margin-right: 4px;
+}
+
+.notesview #notebooksbox .treelist div a.remove:focus,
+.notesview #notebooksbox .treelist div:hover a.remove {
+	background-position: 0 -284px;
+}
+
+.notesview #notebooksbox .treelist div a.remove:focus,
+.notesview #notebooksbox .treelist div a.subscribed:focus {
+	border-radius: 3px;
+	outline: 2px solid rgba(30,150,192, 0.5);
+}
+
+.notesview #notebooksbox .searchresults .treelist div a.remove {
+	display: none;
+}
+
+.notesview #notebooksbox .treelist input {
+	position: absolute;
+	top: 4px;
+	left: 14px;
+}
+
+.notesview #notebooks input {
+	display: none;
+}
+
+.notesview #notebooksbox .searchresults .listing li {
+	background-color: #c7e3ef;
+}
+
+.notesview #notebooksbox .searchresults a.listname {
+	padding-left: 36px;
+}
+
+.notesview #notebooks div.folder span.handle {
+	display: inline-block;
+	position: absolute;
+	top: 6px;
+	right: 26px;
+	height: 16px;
+	width: 30px;
+	padding: 0;
+	background: url('sprites.png') right -1000px no-repeat;
+}
+
+.notesview #notebooks div.readonly span.handle {
+	background-position: right -192px;
+}
+
+.notesview #notebooks div.other span.handle {
+	background-position: right -210px;
+}
+
+.notesview #notebooks div.other.readonly span.handle {
+	background-position: right -228px;
+}
+
+.notesview #notebooks div.shared span.handle {
+	background-position: right -246px;
+}
+
+.notesview #notebooks div.other .listname,
+.notesview #notebooks div.shared .listname,
+.notesview #notebooks div.readonly .listname {
+	padding-right: 46px;
+}
+
+.notesview #notebooks div.other.readonly .listname {
+	padding-right: 56px;
+}
+
+.notesview #notebooksbox .searchresults {
+	background: #b0ccd7;
+	margin-top: 8px;
+}
+
+.notesview #notebooksbox .searchresults  .boxtitle {
+	background: none;
+	padding: 2px 8px 2px 8px;
+}
+
+.notesview #notebooksbox .boxtitle a.iconbutton.search {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	width: 16px;
+	cursor: pointer;
+	background-position: -2px -317px;
+}
+
+.notesview .uidialog .tabbed {
+	margin-top: -12px;
+}
+
+.notesview .uidialog .propform fieldset.ui-tabs-panel {
+	min-height: 290px;
+}
+
+.notesview .uidialog .propform #noteslist-name {
+	width: 20em;
+}
+
+.notesdialog #notesdialogheader {
+	height: auto;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	    -ms-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+
+#kolabnotesinlinegui {
+	border: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	    -ms-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+
+.notesview .attachmentslist li.message.eml {
+	position: relative;
+	display: inline-block;
+	background-image: url(sprites.png);
+	background-position: -6px -128px;
+	margin-right: 1em;
+	padding-right: 28px;
+}
+
+.notesview .attachmentslist li.message a.messagelink {
+	padding-left: 24px;
+	padding-right: 0;
+}
+
+.notesview .attachmentslist li.message a.delete {
+	background-position: -6px -378px;
+}
+
+.notesview .attachmentslist li.deleted a.messagelink,
+.notesview .attachmentslist li.deleted a.messagelink:hover {
+	text-decoration: line-through;
+}
+
+ul.toolbarmenu li .appendnote span.icon {
+	background-image: url(sprites.png);
+	background-position: -4px -170px;
+}
+
+div.kolabmessagenotes {
+	margin: 8px 8px;
+	padding: 4px 8px;
+	border: 1px solid #dfdfdf;
+	background: #fafafa;
+	border-radius: 4px;
+}
+
+div.kolabmessagenotes a.kolabnotesref {
+	display: inline-block;
+	color: #333;
+	font-weight: bold;
+	padding: 3px 15px 2px 22px;
+	text-shadow: 0px 1px 1px #fff;
+	text-decoration: none;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 16em;
+	background: url(sprites.png) -6px -151px no-repeat;
+}

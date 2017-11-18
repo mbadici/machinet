@@ -1,0 +1,81 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2014, roundcube.net
+# This file is distributed under the same license as the Roundcube Webmail Help package.
+# 
+# Translators:
+# Ettore Atalan <atalanttore@googlemail.com>, 2014
+# Mads <mads@batmads.com>, 2016
+# Max Hellwig <max.hellwig@translating-energy.de>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Kolab Documentation\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-26 23:28+0100\n"
+"PO-Revision-Date: 2017-09-23 20:32+0000\n"
+"Last-Translator: Mads <mads@batmads.com>\n"
+"Language-Team: German (http://www.transifex.com/kolab/kolab-documentation/language/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../en_US/_plugins/kolab_addressbook/addressbook.rst:9
+msgid "Sharing Address Books"
+msgstr "Adressbücher teilen"
+
+#: ../../en_US/_plugins/kolab_addressbook/addressbook.rst:11
+msgid ""
+"Just like calendars or regular email folders, personal address books can "
+"also be shared with other users in your workgroup."
+msgstr "Persönliche Adressbücher können genauso wie Kalender oder normale E-Mail-Ordner mit anderen Nutzern Ihrer Arbeitsgruppe geteilt werden. "
+
+#: ../../en_US/_plugins/kolab_addressbook/addressbook.rst:16
+msgid "Share Contacts with others"
+msgstr "Kontakte mit Anderen teilen"
+
+#: ../../en_US/_plugins/kolab_addressbook/addressbook.rst:22
+msgid ""
+"Settings for sharing is controlled through the address book properties "
+"accessible through the *More actions* menu behind the gear icon the footer "
+"in the :ref:`addressbook-groups` list."
+msgstr "Die Einstellungen zum Teilen werden über die Eigenschaften des Adressbuchs gemacht, die durch das *Weitere Tätigkeiten*-Menü hinter dem Zahnradicon in der Fußzeile der :ref: `Adressbuchgruppen <addressbook-groups>`-Liste zu erreichen sind. "
+
+#: ../../en_US/_plugins/kolab_addressbook/addressbook.rst:25
+msgid "Select the address book you want to share."
+msgstr "Wählen Sie das Adressbuch aus, dass Sie teilen möchten."
+
+#: ../../en_US/_plugins/kolab_addressbook/addressbook.rst:26
+msgid "Choose *Edit address book* from the actions menu."
+msgstr "Wählen Sie *Adressbuch bearbeiten* aus dem Tätigkeitenmenü. "
+
+#: ../../en_US/_plugins/kolab_addressbook/addressbook.rst:27
+msgid "Switch to the *Sharing* tab in the properties form on the right."
+msgstr "Wechseln Sie auf den *Teilen*-Reiter in der Eigenschaftenmaske rechts. "
+
+#: ../../en_US/_plugins/kolab_addressbook/addressbook.rst:29
+msgid ""
+"The table displays who already has permission to see and modify the selected"
+" address book. Here you can manage permissions the same way as :ref:`Sharing"
+" a Folder <settings-folder-sharing>`."
+msgstr "Die Tabelle zeigt an, wer schon die Erlaubnis hat, das ausgewählte Adressbuch zu sehen und verändern. Freigaben können hier auf die selbe Weise, wie :ref: `Ordner teilen <settings-folder-sharing>` verwaltet werden. "
+
+#: ../../en_US/_plugins/kolab_addressbook/addressbook.rst:34
+msgid "Subscribe to Shared Address Books"
+msgstr "Geteilte Adressbücher abonnieren"
+
+#: ../../en_US/_plugins/kolab_addressbook/addressbook.rst:36
+msgid ""
+"Address books shared by others are not showing up right away in the "
+"directories list of the web client. Switch to :ref:`Settings > Folders "
+"<settings-folders>` to see all resources you can access. There's a shortcut "
+"to this: click *Manage folders* in the actions menu behind the gear icon "
+"located the footer of the directory list."
+msgstr "Adressbücher, die von anderen geteilt wurden, werden nicht sofort in der Verzeichnisliste des Webclients angezeigt. Wechseln Sie zu :ref: `Einstellungen > Ordner <settings-folders>`, um alle Hilfsmittel, auf die Sie Zugriff haben, zu sehen. Es gibt einen schnelleren Weg dorthin: Klicken Sie auf *Ordner verwalten* im Tätigkeitenmenü hinter dem Zahnradicon in der Fußzeile der Verzeichnisliste. "
+
+#: ../../en_US/_plugins/kolab_addressbook/addressbook.rst:41
+msgid ""
+"In order to make a shared address book appear in the address book view, "
+"locate it in the folder manager and check the *Subscribed* mark in the list."
+" Only subscribed directories are visible in the address book view."
+msgstr "Um ein geteiltes Adressbuch in der Adressbuchansicht anzuzeigen, wählen Sie es in der Ordnerverwaltung aus und setzen Sie bei *Abonniert* ein Häkchen in der Liste. Nur abonnierte Verzeichnisse sind in der Adressbuchansicht sichtbar. "

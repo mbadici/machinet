@@ -1,0 +1,30 @@
+<?php
+$labels['tabtitle'] = 'Activesync';
+$labels['activesynctitle'] = 'Διαχείριση συσκευών Activesync';
+$labels['devices'] = 'Συσκευές';
+$labels['devicealias'] = 'Όνομα συσκευής';
+$labels['synchronize'] = 'Συγχρονισμός';
+$labels['withalarms'] = 'Με ξυπνητήρια';
+$labels['syncsettings'] = 'Ρυθμίσεις συγχρονισμού';
+$labels['deviceconfig'] = 'Ρυθμίσεις συσκευής';
+$labels['folderstosync'] = 'Φάκελοι προς συγχρονισμό';
+$labels['mail'] = 'Ηλεκτρονική αλληλογραφία';
+$labels['contact'] = 'Βιβλίο διευθύνσεων';
+$labels['event'] = 'Ημερολόγια';
+$labels['task'] = 'Εργασίες';
+$labels['note'] = 'Σημειώσεις';
+$labels['configuration'] = 'Ρυθμίσεις';
+$labels['deletedevice'] = 'Διαγραφή συσκευής';
+$labels['savingdata'] = 'Αποθήκευση δεδομένων...';
+$labels['savingerror'] = 'Αποτυχία αποθήκευσης ρυθμίσεων';
+$labels['devicedeleteconfirm'] = 'Θέλετε να διαγράψετε τις ρυθμίσεις για αυτή τη συσκευή;';
+$labels['successfullydeleted'] = 'Αφαιρέθηκε επιτυχώς οι ρυθμίσεις για την συσκευή';
+$labels['devicenotfound'] = 'Αδυναμία ανάγνωσης ρυθμίσεων συσκευής';
+$labels['devicetype'] = 'Τύπος συσκευής';
+$labels['acsversion'] = 'Έκδοση πρωτοκόλλου';
+$labels['friendlyname'] = 'Φιλικό όνομα';
+$labels['os'] = 'Λειτουργικό σύστημα';
+$labels['oslanguage'] = 'Γλώσσα λειτουργικού συστήματος';
+$labels['phonenumber'] = 'Αριθμός τηλεφώνου';
+$labels['arialabeldeviceframe'] = 'Ρυθμίσεις συγχρονισμού συσκευής από';
+?>

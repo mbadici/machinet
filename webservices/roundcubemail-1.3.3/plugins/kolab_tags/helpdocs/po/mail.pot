@@ -1,0 +1,78 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2015, roundcube.net
+# This file is distributed under the same license as the Roundcube Webmail Help package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Roundcube Webmail Help 1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-30 08:11\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../en_US/_plugins/kolab_tags/mail.rst:9
+# 1dc1760850df40c897398e827760d1be
+msgid "Tags"
+msgstr ""
+
+#: ../../en_US/_plugins/kolab_tags/mail.rst:11
+# 8dc48bf0b480455e87702ef619ffda19
+msgid "Like folders, tags is a way to separate and organize Emails. Tags are showing up as a colored reference in the subject line of the referenced Emails."
+msgstr ""
+
+#: ../../en_US/_plugins/kolab_tags/mail.rst:15
+# 8f9300e9b466481ca01abbccca58b74c
+msgid "Tags can be reused across the Kolab components - Email, Calendar, Notes, Files and Tasks."
+msgstr ""
+
+#: ../../en_US/_plugins/kolab_tags/mail.rst:19
+# f9d9d4941dc4470ca70efb2dba17ebe0
+msgid "When a tag is associated with a number of Emails, these Emails can be listed by clicking the tag in the tag-cloud. It is possible to select more than one tag using CTRL key. This way one can display messages associated with all selected tags."
+msgstr ""
+
+#: ../../en_US/_plugins/kolab_tags/mail.rst:22
+# dcb4832f54f04afeb4c3072500ce6a81
+msgid "The tag-cloud can be found under the :ref:`folder list <mail-folders>` in the Email view. It is showing all available tags."
+msgstr ""
+
+#: ../../en_US/_plugins/kolab_tags/mail.rst:28
+# 9ff403451b5a43d4ad6384aede45348c
+msgid "Creating a tag"
+msgstr ""
+
+#: ../../en_US/_plugins/kolab_tags/mail.rst:30
+# 4a2a148e04614be480d412a3f9a1403c
+msgid "Tags can be created, either from the manage menu (see above) or from the dropdown menu in the mail view. Rightclick on an Email in the list, and select \"Mark -> Tag as...\"."
+msgstr ""
+
+#: ../../en_US/_plugins/kolab_tags/mail.rst:36
+# b01add6c2a734d60ae7f65ddbffd3b4b
+msgid "Managing tags"
+msgstr ""
+
+#: ../../en_US/_plugins/kolab_tags/mail.rst:38
+# 4c986569129c4ca087363341d6becbf7
+msgid "Tags can be managed through the menu in the tag-cloud. The menu is opened by clicking the wheel in the buttom of the tag-cloud. Here you can add/remove tags or modify their name and color."
+msgstr ""
+
+#: ../../en_US/_plugins/kolab_tags/mail.rst:41
+# ae55ddb468b54934a3997e399664c2aa
+msgid "Tags are associated to Email messages via the drop-down menu in the Email list."
+msgstr ""
+
+#: ../../en_US/_plugins/kolab_tags/mail.rst:45
+# c9882b94e0fd41328b2e18f21721eb63
+msgid "Deleting tags"
+msgstr ""
+
+#: ../../en_US/_plugins/kolab_tags/mail.rst:47
+# c738c03404424c7b989095468961e5dd
+msgid "A tag which is no longer needed can be removed via the tag-cloud menu. This will remove the tag from the cloud and the references to the associated Emails. The Emails will however remain."
+msgstr ""
+

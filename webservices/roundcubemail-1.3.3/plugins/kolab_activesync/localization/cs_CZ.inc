@@ -1,0 +1,33 @@
+<?php
+$labels['tabtitle'] = 'Activesync';
+$labels['activesynctitle'] = 'Správa zařízení Avtivesync';
+$labels['devices'] = 'Zařízení';
+$labels['devicealias'] = 'Název zařízení';
+$labels['synchronize'] = 'Synchronizovat';
+$labels['withalarms'] = 'Připomenutí';
+$labels['syncsettings'] = 'Nastavení synchronizace';
+$labels['deviceconfig'] = 'Nastavení zařízení';
+$labels['folderstosync'] = 'Složky k synchronizaci';
+$labels['mail'] = 'E-mail';
+$labels['contact'] = 'Adresáře';
+$labels['event'] = 'Kalendáře';
+$labels['task'] = 'Úkoly';
+$labels['note'] = 'Poznámky';
+$labels['configuration'] = 'Nastavení';
+$labels['deletedevice'] = 'Smazat zařízení';
+$labels['nodevices'] = 'V současné době nemáte registrována žádná zařízení.<br/><br/>Zařízení musíte nejprve připojit k serveru dle <a href="$url" target="_blank">těchto pokynů</a>. Po úspěšném připojení zde bude dostupné nastavení připojených zařízení.';
+$labels['savingdata'] = 'Ukládají se data...';
+$labels['savingerror'] = 'Nepodařilo se uložit nastavení';
+$labels['notsupported'] = 'Váš server nepodporuje popisná data/poznámky';
+$labels['devicedeleteconfirm'] = 'Opravdu chcete smazat nastavení pro toto zařízení?';
+$labels['successfullydeleted'] = 'Nastavení zařízení bylo úspěšně odebráno';
+$labels['devicenotfound'] = 'Nelze přečíst nastavení zařízení';
+$labels['devicetype'] = 'Typ zařízení';
+$labels['acsversion'] = 'Verze protokolu';
+$labels['useragent'] = 'Uživatelský agent';
+$labels['friendlyname'] = 'Zobrazovaný název';
+$labels['os'] = 'Operační systém';
+$labels['oslanguage'] = 'Jazyk operačního systému';
+$labels['phonenumber'] = 'Telefonní číslo';
+$labels['arialabeldeviceframe'] = 'Nastavení synchronizace zařízení';
+?>

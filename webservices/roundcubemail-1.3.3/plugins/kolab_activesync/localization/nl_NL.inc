@@ -1,0 +1,33 @@
+<?php
+$labels['tabtitle'] = 'Activesync';
+$labels['activesynctitle'] = 'Activesync-apparaten beheren';
+$labels['devices'] = 'Apparaten';
+$labels['devicealias'] = 'Apparaatnaam';
+$labels['synchronize'] = 'Synchroniseren';
+$labels['withalarms'] = 'Met herinneringen';
+$labels['syncsettings'] = 'Synchronisatie-instellingen';
+$labels['deviceconfig'] = 'Configuratie van apparaat';
+$labels['folderstosync'] = 'Te synchroniseren mappen';
+$labels['mail'] = 'E-mail';
+$labels['contact'] = 'Adresboeken';
+$labels['event'] = 'Agenda\'s';
+$labels['task'] = 'Taken';
+$labels['note'] = 'Notities';
+$labels['configuration'] = 'Configuratie';
+$labels['deletedevice'] = 'Apparaat verwijderen';
+$labels['nodevices'] = 'Momenteel zijn er geen apparaten geregistreerd.<br/><br/>Als u een apparaat wilt registreren, volgt u de instructies op <a href="$url" target="_blank">deze pagina</a> om het eerst met de server te verbinden. Daarna kunt u het apparaat hier configureren.';
+$labels['savingdata'] = 'Gegevens opslaan...';
+$labels['savingerror'] = 'Opslaan van configuratie is mislukt';
+$labels['notsupported'] = 'Uw server ondersteunt geen metagegevens/annotaties';
+$labels['devicedeleteconfirm'] = 'Weet u zeker dat u de configuratie voor dit apparaat wilt verwijderen?';
+$labels['successfullydeleted'] = 'De configuratie van het apparaat is met succes verwijderd';
+$labels['devicenotfound'] = 'Configuratie van apparaat kan niet worden gelezen';
+$labels['devicetype'] = 'Apparaattype';
+$labels['acsversion'] = 'Protocolversie';
+$labels['useragent'] = 'Gebruikersagent';
+$labels['friendlyname'] = 'Beschrijvende naam';
+$labels['os'] = 'Besturingssysteem';
+$labels['oslanguage'] = 'Taal van besturingssysteem';
+$labels['phonenumber'] = 'Telefoonnummer';
+$labels['arialabeldeviceframe'] = 'Formulier met instellingen voor synchronisatie van apparaat';
+?>

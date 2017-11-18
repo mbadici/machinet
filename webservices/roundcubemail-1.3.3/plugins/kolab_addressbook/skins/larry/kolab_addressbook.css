@@ -1,0 +1,255 @@
+
+#directorylistbox .listsearchbox + .scroller {
+	top: 34px;
+}
+
+#directorylistbox .listsearchbox.expanded + .scroller {
+	top: 68px;
+}
+
+#directorylistbox .boxtitle a.iconbutton.search {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	width: 16px;
+	cursor: pointer;
+	background-position: -2px -317px;
+}
+
+#directorylist li.addressbook.selected > div a {
+	background-position: 6px -791px;
+}
+
+#directorylist ul li.addressbook.selected > div a {
+	background-position: 32px -791px;
+}
+
+#directorylist ul ul li.addressbook.selected > div a {
+	background-position: 58px -791px;
+}
+
+#directorylist ul ul ul li.addressbook.selected > div a {
+	background-position: 84px -791px;
+}
+
+#directorylistbox ul.treelist li.virtual {
+	background-image: none !important;
+}
+
+#directorylistbox ul.treelist li.virtual > div a {
+	color: #aaa;
+	background-image: none;
+	height: 16px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+#directorylistbox ul.treelist li.virtual > .treetoggle {
+	top: 6px !important;
+}
+
+#directorylistbox ul.treelist li input[type='checkbox'] {
+	position: absolute;
+	top: 4px;
+	left: 10px;
+}
+
+#directorylistbox ul.treelist ul li input[type='checkbox'] {
+	left: 36px;
+}
+
+#directorylist li input[type='checkbox'] {
+	display: none;
+}
+
+#directorylistbox ul.treelist div span.subscribed {
+	display: inline-block;
+	position: absolute;
+	top: 4px;
+	right: 5px;
+	height: 16px;
+	width: 16px;
+	padding: 0;
+	background: url(folder_icons.png) -100px 0 no-repeat;
+	overflow: hidden;
+	text-indent: -5000px;
+	cursor: pointer;
+}
+
+#directorylistbox ul.treelist div span.subscribed:focus,
+#directorylistbox ul.treelist div:hover span.subscribed {
+	background-position: 0px -160px;
+}
+
+#directorylistbox ul.treelist div.subscribed span.subscribed {
+	background-position: -16px -160px;
+}
+
+#directorylistbox ul.treelist div span.subscribed:focus {
+	border-radius: 3px;
+	outline: 2px solid rgba(30,150,192, 0.5);
+}
+
+#directorylistbox .searchresults .listing li {
+	background-color: #c7e3ef;
+}
+
+#directorylistbox .searchresults .boxtitle {
+	padding: 2px 8px;
+	border-radius: 0;
+}
+
+#directorylist li.addressbook.readonly,
+#directorylist li.addressbook.shared,
+#directorylist li.addressbook.other {
+	background-image: url(folder_icons.png);
+	background-position: right -1000px;
+	background-repeat: no-repeat;
+}
+
+#directorylist li.addressbook.readonly {
+	background-position: 98% -21px;
+}
+
+#directorylist li.addressbook.personal.readonly,
+#directorylist li.addressbook.other.readonly {
+	background-position: 98% -77px;
+}
+
+#directorylist li.addressbook.shared {
+	background-position: 98% -103px;
+}
+
+#directorylist li.addressbook.shared.readonly {
+	background-position: 98% -130px;
+}
+
+#directorylist li.addressbook.virtual.user {
+	background-image: url(folder_icons.png) !important;
+	background-position: 98% -52px;
+}
+
+#directorylist li.addressbook.readonly a,
+#directorylist li.addressbook.shared a,
+#directorylist li.addressbook.other a {
+	padding-right: 24px;
+}
+
+#directorylist li.addressbook.other.readonly a,
+#directorylist li.addressbook.shared.readonly a {
+	padding-right: 36px;
+}
+
+/* for contextmenu */
+#directorylist a.contextRow {
+	background-color: #C7E3EF;
+}
+
+#contactdiff,
+#contacthistory {
+	display: none;
+}
+
+.formbuttons .formbuttons-secondary-kolab {
+	display: block;
+	margin: 2px 2px 0 0;
+	text-align: center;
+}
+
+.formbuttons .btn-contact-history {
+	display: inline-block;
+	padding: 1px;
+	color: #333;
+	text-decoration: none;
+}
+
+.formbuttons .btn-contact-history:hover {
+	text-decoration: underline;
+}
+
+.formbuttons .btn-contact-history:before {
+	content: "";
+	display: inline-block;
+	position: relative;
+	top: 5px;
+	width: 16px;
+	height: 16px;
+	margin-right: 3px;
+	background: url('folder_icons.png') 0px -200px no-repeat;
+}
+
+#contactdiff .contact-names,
+#contactdiff .contact-names-new {
+	margin-top: 0;
+}
+
+#contactdiff .contact-names.diff-text-old {
+	margin-bottom: 0;
+}
+
+#contactdiff .diff-text-diff del,
+#contactdiff .diff-text-diff ins {
+	text-decoration: none;
+	color: inherit;
+}
+
+#contactdiff .diff-img-old,
+#contactdiff .diff-text-old,
+#contactdiff .diff-text-diff del {
+	background-color: #fdd;
+	text-decoration: line-through;
+}
+
+#contactdiff .diff-text-new,
+#contactdiff .diff-img-new,
+#contactdiff .diff-text-diff ins,
+#contactdiff .diff-text-diff .diffmod img {
+	background-color: #dfd;
+}
+
+#contactdiff .diff-img-old,
+#contactdiff .diff-img-new {
+	min-width: 48px;
+	max-width: 112px;
+}
+
+#contactdiff label {
+	color: #666;
+	font-weight: bold;
+}
+
+#contactdiff label span.index {
+	vertical-align: inherit;
+	margin-left: 0.6em;
+	font-weight: normal;
+}
+
+#contactdiff .contact-name {
+	font-size: 120%;
+	font-weight: bold;
+}
+
+#contactdiff .subtype {
+	color: #666;
+}
+
+#contactdiff span.subtype {
+	margin-left: 0.5em;
+}
+
+#contactdiff div.subtype {
+	margin-top: 0.2em;
+}
+
+#contactdiff .subtype:before {
+	content: "(";
+}
+
+#contactdiff .subtype:after {
+	content: ")";
+}
+
+div.contextmenu.rcmmainmenu ul.iconized li a.history > span.icon {
+	background: url(folder_icons.png) 1px -214px no-repeat;
+}
+

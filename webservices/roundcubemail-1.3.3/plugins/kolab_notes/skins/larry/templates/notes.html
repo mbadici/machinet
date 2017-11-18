@@ -1,0 +1,232 @@
+<roundcube:object name="doctype" value="html5" />
+<html>
+<head>
+<title><roundcube:object name="pagetitle" /></title>
+<roundcube:include file="/includes/links.html" />
+</head>
+<body class="notesview noscroll">
+
+<roundcube:include file="/includes/header.html" />
+
+<div id="mainscreen">
+    <h1 class="voice"><roundcube:label name="kolab_notes.navtitle" /></h1>
+
+    <div id="notestoolbar" class="toolbar" role="toolbar" aria-labelledby="aria-label-toolbar">
+        <h2 id="aria-label-toolbar" class="voice"><roundcube:label name="arialabeltoolbar" /></h2>
+        <roundcube:button command="createnote" type="link" class="button createnote disabled" classAct="button createnote" classSel="button createnote pressed" label="kolab_notes.create" title="kolab_notes.createnote" />
+        <roundcube:button command="print" type="link" class="button print disabled" classAct="button print" classSel="button print pressed" label="print" title="print" />
+        <roundcube:button command="sendnote" type="link" class="button sendnote disabled" classAct="button sendnote" classSel="button sendnote pressed" label="kolab_notes.send" title="kolab_notes.sendnote" />
+        <roundcube:container name="toolbar" id="notestoolbar" />
+    </div>
+
+    <div id="quicksearchbar" role="search" aria-labelledby="aria-label-searchform">
+        <h2 id="aria-label-searchform" class="voice"><roundcube:label name="kolab_notes.arialabelnotesearchform" /></h2>
+        <label for="quicksearchbox" class="voice"><roundcube:label name="kolab_notes.arialabelnotesquicksearchbox" /></label>
+        <a id="searchmenulink" class="iconbutton searchoptions" > </a>
+        <roundcube:object name="plugin.searchform" id="quicksearchbox" />
+        <roundcube:button type="link" command="reset-search" id="searchreset" class="iconbutton reset" title="resetsearch" content=" " />
+    </div>
+
+    <div id="mainscreencontent">
+
+    <div id="sidebar">
+        <div id="tagsbox" class="uibox listbox">
+            <h2 class="boxtitle" id="aria-label-tagsbox"><roundcube:label name="kolab_notes.tags" id="taglist" /></h2>
+            <div class="scroller">
+                <roundcube:object name="plugin.tagslist" id="tagslist" class="tagcloud" role="region" aria-labelledby="aria-label-tagsbox" aria-controls="kolabnoteslist" />
+            </div>
+        </div>
+
+        <div id="notebooksbox" class="uibox listbox" role="navigation" aria-labelledby="aria-label-notebooks">
+            <h2 class="boxtitle" id="aria-label-notebooks"><roundcube:label name="kolab_notes.lists" />
+                <a href="#notebooks" class="iconbutton search" title="<roundcube:label name='kolab_notes.findnotebooks' />" tabindex="0"><roundcube:label name="kolab_notes.findnotebooks" /></a>
+            </h2>
+            <div class="listsearchbox" style="display:none">
+                <div class="searchbox" role="search" aria-labelledby="aria-label-notebooksearchform" aria-controls="kolabnoteslist">
+                    <h3 id="aria-label-notebooksearchform" class="voice"><roundcube:label name="kolab_notes.arialabelfolderearchform" /></h3>
+                    <label for="notebooksearch" class="voice"><roundcube:label name="kolab_notes.searchterms" /></label>
+                    <input type="text" name="q" id="notebooksearch" placeholder="<roundcube:label name='kolab_notes.findnotebooks' />" />
+                    <a class="iconbutton searchicon"></a>
+                    <roundcube:button type="link" command="reset-listsearch" id="notebooksearch-reset" class="iconbutton reset" title="resetsearch" label="resetsearch" />
+                </div>
+            </div>
+            <div class="scroller withfooter">
+                <roundcube:object name="plugin.notebooks" id="notebooks" class="listing treelist" />
+            </div>
+            <div class="boxfooter">
+                <roundcube:button command="list-create" type="link" title="kolab_notes.newnotebook" class="listbutton add disabled" classAct="listbutton add" innerClass="inner" label="kolab_notes.addnotebook" /><roundcube:button name="notesoptionslink" id="notesoptionsmenulink" type="link" title="kolab_notes.listactions" class="listbutton groupactions" onclick="return UI.toggle_popup('notesoptionsmenu', event)" innerClass="inner" label="kolab_notes.listactions" aria-haspopup="true" aria-expanded="false" aria-owns="notesoptionsmenu-menu" />
+            </div>
+        </div>
+
+        <div id="notesoptionsmenu" class="popupmenu" aria-hidden="true">
+            <h3 id="aria-label-optionsmenu" class="voice"><roundcube:label name="kolab_notes.arialabelnotesoptionsmenu" /></h3>
+            <ul class="toolbarmenu" id="notesoptionsmenu-menu" role="menu" aria-labelledby="aria-label-optionsmenu">
+                <li role="menuitem"><roundcube:button type="link" command="list-edit" label="edit" classAct="active" /></li>
+                <li role="menuitem"><roundcube:button type="link" command="list-delete" label="delete" classAct="active" /></li>
+                <li role="menuitem"><roundcube:button type="link" command="list-remove" label="kolab_notes.removelist" classAct="active" /></li>
+                <li role="menuitem"><roundcube:button type="link" command="folders" task="settings" label="managefolders" classAct="active" /></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="mainview-right">
+        <div id="noteslistbox" class="uibox listbox">
+            <h3 id="aria-label-noteslist" class="boxtitle"><roundcube:label name="kolab_notes.notes" /></h3>
+            <div class="scroller withfooter" aria-labelledby="aria-label-noteslist">
+                <roundcube:object name="plugin.listing" id="kolabnoteslist" class="listing" summary="kolab_notes.arialabelnoteslist" />
+            </div>
+            <div class="boxfooter">
+                <roundcube:button command="delete" type="link" title="delete" class="listbutton delete disabled" classAct="listbutton delete" innerClass="inner" label="delete" />
+                <roundcube:object name="plugin.recordsCountDisplay" class="countdisplay" label="fromtoshort" aria-live="polite" aria-relevant="text" />
+            </div>
+            <div class="boxpagenav">
+                <roundcube:button name="notessortmenulink" id="notessortmenulink" type="link" title="kolab_notes.sortby" class="icon sortoptions" onclick="return UI.toggle_popup('notessortmenu', event)" innerClass="inner" content="v" aria-haspopup="true" aria-expanded="false" aria-owns="notessortmenu-menu" />
+            </div>
+        </div>
+
+        <div id="notedetailsbox" class="uibox contentbox" role="main" aria-labelledby="aria-label-noteform">
+            <h3 id="aria-label-noteform" class="voice"><roundcube:label name="kolab_notes.arialabelnoteform" /></h3>
+            <roundcube:object name="plugin.notetitle" id="notedetailstitle" class="notetitle boxtitle" />
+            <roundcube:object name="plugin.editform" id="noteform" class="noteform" />
+            <roundcube:object name="plugin.detailview" id="notedetails" class="notedetails scroller" />
+            <div id="notereferences" class="notereferences">
+                <h3 id="aria-label-messagereferences" class="voice"><roundcube:label name="kolab_notes.arialabelmessagereferences" /></h3>
+                <roundcube:object name="plugin.attachments_list" id="attachment-list" class="attachmentslist" role="region" aria-labelledby="aria-label-messagereferences" />
+            </div>
+            <div class="formbuttons">
+                <roundcube:button command="save" type="input" class="button mainaction" label="save" id="btn-save-note" />
+                <div class="footerright">
+                <roundcube:if condition="config:kolab_bonnie_api" />
+                    <roundcube:button command="history" type="link" label="kolab_notes.showhistory" class="btn-note-history" classAct="btn-note-history active" />
+                <roundcube:endif />
+                </div>
+            </div>
+            <roundcube:container name="notedetailview" id="notedetailsbox" />
+        </div>
+    </div>
+
+    </div>
+</div>
+
+<roundcube:if condition="config:kolab_bonnie_api" />
+<div id="notehistory" class="uidialog" aria-hidden="true">
+    <roundcube:object name="plugin.object_changelog_table" class="records-table changelog-table" />
+    <div class="compare-button"><input type="button" class="button" value="↳ <roundcube:label name='libkolab.compare' />" /></div>
+</div>
+
+<div id="notediff" class="uidialog contentbox" aria-hidden="true">
+	<h2 class="note-title">Note Title</h2>
+	<h2 class="note-title-new diff-text-new"></h2>
+
+	<div class="form-section note-tags">
+		<span class="diff-text-old"></span> &#8674;
+		<span class="diff-text-new"></span>
+	</div>
+
+	<div class="form-section note-description">
+		<div class="diff-text-diff" style="white-space:pre-wrap"></div>
+		<div class="diff-text-old"></div>
+		<div class="diff-text-new"></div>
+	</div>
+
+	<div class="form-section notereferences">
+		<div class="diff-text-old"></div>
+		<div class="diff-text-new"></div>
+	</div>
+</div>
+<roundcube:endif />
+
+<roundcube:object name="message" id="messagestack" />
+
+<div id="notessortmenu" class="popupmenu" aria-hidden="true">
+    <h3 id="aria-label-sortmenu" class="voice"><roundcube:label name="kolab_notes.arialabelnotessortmenu" /></h3>
+    <ul class="toolbarmenu iconized" id="notessortmenu-menu" role="menu" aria-labelledby="aria-label-sortmenu">
+        <li role="menuitem"><roundcube:button command="list-sort" prop="changed" type="link" label="kolab_notes.changed" class="icon active by-changed" innerclass="icon" /></li>
+        <li role="menuitem"><roundcube:button command="list-sort" prop="title" type="link" label="kolab_notes.title" class="icon active by-title" innerclass="icon" /></li>
+    </ul>
+</div>
+
+<div id="notebookeditform" class="uidialog" aria-labelledby="aria-label-editform" aria-hidden="true" role="dialog">
+    <h3 id="aria-label-editform" class="voice"><roundcube:label name="kolab_notes.arialabelnotebookform" /></h3>
+    <roundcube:container name="notebookeditform" id="notebookeditform" />
+    <roundcube:label name="loading" />
+</div>
+
+<script type="text/javascript">
+
+// UI startup
+var UI = new rcube_mail_ui();
+
+$(document).ready(function(e){
+    rcmail.addEventListener('kolab_notes_editform_load', function(e){
+        UI.init_tabs($('#notebookeditform > form').addClass('propform tabbed'));
+    })
+
+    new rcube_splitter({ id:'notesviewsplitter', p1:'#sidebar', p2:'#mainview-right',
+        orientation:'v', relative:true, start:240, min:180, size:12, render:layout_view }).init();
+    new rcube_splitter({ id:'noteslistsplitter2', p1:'#noteslistbox', p2:'#notedetailsbox',
+        orientation:'v', relative:true, start:242, min:180, size:12, render:layout_view }).init();
+    new rcube_splitter({ id:'notesviewsplitterv', p1:'#tagsbox', p2:'#notebooksbox',
+        orientation:'h', relative:true, start:242, min:120, size:12, offset:4 }).init();
+
+    function layout_view()
+    {
+        var form = $('#noteform, #notedetails'),
+            content = $('#notecontent'),
+            header = $('#notedetailstitle'),
+            footer = $('#notereferences'),
+            w, h;
+
+        if ($('#attachment-list li').length)
+            footer.show();
+        else
+            footer.hide();
+
+        form.css('top', header.outerHeight()+'px');
+        form.css('bottom', ((footer.is(':visible') ? footer.outerHeight()+4 : 0) + 41) + 'px');
+
+        w = form.outerWidth();
+        h = form.outerHeight();
+        content.width(w).height(h);
+
+        $('#noteform > div.mce-tinymce').width(w);
+        $('#notecontent_ifr').width(w).height(h - 4 - $('div.mce-toolbar').height());
+    }
+
+    $(window).resize(function(e){
+        layout_view();
+    });
+
+    // animation to unfold list search box
+    $('#notebooksbox .boxtitle a.search').click(function(e){
+        var title = $('#notebooksbox .boxtitle'),
+            box = $('#notebooksbox .listsearchbox'),
+            dir = box.is(':visible') ? -1 : 1;
+
+        box.slideToggle({
+            duration: 160,
+            progress: function(animation, progress) {
+                if (dir < 0) progress = 1 - progress;
+                $('#notebooksbox .scroller').css('top', (title.outerHeight() + 34 * progress) + 'px');
+            },
+            complete: function() {
+                box.toggleClass('expanded');
+                if (box.is(':visible')) {
+                    box.find('input[type=text]').focus();
+                }
+                else {
+                    $('#notebooksearch-reset').click();
+                }
+                // TODO: save state in localStorage
+            }
+        });
+
+        return false;
+    });
+    
+});
+
+</script>
+
+</body>
+</html>

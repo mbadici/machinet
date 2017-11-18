@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * Kolab WAP Client plugin configuration
+ *
+ * Copyright (C) 2016, Kolab Systems AG <contact@kolabsys.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+// Kolab WAP API URL
+$config['wap_client_uri'] = '/kolab-webadmin/api';
+
+// Log conversation with WAP
+$config['wap_client_debug'] = false;
+
+// Domain root DN
+$config['wap_client_root_dn'] = 'dc=example,dc=org';
+
+// Domain base DN
+$config['wap_client_base_dn'] = 'dc=example,dc=org';
+
+// Accounts definition
+$config['wap_client_accounts'] = array();
+/*
+$config['wap_client_accounts'] = array(
+    'Lite' => array(
+        'description' => 'Mail account with 2GB quota',
+        'nsroledn'    => array('cn=imap-user,$base_dn', 'cn=active-user,$root_dn'),
+        'mailquota'   => 2097152,
+    ),
+    'Professional' => array(
+        'description' => 'Professional groupware account with 10GB quota',
+        'nsroledn'    => array('cn=activesync-user,$base_dn', 'cn=kolab-user,$base_dn', 'cn=active-user,$root_dn'),
+        'mailquota'   => 10485760,
+    ),
+);
+*/

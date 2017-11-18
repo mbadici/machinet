@@ -1,0 +1,33 @@
+<?php
+$labels['tabtitle'] = 'Activesync';
+$labels['activesynctitle'] = 'Hallitse Activesync-laitteita';
+$labels['devices'] = 'Laitteet';
+$labels['devicealias'] = 'Laitteen nimi';
+$labels['synchronize'] = 'Synkronoi';
+$labels['withalarms'] = 'Hälytyksien kera';
+$labels['syncsettings'] = 'Synkronointiasetukset';
+$labels['deviceconfig'] = 'Laitteen määritykset';
+$labels['folderstosync'] = 'Synkronoitavat kansiot';
+$labels['mail'] = 'Sähköposti';
+$labels['contact'] = 'Osoitekirjat';
+$labels['event'] = 'Kalenterit';
+$labels['task'] = 'Tehtävät';
+$labels['note'] = 'Muistiot';
+$labels['configuration'] = 'Määritykset';
+$labels['deletedevice'] = 'Poista laite';
+$labels['nodevices'] = 'Ei rekisteröityjä laitteita.<br/><br/>Rekisteröi laite yhdistämällä se ensin palvelimeen, <a href="$url" target="_blank">ohjeet löytyvät tältä sivulta</a>. Sen jälkeen laite näkyy täällä ja on valmis määriteltäväksi.';
+$labels['savingdata'] = 'Tallennetaan tietoja...';
+$labels['savingerror'] = 'Määritysten tallentaminen epäonnistui';
+$labels['notsupported'] = 'Käyttämäsi palvelin ei tue seuraavaa ominaisuutta: metadata/annotations';
+$labels['devicedeleteconfirm'] = 'Haluatko varmasti poistaa tämän laitteen määritykset?';
+$labels['successfullydeleted'] = 'Laitteen määritykset poistettiin onnistuneesti';
+$labels['devicenotfound'] = 'Laitemäärityksen lukeminen epäonnistui';
+$labels['devicetype'] = 'Laitteen tyyppi';
+$labels['acsversion'] = 'Protokollan versio';
+$labels['useragent'] = 'Tunniste / User agent';
+$labels['friendlyname'] = 'Kutsumanimi';
+$labels['os'] = 'Käyttöjärjestelmä';
+$labels['oslanguage'] = 'Käyttöjärjestelmän kieli';
+$labels['phonenumber'] = 'Puhelinnumero';
+$labels['arialabeldeviceframe'] = 'Laitesynkronointiasetusten lomake';
+?>

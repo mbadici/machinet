@@ -1,0 +1,45 @@
+<div id="tagcloud" class="uibox listbox" style="display:none">
+	<h2 class="boxtitle"><roundcube:label name="kolab_tags.tags" id="taglist" /></h2>
+	<div class="scroller withfooter">
+		<roundcube:object name="plugin.taglist" id="taglist" />
+	</div>
+	<div class="boxfooter">
+		<roundcube:button name="tagsmenulink" id="tagsmenulink" type="link" title="kolab_tags.tagactions" class="listbutton groupactions" onclick="UI.toggle_popup('tagsmenu', event)" innerClass="inner" content="&#9881;" />
+	</div>
+</div>
+
+<div id="tagsmenu" class="popupmenu" aria-hidden="true">
+	<h3 id="aria-label-tagsmenu" class="voice"><roundcube:label name="kolab_tags.arialabelmoretagactions" /></h3>
+	<ul class="toolbarmenu" id="tagoptionsmenu" role="menu" aria-labelledby="aria-label-tagsmenu">
+		<li role="menuitem"><roundcube:button command="reset-tags" type="link" label="kolab_tags.unset" classAct="active" /></li>
+		<li role="menuitem"><roundcube:button command="manage-tags" type="link" label="kolab_tags.manage" classAct="active" /></li>
+		<roundcube:container name="tagoptions" id="tagoptionsmenu" />
+	</ul>
+</div>
+
+<div id="tagmessagemenu" class="popupmenu" aria-hidden="true">
+	<ul class="toolbarmenu iconized">
+		<li class="separator"><label><roundcube:label name="kolab_tags.tags" /></label></li>
+		<li role="menuitem"><roundcube:button type="link" command="tag-add" label="kolab_tags.tagadd" classAct="icon active" class="icon" innerclass="icon tagadd folder-selector-link" /></li>
+		<li role="menuitem"><roundcube:button type="link" command="tag-remove" label="kolab_tags.tagremove" classAct="icon active" class="icon" innerclass="icon tagremove folder-selector-link" /></li>
+		<li role="menuitem"><roundcube:button type="link" command="tag-remove-all" label="kolab_tags.tagremoveall" classAct="icon active" class="icon" innerclass="icon tagremoveall" /></li>
+	</ul>
+</div>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(e) {
+    // put tags cloud under folders list
+    var tagcloud = $('#tagcloud').detach();
+    $('#mailview-left').append(tagcloud.show());
+
+    new rcube_splitter({ id:'mailtagsplitter', p1:'#mailboxcontainer', p2:'#tagcloud',
+        orientation:'h', relative:true, start:242, min:120, size:12, offset:4 }).init();
+
+    // add tag message menu positions to Mark menu
+    var menu = $('#tagmessagemenu li').detach();
+    $('#markmessagemenu ul').append(menu);
+});
+
+</script>
