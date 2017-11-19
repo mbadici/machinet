@@ -11,7 +11,6 @@ return array(
     $vendorDir . '/pear/net_idna2',
     $vendorDir . '/pear/console_getopt',
     $vendorDir . '/pear/pear-core-minimal/src',
-    $vendorDir . '/pear/net_ldap2',
     $vendorDir . '/pear/net_socket',
     $vendorDir . '/pear/mail_mime',
     $vendorDir . '/pear/net_smtp',

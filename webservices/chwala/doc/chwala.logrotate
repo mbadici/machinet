@@ -1,0 +1,8 @@
+/var/log/chwala/console /var/log/chwala/errors /var/log/chwala/imap /var/log/chwala/ldap /var/log/chwala/sendmail /var/log/chwala/sieve /var/log/chwala/smtp /var/log/chwala/sql /var/log/chwala/userlogins {
+    missingok
+    compress
+    notifempty
+    size 30k
+    create 0660 apache apache
+}
+

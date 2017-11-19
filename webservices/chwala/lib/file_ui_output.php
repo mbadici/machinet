@@ -145,6 +145,7 @@ class file_ui_output
             $this->tpl->assign($name, $value);
         }
 
+        $this->env['skin_path'] = 'skins/' . $this->skin . '/';
         $script = '';
 
         if (!empty($this->env)) {
@@ -170,7 +171,7 @@ class file_ui_output
             $script[] = sprintf('ui.%s(%s);', $cname, implode(',', $args));
         }
 
-        $this->tpl->assign('skin_path', 'skins/' . $this->skin . '/');
+        $this->tpl->assign('skin_path', $this->env['skin_path']);
         if ($script) {
             $script = "<script type=\"text/javascript\">\n" . implode("\n", $script) . "\n</script>";
             $this->tpl->assign('script', $script);

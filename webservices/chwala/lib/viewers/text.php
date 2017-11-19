@@ -104,7 +104,9 @@ class file_viewer_text extends file_viewer
         stream_filter_register('file_viewer_text', 'file_viewer_content_filter');
         stream_filter_append($stdout, 'file_viewer_text');
 
-        $this->api->api->file_get($file, array(), $stdout);
+        list($driver, $file) = $this->api->get_driver($file);
+
+        $driver->file_get($file, array(), $stdout);
     }
 
     /**
@@ -121,12 +123,12 @@ class file_viewer_text extends file_viewer
     /**
      * Print output and exit
      *
-     * @param string $file     File name
-     * @param string $mimetype File type
+     * @param string $file      File name
+     * @param array  $file_info File metadata (e.g. type)
      */
-    public function output($file, $mimetype = null)
+    public function output($file, $file_info = array())
     {
-        $mode = $this->get_mode($mimetype, $file);
+        $mode = $this->get_mode($file_info['type'], $file);
         $href = addcslashes($this->api->file_url($file), "'");
 
         echo '<!DOCTYPE html>

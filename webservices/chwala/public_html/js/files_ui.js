@@ -275,76 +275,6 @@ function files_ui()
 
 
   /********************************************************/
-  /*********        Remote request methods        *********/
-  /********************************************************/
-/*
-  // send a http POST request to the server
-  this.http_post = function(action, postdata)
-  {
-    var url = this.url(action);
-
-    if (postdata && typeof postdata === 'object')
-      postdata.remote = 1;
-    else {
-      if (!postdata)
-        postdata = '';
-      postdata += '&remote=1';
-    }
-
-    this.set_request_time();
-
-    return $.ajax({
-      type: 'POST', url: url, data: postdata, dataType: 'json',
-      success: function(response) { ui.http_response(response); },
-      error: function(o, status, err) { ui.http_error(o, status, err); }
-    });
-  };
-
-  // handle HTTP response
-  this.http_response = function(response)
-  {
-    var i;
-
-    if (!response)
-      return;
-
-    // set env vars
-    if (response.env)
-      this.set_env(response.env);
-
-    // we have translation labels to add
-    if (typeof response.labels === 'object')
-      this.tdef(response.labels);
-
-    // HTML page elements
-    if (response.objects)
-      for (i in response.objects)
-        $('#'+i).html(response.objects[i]);
-
-    this.update_request_time();
-    this.set_busy(false);
-
-    // if we get javascript code from server -> execute it
-    if (response.exec)
-      eval(response.exec);
-
-    this.trigger_event('http-response', response);
-  };
-
-  // handle HTTP request errors
-  this.http_error = function(request, status, err)
-  {
-    var errmsg = request.statusText;
-
-    this.set_busy(false);
-    request.abort();
-
-    if (request.status && errmsg)
-      this.display_message(this.t('servererror') + ' (' + errmsg + ')', 'error');
-  };
-*/
-
-  /********************************************************/
   /*********            Helper methods            *********/
   /********************************************************/
 
@@ -483,7 +413,7 @@ function files_ui()
 
     var elem = $('#folderlist'), table = $('table', elem);
 
-    this.env.folders = this.folder_list_parse(response.result);
+    this.env.folders = this.folder_list_parse(response.result && response.result.list ? response.result.list : response.result);
 
     table.empty();
 
@@ -509,6 +439,9 @@ function files_ui()
 
     // add tree icons
     this.folder_list_tree(this.env.folders);
+
+    // handle authentication errors on external sources
+    this.folder_list_auth_errors(response.result);
   };
 
   this.folder_select = function(folder, is_collection)
@@ -557,8 +490,12 @@ function files_ui()
       return;
     }
 
+    if (typeof folder != 'object') {
+      folder = {folder: folder};
+    }
+
     this.set_busy(true, 'saving');
-    this.request('folder_create', {folder: folder}, 'folder_create_response');
+    this.request('folder_create', folder, 'folder_create_response');
   };
 
   // folder create response handler
@@ -567,6 +504,7 @@ function files_ui()
     if (!this.response(response))
       return;
 
+    this.folder_create_stop();
     this.folder_list();
   };
 
@@ -579,6 +517,7 @@ function files_ui()
     }
 
     this.set_busy(true, 'saving');
+    this.env.folder_rename = folder['new'];
     this.request('folder_move', {folder: folder.folder, 'new': folder['new']}, 'folder_rename_response');
   };
 
@@ -590,6 +529,7 @@ function files_ui()
 
     this.env.folder = this.env.folder_rename;
     this.folder_list();
+    this.file_list();
   };
 
   // folder delete request
@@ -948,33 +888,143 @@ function files_ui()
       field = $('input[type=file]', form).get(0),
       files = field.files ? field.files.length : field.value ? 1 : 0;
 
-    if (files) {
-      // submit form and read server response
-      this.file_upload_form(form, 'file_upload', function(e, frame, folder) {
-        var doc, response, res;
+    if (!files || !this.file_upload_size_check(field.files))
+      return;
 
-        try {
-          doc = frame.contentDocument ? frame.contentDocument : frame.contentWindow.document;
-          response = doc.body.innerHTML;
+    // submit form and read server response
+    this.file_upload_form(form, 'file_upload', function(e, frame, folder) {
+      var doc, response, res;
 
-          // in Opera onload is called twice, once with empty body
-          if (!response)
-            return;
-          // response may be wrapped in <pre> tag
-          if (response.match(/^<pre[^>]*>(.*)<\/pre>$/i))
-            response = RegExp.$1;
+      try {
+        doc = frame.contentDocument ? frame.contentDocument : frame.contentWindow.document;
+        response = doc.body.innerHTML;
 
-          response = eval('(' + response + ')');
+        // in Opera onload is called twice, once with empty body
+        if (!response)
+          return;
+        // response may be wrapped in <pre> tag
+        if (response.match(/^<pre[^>]*>(.*)<\/pre>$/i))
+          response = RegExp.$1;
+
+        response = eval('(' + response + ')');
+      }
+      catch (err) {
+        response = {status: 'ERROR'};
+      }
+
+      if ((res = ui.response_parse(response)) && folder == ui.env.folder)
+        ui.file_list();
+
+      return res;
+    });
+  };
+
+  // handler when files are dropped to a designated area.
+  // compose a multipart form data and submit it to the server
+  this.file_drop = function(e)
+  {
+    var files = e.target.files || e.dataTransfer.files;
+
+    if (!files || !files.length || !this.file_upload_size_check(files))
+      return;
+
+    // prepare multipart form data composition
+    var ts = new Date().getTime(),
+      progress = this.env.capabilities.PROGRESS_NAME && window.progress_update,
+      formdata = window.FormData ? new FormData() : null,
+      fieldname = 'file[]',
+      boundary = '------multipartformboundary' + (new Date).getTime(),
+      dashdash = '--', crlf = '\r\n',
+      multipart = dashdash + boundary + crlf;
+
+    // inline function to submit the files to the server
+    var submit_data = function() {
+      var multiple = files.length > 1;
+
+      ui.uploads[ts] = ui.env.folder;
+
+      // start progress meter
+      if (progress)
+        ui.file_upload_progress(ts);
+
+      // complete multipart content and post request
+      multipart += dashdash + boundary + dashdash + crlf;
+
+      $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: ui.env.url + ui.url('file_upload', {folder: ui.env.folder}),
+        contentType: formdata ? false : 'multipart/form-data; boundary=' + boundary,
+        processData: false,
+        timeout: 0, // disable default timeout set in ajaxSetup()
+        data: formdata || multipart,
+        success: function(response) {
+          if (ui.response_parse(response) && ui.uploads[ts] == ui.env.folder)
+            ui.file_list();
+          ui.file_upload_progress_stop(ts);
+        },
+        error: function(o, status, err) {
+          ui.http_error(o, status, err);
+          ui.file_upload_progress_stop(ts);
+        },
+        xhr: function() {
+          var xhr = jQuery.ajaxSettings.xhr();
+          if (!formdata && xhr.sendAsBinary)
+            xhr.send = xhr.sendAsBinary;
+          return xhr;
         }
-        catch (err) {
-          response = {status: 'ERROR'};
-        }
-
-        if ((res = ui.response_parse(response)) && folder == ui.env.folder)
-          ui.file_list();
-
-        return res;
       });
+    };
+
+    // upload progress supported (and handler exists)
+    // add progress ID to the request - need to be added before files
+    if (progress) {
+      if (formdata)
+        formdata.append(this.env.capabilities.PROGRESS_NAME, ts);
+      else
+        multipart += 'Content-Disposition: form-data; name="' + ts.env.capabilities.PROGRESS_NAME + '"'
+          + crlf + crlf + ts + crlf + dashdash + boundary + crlf;
+    }
+
+    // get contents of all dropped files
+    var f, j, i = 0, last = files.length - 1;
+    for (j = 0; j <= last && (f = files[i]); i++) {
+      if (!f.name) f.name = f.fileName;
+      if (!f.size) f.size = f.fileSize;
+      if (!f.type) f.type = 'application/octet-stream';
+
+      // file name contains non-ASCII characters, do UTF8-binary string conversion.
+      if (!formdata && /[^\x20-\x7E]/.test(f.name))
+        f.name_bin = unescape(encodeURIComponent(f.name));
+
+      // do it the easy way with FormData (FF 4+, Chrome 5+, Safari 5+)
+      if (formdata) {
+        formdata.append(fieldname, f);
+        if (j == last)
+          return submit_data();
+      }
+      // use FileReader supporetd by Firefox 3.6
+      else if (window.FileReader) {
+        var reader = new FileReader();
+
+        // closure to pass file properties to async callback function
+        reader.onload = (function(file, j) {
+          return function(e) {
+            multipart += 'Content-Disposition: form-data; name="' + fieldname + '"';
+            multipart += '; filename="' + (f.name_bin || file.name) + '"' + crlf;
+            multipart += 'Content-Length: ' + file.size + crlf;
+            multipart += 'Content-Type: ' + file.type + crlf + crlf;
+            multipart += reader.result + crlf;
+            multipart += dashdash + boundary + crlf;
+
+            if (j == last)  // we're done, submit the data
+              return submit_data();
+          }
+        })(f,j);
+        reader.readAsBinaryString(f);
+      }
+
+      j++;
     }
   };
 
@@ -982,6 +1032,126 @@ function files_ui()
   /*********************************************************/
   /*********          Command helpers              *********/
   /*********************************************************/
+
+  // handle auth errors on folder list
+  this.folder_list_auth_errors = function(result)
+  {
+    if (result && result.auth_errors) {
+      if (!this.auth_errors)
+        this.auth_errors = {};
+
+      $.extend(this.auth_errors, result.auth_errors);
+    }
+
+    // ask for password to the first storage on the list
+    $.each(this.auth_errors || [], function(i, v) {
+      ui.folder_list_auth_dialog(i, v);
+      return false;
+    });
+  };
+
+  // create dialog for user credentials of external storage
+  this.folder_list_auth_dialog = function(label, driver)
+  {
+    var div, buttons = {},
+      content = this.folder_list_auth_form(driver),
+      title = this.t('folder.authenticate').replace('$title', label);
+
+    buttons['form.submit'] = function() {
+      var data = {folder: label, list: 1};
+
+      $('input', this.modal).each(function() {
+        data[this.name] = this.type == 'checkbox' && !this.checked ? '' : this.value;
+      });
+
+      ui.open_dialog = this;
+      ui.set_busy(true, 'authenticating');
+      ui.request('folder_auth', data, 'folder_auth_response');
+    };
+
+    buttons['form.cancel'] = function() {
+      delete ui.auth_errors[label];
+      this.hide();
+      // go to the next one
+      ui.folder_list_auth_errors();
+    };
+
+    // copy "remember password" checkbox into the dialog
+    div = $('.drivers-footer').first().clone();
+    if (div.length) {
+        div.find('input').each(function() { this.id += '-dialog'; });
+        div.find('label').each(function() { $(this).prop('for', $(this).prop('for') + '-dialog'); });
+        content.append(div.show());
+    }
+
+    this.modal_dialog(content, buttons, {
+      title: title,
+      fxOpen: function(win) {
+        // focus first empty input
+        $('input', win.modal).each(function() {
+          if (!this.value) {
+            this.focus();
+            return false;
+          }
+        });
+      }
+    });
+  };
+
+  // folder_auth handler
+  this.folder_auth_response = function(response)
+  {
+    if (!this.response(response))
+      return;
+
+    var cnt = 0, folders,
+      folder = response.result.folder,
+      parent = $('#' + this.env.folders[folder].id);
+
+    delete this.auth_errors[folder];
+    this.open_dialog.hide();
+
+    // go to the next one
+    this.folder_list_auth_errors();
+
+    // count folders on the list
+    $.each(this.env.folders, function() { cnt++; });
+
+    // parse result
+    folders = this.folder_list_parse(response.result.list, cnt);
+    delete folders[folder]; // remove root added in folder_list_parse()
+
+    // add folders from the external source to the list
+    $.each(folders, function(i, f) {
+      var row = ui.folder_list_row(i, f);
+      parent.after(row);
+      parent = row;
+    });
+
+    // add tree icons
+    this.folder_list_tree(folders);
+
+    $.extend(this.env.folders, folders);
+  };
+
+  // returns content of the external storage authentication form
+  this.folder_list_auth_form = function(driver)
+  {
+    var elements = [];
+
+    $.each(driver.form, function(fi, fv) {
+      var id = 'authinput' + fi,
+        attrs = {type: fi.match(/pass/) ? 'password' : 'text', size: 25, name: fi, id: id},
+        input = $('<input>').attr(attrs);
+
+      if (driver.form_values && driver.form_values[fi])
+        input.attr({value: driver.form_values[fi]});
+
+      elements.push($('<span class="formrow">').append($('<label>').attr('for', id).text(fv)).append(input));
+    });
+
+    return $('<div class="form">').append(elements);
+  };
 
   // create folders table row
   this.folder_list_row = function(folder, data)
@@ -1081,7 +1251,7 @@ function files_ui()
   // file row drag start event handler
   this.file_list_drag = function(e, row)
   {
-    if (e.shiftKey || e.ctrlKey)
+    if (e.shiftKey || e.ctrlKey || $(e.target).is('input'))
       return true;
 
     // selects currently unselected row
@@ -1295,6 +1465,8 @@ function files_ui()
     var ts = new Date().getTime(),
       frame_name = 'fileupload' + ts;
 
+    this.uploads[ts] = this.env.folder;
+
     // upload progress supported (and handler exists)
     if (this.env.capabilities.PROGRESS_NAME && window.progress_update) {
       var fname = this.env.capabilities.PROGRESS_NAME,
@@ -1306,7 +1478,6 @@ function files_ui()
       }
 
       field.val(ts);
-      this.uploads[ts] = this.env.folder;
       this.file_upload_progress(ts);
     }
 
@@ -1327,15 +1498,13 @@ function files_ui()
 
     // handle upload errors, parsing iframe content in onload
     $('#'+frame_name).load(function(e) {
-      // hide progressbar on upload error
-      if (!onload(e, this, ui.uploads[ts]) && window.progress_update)
-        window.progress_update({id: ts, done: true});
-      delete ui.uploads[ts];
+      onload(e, this, ui.uploads[ts]);
+      ui.file_upload_progress_stop(ts);
     });
 
     $(form).attr({
       target: frame_name,
-      action: this.env.url + this.url(action, {folder: this.env.folder, token: this.env.token, uploadid:ts}),
+      action: this.env.url + this.url(action, {folder: this.env.folder, token: this.env.token}),
       method: 'POST'
     }).attr(form.encoding ? 'encoding' : 'enctype', 'multipart/form-data')
       .submit();
@@ -1363,6 +1532,31 @@ function files_ui()
 
     if (!param.done)
       this.file_upload_progress(param.id);
+  };
+
+  this.file_upload_progress_stop = function(id)
+  {
+    if (window.progress_update)
+      window.progress_update({id: id, done: true});
+    delete ui.uploads[id];
+  };
+
+  // check upload max size
+  this.file_upload_size_check = function(files)
+  {
+    var i, size = 0, maxsize = this.env.capabilities.MAX_UPLOAD;
+
+    if (files && maxsize) {
+      for (i=0; i < files.length; i++)
+        size += files[i].size;
+
+      if (size > maxsize) {
+        alert(this.t('upload.size.error').replace('$size', this.file_size(maxsize)));
+        return false;
+      }
+    }
+
+    return true;
   };
 
   // Display file search form
@@ -1410,10 +1604,20 @@ function files_ui()
   // Display folder creation form
   this.folder_create_start = function()
   {
-    var form = this.form_show('folder-create');
+    var form = $('#folder-create-form');
+
+    $('.drivers', form).hide();
     $('input[name="name"]', form).val('').focus();
     $('input[name="parent"]', form).prop('checked', this.env.folder)
       .prop('disabled', !this.env.folder);
+    $('#folder-driver-checkbox').prop('checked', false);
+
+    this.form_show('folder-create');
+
+    if (!this.folder_types)
+      this.request('folder_types', {}, 'folder_types_response');
+    else
+      this.folder_types_init();
   };
 
   // Hide folder creation form
@@ -1425,30 +1629,146 @@ function files_ui()
   // Submit folder creation form
   this.folder_create_submit = function()
   {
-    var folder = '', data = this.serialize_form('#folder-create-form');
+    var args = {}, folder = '', data = this.serialize_form('#folder-create-form');
 
     if (!data.name)
       return;
 
-    if (data.parent && this.env.folder)
+    if (data.parent && this.env.folder) {
       folder = this.env.folder + this.env.directory_separator;
+    }
+    else if (data.external && data.driver) {
+      args.store_passwords = data.store_passwords;
+      args.driver = data.driver;
+
+      $.each(data, function(i, v) {
+        if (i.startsWith(data.driver + '[')) {
+          args[i.substring(data.driver.length + 1, i.length - 1)] = v;
+        }
+      });
+    }
 
     folder += data.name;
+    args.folder = folder;
 
-    this.folder_create_stop();
-    this.command('folder.create', folder);
+    this.command('folder.create', args);
+  };
+
+  // folder_types response handler
+  this.folder_types_response = function(response)
+  {
+    if (!this.response(response))
+      return;
+
+    if (response.result) {
+      this.folder_types = response.result;
+
+      var list = [];
+
+      $.each(this.folder_types, function(i, v) {
+        var form = [], item = $('<div>').data('id', i),
+          content = $('<div class="content">')
+          label = $('<span class="name">').text(v.name),
+          desc = $('<span class="description">').text(v.description),
+          img = $('<img>').attr({alt: i, title: i, src: v.image}),
+          input = $('<input>').attr({type: 'radio', name: 'driver'}).val(i);
+
+        item.append(input)
+          .append(img)
+          .append(content);
+
+        content.append(label).append($('<br>')).append(desc);
+
+        $.each(v.form || [], function(fi, fv) {
+          var id = 'input' +i + fi,
+            attrs = {type: fi.match(/pass/) ? 'password' : 'text', size: 25, name: i + '[' + fi + ']', id: id};
+
+          form.push($('<span class="formrow">')
+            .append($('<label>').attr('for', id).text(fv))
+            .append($('<input>').attr(attrs))
+          );
+        });
+
+        if (form.length) {
+          $('<div class="form">').append(form).appendTo(content);
+        }
+
+        list.push(item);
+      });
+
+      if (list.length) {
+        var drivers_list = $('.drivers-list');
+
+        drivers_list.append(list);
+        this.form_show('folder-create');
+
+        $.each(list, function() {
+          this.click(function() {
+            $('.selected', drivers_list).removeClass('selected');
+            drivers_list.find('.form').hide();
+            $(this).addClass('selected').find('.form').show();
+            $('input[type="radio"]', this).prop('checked', true);
+            ref.form_show('folder-create');
+          });
+        });
+
+        $('#folder-parent-checkbox').change(function() {
+          if (this.checked)
+            $('#folder-create-form div.drivers').hide();
+          ref.folder_types_init();
+        });
+
+        $('#folder-driver-checkbox').change(function() {
+          drivers_list[this.checked ? 'show' : 'hide']();
+          $('.drivers-footer')[this.checked ? 'show' : 'hide']();
+          ref.folder_types_init();
+        });
+
+        this.folder_types_init();
+      }
+    }
+  };
+
+  // initialize folder types list on folder create form display
+  this.folder_types_init = function()
+  {
+    var form = $('#folder-create-form'),
+      list = $('.drivers-list > div', form);
+
+    if (list.length && !$('input[name="parent"]', form).is(':checked')) {
+      $('#folder-create-form div.drivers').show();
+      list[0].click();
+    }
+
+    $('.drivers-list,.drivers-footer')[list.length && $('#folder-driver-checkbox:checked').length ? 'show' : 'hide']();
+
+    ref.form_show('folder-create');
   };
 
   // Display folder edit form
   this.folder_edit_start = function()
   {
-    var form = this.form_show('folder-edit'),
-      arr = this.env.folder.split(this.env.directory_separator),
+    var opts = [], separator = this.env.directory_separator,
+      form = this.form_show('folder-edit'),
+      select = $('#folder-edit-parent-select'),
+      arr = this.env.folder.split(separator),
       name = arr.pop();
 
-    this.env.folder_edit_path = arr.join(this.env.directory_separator);
-
     $('input[name="name"]', form).val(name).focus();
+
+    $('option[value!=""]', select).remove();
+
+    $.each(this.env.folders, function(i, v) {
+      var n, arr = i.split(separator),
+        name = arr.pop(), prefix = '', level = '&nbsp;&nbsp;&nbsp;';
+
+      for (n=arr.length; n>0; n--)
+        prefix += level;
+
+      opts.push($('<option>').attr('value', i).html(prefix).append($('<span>').text(name)));
+    });
+
+    select.append(opts).val(arr.join(separator));
   };
 
   // Hide folder edit form
@@ -1465,11 +1785,10 @@ function files_ui()
     if (!data.name)
       return;
 
-    if (this.env.folder_edit_path)
-      folder = this.env.folder_edit_path + this.env.directory_separator;
+    if (data.parent)
+      folder = data.parent + this.env.directory_separator;
 
     folder += data.name;
-    this.env.folder_rename = folder;
 
     this.folder_edit_stop();
     this.command('folder.edit', {folder: this.env.folder, 'new': folder});
@@ -1609,16 +1928,26 @@ function files_ui()
       footer.push({name: n, label: ui.t(i)});
     });
 
+    // open function
+    settings.fxOpen = opts.fxOpen;
+
 //    if (!settings.btns.cancel && (!opts || !opts.no_cancel))
 //      settings.btns.cancel = function() { this.hide(); };
 
     if (footer.length) {
       foot = $('<div class="_wModal_btns"></div>');
       $.each(footer, function() {
-        $('<div></div>').addClass('_wModal_btn_' + this.name).text(this.label).appendTo(foot);
+        $('<div tabindex="0"></div>').addClass('_wModal_btn_' + this.name).text(this.label).appendTo(foot)
       });
 
       body.append(foot);
+
+      // make buttons focusable and key-pressable
+      $(document).off('keydown.dialog').on('keydown.dialog', function(e) {
+        if (e.which == 13 && $(e.target).parent().is('._wModal_btns')) {
+          $(e.target).click();
+        }
+      });
     }
 
     // configure and display dialog
@@ -1629,8 +1958,12 @@ function files_ui()
   this.form_show = function(name)
   {
     var form = $('#' + name + '-form');
-    $('#forms > form').hide();
-    form.show();
+
+    if (form.is(':hidden')) {
+      $('#forms > form').hide();
+      form.show();
+    }
+
     $('#taskcontent').css('top', form.height() + 20);
 
     return form;

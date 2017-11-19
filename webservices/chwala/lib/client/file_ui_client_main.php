@@ -30,8 +30,8 @@ class file_ui_client_main extends file_ui
         $this->output->add_translation('saving', 'deleting', 'search', 'search.loading',
             'collection.audio', 'collection.video', 'collection.image', 'collection.document',
             'moving', 'copying', 'file.skip', 'file.skipall', 'file.overwrite', 'file.overwriteall',
-            'file.moveconfirm', 'file.progress', 'upload.size', 'upload.progress',
-            'upload.eta', 'upload.rate'
+            'file.moveconfirm', 'file.progress', 'upload.size', 'upload.size.error', 'upload.progress',
+            'upload.eta', 'upload.rate', 'folder.authenticate', 'form.submit', 'form.cancel'
         );
 
         $result = $this->api_get('mimetypes');
@@ -48,6 +48,7 @@ class file_ui_client_main extends file_ui
             'type'  => 'text',
             'name'  => 'name',
             'value' => '',
+            'id'    => 'folder-name-input',
         ));
         $input_parent = new html_checkbox(array(
             'name'  => 'parent',
@@ -65,15 +66,38 @@ class file_ui_client_main extends file_ui
             'value'   => $this->translate('form.cancel'),
         ));
 
+        $drivers_input = new html_checkbox(array(
+            'name'  => 'external',
+            'value' => '1',
+            'id'    => 'folder-driver-checkbox',
+        ));
+        $drivers_pass_input = new html_checkbox(array(
+            'name'  => 'store_passwords',
+            'value' => '1',
+            'id'    => 'folder-driver-pass-checkbox',
+        ));
+        $drivers = html::div('drivers',
+            html::span('drivers-header', $drivers_input->show() . '&nbsp;'
+                . html::label('folder-driver-checkbox', $this->translate('folder.driverselect')))
+            . html::div('drivers-list', '')
+            . html::div('drivers-footer', $drivers_pass_input->show() . '&nbsp;'
+                . html::label('folder-driver-pass-checkbox', $this->translate('folder.driverwithpass'))
+                . html::span('description', $this->translate('folder.driverwithpassdesc'))
+            )
+        );
+
         $table = new html_table;
 
-        $table->add(null, $input_name->show() . $input_parent->show()
-            . html::label('folder-parent-checkbox', $this->translate('folder.under')));
+        $table->add(null, html::label('folder-name-input', $this->translate('folder.name')) . $input_name->show());
         $table->add('buttons', $submit->show() . $cancel->show());
 
         $content = html::tag('fieldset', null,
-            html::tag('legend', null,
-                $this->translate('folder.createtitle')) . $table->show());
+            html::tag('legend', null, $this->translate('folder.createtitle'))
+            . $table->show()
+            . $input_parent->show() . '&nbsp;'
+            . html::label('folder-parent-checkbox', $this->translate('folder.under'))
+            . $drivers
+        );
 
         $form = html::tag('form', array(
             'id'       => 'folder-create-form',
@@ -88,7 +112,11 @@ class file_ui_client_main extends file_ui
         $input_name = new html_inputfield(array(
             'type'  => 'text',
             'name'  => 'name',
-            'value' => '',
+            'id'    => 'folder-edit-name-input',
+        ));
+        $parent_select = new html_select(array(
+            'name' => 'parent',
+            'id'   => 'folder-edit-parent-select',
         ));
         $submit = new html_inputfield(array(
             'type'    => 'button',
@@ -101,14 +129,18 @@ class file_ui_client_main extends file_ui
             'value'   => $this->translate('form.cancel'),
         ));
 
+        $parent_select->add('---', '');
+
         $table = new html_table;
 
-        $table->add(null, $input_name->show());
+        $table->add(null, html::label('folder-edit-name-input', $this->translate('folder.name')) . $input_name->show());
         $table->add('buttons', $submit->show() . $cancel->show());
 
         $content = html::tag('fieldset', null,
-            html::tag('legend', null,
-                $this->translate('folder.edittitle')) . $table->show());
+            html::tag('legend', null, $this->translate('folder.edittitle'))
+            . $table->show()
+            . html::div('', html::label('folder-edit-parent-select', $this->translate('folder.parent')) . $parent_select->show())
+        );
 
         $form = html::tag('form', array(
             'id'       => 'folder-edit-form',

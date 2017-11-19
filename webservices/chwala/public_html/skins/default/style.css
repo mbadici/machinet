@@ -29,12 +29,18 @@ textarea {
   color: black;
 }
 
+input[type="checkbox"],
+input[type="radio"] {
+  vertical-align: middle;
+}
+
 select[multiple="multiple"] {
   padding-left: 0;
 }
 
 table.list {
   width: 100%;
+  table-layout: fixed;
   border-spacing: 0;
   border-radius: 3px;
   -moz-border-radius: 3px;
@@ -139,6 +145,7 @@ table tbody tr.selected {
   background-color: #d6efff;
 }
 
+
 /**** Common UI elements ****/
 
 #topmenu {
@@ -153,9 +160,9 @@ table tbody tr.selected {
 #topmenu > span {
   color: #aaa;
   font-size: 11px;
-  padding-top: 2px;
   display: inline-block;
   height: 18px;
+  line-height: 18px;
 }
 
 #navigation {
@@ -869,6 +876,25 @@ table.progressinfo td.value {
 }
 
 
+/*****   drag-n-drop   *****/
+
+#taskcontent.droptarget.hover,
+#taskcontent.droptarget.active {
+  border-color: #019bc6;
+  box-shadow: 0 0 3px 2px rgba(71,135,177, 0.5);
+  -webkit-box-shadow: 0 0 3px 2px rgba(71,135,177, 0.5);
+}
+
+#taskcontent.droptarget.hover {
+  background-color: #d9ecf4;
+  box-shadow: 0 0 5px 2px rgba(71,135,177, 0.9);
+  -webkit-box-shadow: 0 0 5px 2px rgba(71,135,177, 0.9);
+}
+
+#taskcontent.droptarget.hover table tbody td {
+  background-color: #d9ecf4;
+}
+
 
 /*****   autocomplete list   *****/
 
@@ -903,6 +929,7 @@ table.progressinfo td.value {
 {
   background-color: #d6efff;
 }
+
 
 /***** tabbed interface elements *****/
 
@@ -967,6 +994,7 @@ fieldset.tabbed
   padding-top: 12px;
   border-top: none;
 }
+
 
 /*****  Dialog windows  *****/
 #_wModal_bg {
@@ -1044,8 +1072,10 @@ fieldset.tabbed
   color: #333;
 }
 
-._wModal_btns div:hover {
+._wModal_btns div:hover,
+._wModal_btns div:focus {
   background-color: #E6E6E6;
+  outline: none;
 }
 
 ._wModal_btns div.default {
@@ -1055,9 +1085,11 @@ fieldset.tabbed
   color: #FFF;
 }
 
-._wModal_btns div.default:hover {
+._wModal_btns div.default:hover,
+._wModal_btns div.default:focus {
   background-color: #0044CC
 }
+
 
 /**** Login form elements ****/
 
@@ -1099,6 +1131,7 @@ fieldset.tabbed
   margin-top: 5px;
 }
 
+
 /**** Main screen elements ****/
 
 #main {
@@ -1110,6 +1143,12 @@ fieldset.tabbed
   vertical-align: top;
   text-align: right;
 }
+
+#folder-edit-form label {
+  display: inline-block;
+  width: 100px;
+}
+
 
 /***** tree indicators *****/
 
@@ -1264,22 +1303,28 @@ td span.branch span.l3
 #filelist td {
   white-space: nowrap;
   cursor: default;
+  width: 70px;
+  overflow: hidden;
 }
 
 #filelist td.filename {
   width: 98%;
   height: 20px;
   padding: 0 4px;
+  text-overflow: ellipsis;
 }
 
 #filelist td.filesize {
   text-align: right;
 }
 
+#filelist td.filemtime {
+  width: 115px;
+}
+
 #filelist tbody td.filename span {
   background: url(images/mimetypes/unknown.png) 0 0 no-repeat;
-  padding: 0 0 0 20px;
-  height: 16px;
+  padding: 1px 0 1px 20px;
   cursor: pointer;
 }
 
@@ -1304,8 +1349,8 @@ td span.branch span.l3
 
 #folderlist td span.name {
   background: url(images/folder.png) 0 0 no-repeat;
-  height: 18px;
-  padding-left: 20px;
+  line-height: 16px;
+  padding: 1px 0 1px 20px;
   margin-left: 3px;
   cursor: pointer;
 }
@@ -1347,6 +1392,85 @@ td span.branch span.l3
 #folderlist #folder-collection-document.selected td span.name {
   background: url(images/document.png) 0 0 no-repeat;
 }
+
+#folder-create-form input {
+  vertical-align: middle;
+}
+
+#folder-create-form table td.buttons {
+  vertical-align: top;
+}
+
+.drivers-list {
+  max-height: 160px;
+  overflow: auto;
+}
+
+.drivers-list > div {
+  border: 1px solid white;
+  border-radius: 3px;
+  margin-top: 3px;
+  padding: 2px 0;
+}
+
+.drivers-list > div.selected {
+  background-color: #e8e8e8;
+}
+
+.drivers-list div.content {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+.drivers-list .name {
+  font-weight: bold;
+}
+
+.drivers-list img {
+  vertical-align: middle;
+  background-color: #e0e0e0;
+  border-radius: 3px;
+  margin: 3px;
+  background-image: -moz-linear-gradient(center top, #888, #333);
+  background-image: -webkit-linear-gradient(top, #888, #333);
+  background-image: -ms-linear-gradient(top, #888, #333);
+}
+
+.drivers-list input {
+  vertical-align: middle;
+}
+
+.drivers-list div.content div.form {
+  padding-top: 4px;
+  width: 400px;
+}
+
+.drivers-footer .description,
+.drivers-list .description {
+  font-size: 10px;
+  color: #666;
+  display: block;
+}
+
+.drivers-footer .description {
+  margin-left: 25px;
+}
+
+div.form .formrow {
+  display: block;
+  padding: 1px;
+}
+
+div.form .formrow label {
+  width: 80px;
+  display: inline-block;
+}
+
+div.form .drivers-footer {
+  margin-top: 10px;
+}
+
 
 /****** File open interface elements ******/
 

@@ -1,0 +1,25 @@
+{
+    "name": "kolab/chwala",
+    "description": "The Kolab Storage service",
+    "license": "AGPL-3.0+",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://git.kolab.org/diffusion/PNL/php-net_ldap.git"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "pear/pear-core-minimal": "~1.10.1",
+        "pear/net_url2": "~2.2.1",
+        "pear/http_request2": "~2.3.0",
+        "pear/net_socket": "~1.2.1",
+        "pear/auth_sasl": "~1.1.0",
+        "pear/net_idna2": "~0.2.0",
+        "pear/mail_mime": "~1.10.0",
+        "pear/net_smtp": "~1.7.3",
+        "pear/net_ldap2": "~2.2.0",
+        "kolab/net_ldap3": "dev-master",
+        "sabre/dav" : "~2.1.11"
+    }
+}

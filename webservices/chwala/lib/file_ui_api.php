@@ -40,6 +40,8 @@ class file_ui_api
     const ERROR_INTERNAL   = 100;
     const ERROR_CONNECTION = 200;
 
+    const ACCEPT_HEADER = "application/json,text/javascript,*/*";
+
     /**
      * Class constructor.
      *
@@ -104,6 +106,9 @@ class file_ui_api
 
         // proxy User-Agent
         $request->setHeader('user-agent', $_SERVER['HTTP_USER_AGENT']);
+
+        // some HTTP server configurations require this header
+        $request->setHeader('accept', self::ACCEPT_HEADER);
     }
 
     /**
@@ -131,17 +136,18 @@ class file_ui_api
      *
      * @param string $username User name
      * @param string $password User password
+     * @param array  $get      Additional GET parameters (e.g. 'version')
      *
      * @return file_ui_api_result Request response
      */
-    public function login($username, $password)
+    public function login($username, $password, $get = null)
     {
         $query = array(
             'username' => $username,
             'password' => $password,
         );
 
-        $response = $this->post('authenticate', null, $query);
+        $response = $this->post('authenticate', $get, $query);
 
         return $response;
     }
@@ -274,7 +280,10 @@ class file_ui_api
             $err_str  = 'Unable to decode response';
         }
 
+        if (!$err_code && array_key_exists('result', (array) $body)) {
+            $body = $body['result'];
+        }
+
         return new file_ui_api_result($body, $err_code, $err_str);
     }
-
 }

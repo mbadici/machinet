@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Roundcube\\Composer' => array($vendorDir . '/roundcube/plugin-installer/src'),
+    'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
     'PEAR' => array($vendorDir . '/pear/pear_exception'),
     'Net' => array($vendorDir . '/pear/net_idna2', $vendorDir . '/pear/net_socket', $vendorDir . '/pear/net_smtp'),
     'Mail' => array($vendorDir . '/pear/mail_mime'),

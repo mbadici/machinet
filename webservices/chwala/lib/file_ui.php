@@ -23,7 +23,7 @@
  +--------------------------------------------------------------------------+
 */
 
-class file_ui
+class file_ui extends file_locale
 {
     /**
      * @var kolab_client_output
@@ -40,14 +40,14 @@ class file_ui
      */
     protected $config;
 
-    protected $ajax_only = false;
-    protected $page_title = 'Kolab File API';
-    protected $menu = array();
-    protected $cache = array();
-    protected $devel_mode = false;
+    protected $ajax_only    = false;
+    protected $page_title   = 'Kolab File API';
+    protected $menu         = array();
+    protected $cache        = array();
+    protected $devel_mode   = false;
     protected $object_types = array();
 
-    protected static $translation = array();
+    const API_VERSION = 2;
 
 
     /**
@@ -74,29 +74,6 @@ class file_ui
         $this->locale_init();
 
         $this->auth();
-    }
-
-    /**
-     * Localization initialization.
-     */
-    protected function locale_init()
-    {
-        $language = $this->get_language();
-        $LANG     = array();
-
-        if (!$language) {
-            $language = 'en_US';
-        }
-
-        @include RCUBE_INSTALL_PATH . '/lib/locale/en_US.php';
-
-        if ($language != 'en_US') {
-            @include RCUBE_INSTALL_PATH . "/lib/locale/$language.php";
-        }
-
-        setlocale(LC_ALL, $language . '.utf8', $language . 'UTF-8', 'en_US.utf8', 'en_US.UTF-8');
-
-        self::$translation = $LANG;
     }
 
     /**
@@ -132,10 +109,12 @@ class file_ui
         $url = $this->config->get('file_api_url', '');
 
         if (!$url) {
-            $url = rcube_utils::https_check() ? 'https://' : 'http://';
-            $url .= $_SERVER['SERVER_NAME'];
-            $url .= preg_replace('/\/?\?.*$/', '', $_SERVER['REQUEST_URI']);
-            $url .= '/api/';
+            $schema = rcube_utils::https_check() ? 'https' : 'http';
+            $port   = $schema == 'http' ? 80 : 443;
+            $url    = $schema . '://' . $_SERVER['SERVER_NAME'];
+            $url   .= $_SERVER['SERVER_PORT'] != $port ? ':' . $_SERVER['SERVER_PORT'] : '';
+            $url   .= preg_replace('/\/?\?.*$/', '', $_SERVER['REQUEST_URI']);
+            $url   .= '/api/';
         }
 
         $this->api = new file_ui_api($url);
@@ -169,46 +148,6 @@ class file_ui
     }
 
     /**
-     * Returns system language (locale) setting.
-     *
-     * @return string Language code
-     */
-    private function get_language()
-    {
-        $aliases = array(
-            'de' => 'de_DE',
-            'en' => 'en_US',
-            'pl' => 'pl_PL',
-        );
-
-        // UI language
-        $langs = !empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : '';
-        $langs = explode(',', $langs);
-
-        if (!empty($_SESSION['user']) && !empty($_SESSION['user']['language'])) {
-            array_unshift($langs, $_SESSION['user']['language']);
-        }
-
-        while ($lang = array_shift($langs)) {
-            $lang = explode(';', $lang);
-            $lang = $lang[0];
-            $lang = str_replace('-', '_', $lang);
-
-            if (file_exists(RCUBE_INSTALL_PATH . "/lib/locale/$lang.php")) {
-                return $lang;
-            }
-
-            if (isset($aliases[$lang]) && ($alias = $aliases[$lang])
-                && file_exists(RCUBE_INSTALL_PATH . "/lib/locale/$alias.php")
-            ) {
-                return $alias;
-            }
-        }
-
-        return null;
-    }
-
-    /**
      * User authentication (and authorization).
      */
     private function auth()
@@ -217,7 +156,8 @@ class file_ui
             $login = $this->get_input('login', 'POST');
 
             if ($login['username']) {
-                $result = $this->api->login($login['username'], $login['password']);
+                $result = $this->api->login($login['username'], $login['password'],
+                    array('version' => self::API_VERSION));
 
                 if ($token = $result->get('token')) {
                     $user = array(
@@ -249,7 +189,7 @@ class file_ui
 
                     if (($language = $this->get_language()) && $language != 'en_US') {
                         $_SESSION['user']['language'] = $language;
-                        $session_config['language']   = $language;
+//                        $session_config['language']   = $language;
                     }
 /*
                     // Configure API session
@@ -462,35 +402,6 @@ class file_ui
         if (preg_match('/^file_ui_client_([a-z]+)$/', $class_name, $m)) {
             return $m[1];
         }
-    }
-
-    /**
-     * Returns translation of defined label/message.
-     *
-     * @return string Translated string.
-     */
-    public static function translate()
-    {
-        $args = func_get_args();
-
-        if (is_array($args[0])) {
-            $args = $args[0];
-        }
-
-        $label = $args[0];
-
-        if (isset(self::$translation[$label])) {
-            $content = trim(self::$translation[$label]);
-        }
-        else {
-            $content = $label;
-        }
-
-        for ($i = 1, $len = count($args); $i < $len; $i++) {
-            $content = str_replace('$'.$i, $args[$i], $content);
-        }
-
-        return $content;
     }
 
     /**

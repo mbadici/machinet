@@ -41,14 +41,14 @@ $config['debug_level'] = 8;
 
 // log driver:  'syslog' or 'file'.
 $config['log_driver'] = 'file';
-
+$config['mail_host']='%d';
 // date format for log entries
 // (read http://php.net/manual/en/function.date.php for all format characters)  
 $config['log_date_format'] = 'd-M-Y H:i:s O';
 
 // Syslog ident string to use, if using the 'syslog' log driver.
 $config['syslog_id'] = 'roundcube';
-
+$config['log_dir'] = 'logs/';
 // Syslog facility to use, if using the 'syslog' log driver.
 // For possible values see installer or http://php.net/manual/en/function.openlog.php
 $config['syslog_facility'] = LOG_USER;
@@ -70,9 +70,9 @@ $config['sql_debug'] = true;
 $config['imap_debug'] = true;
 
 // Log LDAP conversation to <log_dir>/ldap or to syslog
-$config['password_log'] = true;
+$config['password_log'] = false;
 $config['ldap_log'] = true;
-$config['ldap_debug'] = true;
+$config['ldap_debug'] = false;
 
 // Log SMTP conversation to <log_dir>/smtp or to syslog
 $config['smtp_debug'] = false;
@@ -89,7 +89,7 @@ $config['default_host'] = 'localhost';
 // %d - domain (http hostname $_SERVER['HTTP_HOST'] without the first part)
 // %z - IMAP domain (IMAP hostname without the first part)
 // For example %n = mail.domain.tld, %t = domain.tld
-$config['smtp_server'] = '%d';
+$config['smtp_server'] = 'localhost';
 
 // SMTP port (default is 25; use 587 for STARTTLS or 465 for the
 // deprecated SSL over SMTP (aka SMTPS))
@@ -109,7 +109,7 @@ $config['support_url'] = '';
 //$config['force_https'] = 'true';
 
 // Name your service. This is displayed on the login screen and in the window title
-$config['product_name'] = 'Roundcube Webmail';
+$config['product_name'] = 'MachiNet Webmail';
 
 // this key is used to encrypt the users imap password which is stored
 // in the session record (and the client cookie if remember password is enabled).
@@ -122,7 +122,7 @@ $config['plugins'] = array(
     'archive',
     'zipdownload',
     'acl' ,
-  'calendar' , 'kolab_auth',  'kolab_activesync' ,'kolab_addressbook' , 'kolab_config'  , 'kolab_notes' , 'ldap_authentication' , 'kolab_folders' , 'kolab_files' ,  'libcalendaring' , 
+  'calendar' , 'kolab_auth',   'kolab_activesync' ,'kolab_addressbook' , 'kolab_config'  , 'kolab_notes' , 'ldap_authentication' , 'kolab_folders' , 'kolab_files' ,  'libcalendaring' , 
       'libkolab'  , 'tasklist' ,  'jqueryui'  , 'password' , 'managesieve' , 'markasjunk' , 'pdfviewer' , 'odfviewer' , 'message_label' 
 );
 

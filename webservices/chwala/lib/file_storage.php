@@ -31,20 +31,32 @@ interface file_storage
     const CAPS_PROGRESS_TIME = 'PROGRESS_TIME';
     const CAPS_QUOTA         = 'QUOTA';
     const CAPS_LOCKS         = 'LOCKS';
+    const CAPS_SUBSCRIPTIONS = 'SUBSCRIPTIONS';
 
     // config
     const SEPARATOR = '/';
 
     // error codes
-    const ERROR             = 500;
     const ERROR_LOCKED      = 423;
+    const ERROR             = 500;
+    const ERROR_UNAVAILABLE = 503;
+    const ERROR_FORBIDDEN   = 530;
     const ERROR_FILE_EXISTS = 550;
     const ERROR_UNSUPPORTED = 570;
+    const ERROR_NOAUTH      = 580;
 
     // locks
     const LOCK_SHARED    = 'shared';
     const LOCK_EXCLUSIVE = 'exclusive';
     const LOCK_INFINITE  = 'infinite';
+
+    // list filters
+    const FILTER_UNSUBSCRIBED = 1;
+    const FILTER_WRITABLE     = 2;
+
+    // folder permissions
+    const ACL_READ = 1;
+    const ACL_WRITE = 2;
 
     /**
      * Authenticates a user
@@ -57,11 +69,26 @@ interface file_storage
     public function authenticate($username, $password);
 
     /**
+     * Get password and name of authenticated user
+     *
+     * @return array Authenticated user data
+     */
+    public function auth_info();
+
+    /**
      * Configures environment
      *
-     * @param array $config COnfiguration
+     * @param array  $config Configuration
+     * @param string $title  Driver instance identifier
      */
-    public function configure($config);
+    public function configure($config, $title = null);
+
+    /**
+     * Returns current instance title
+     *
+     * @return string Instance title (mount point)
+     */
+    public function title();
 
     /**
      * Storage driver capabilities
@@ -71,10 +98,64 @@ interface file_storage
     public function capabilities();
 
     /**
+     * Save configuration of external driver (mount point)
+     *
+     * @param array $driver Driver data
+     *
+     * @throws Exception
+     */
+    public function driver_create($driver);
+
+    /**
+     * Delete configuration of external driver (mount point)
+     *
+     * @param string $title Driver instance title
+     *
+     * @throws Exception
+     */
+    public function driver_delete($title);
+
+    /**
+     * Return list of registered drivers (mount points)
+     *
+     * @return array List of drivers data
+     * @throws Exception
+     */
+    public function driver_list();
+
+    /**
+     * Returns metadata of the driver
+     *
+     * @return array Driver meta data (image, name, form)
+     */
+    public function driver_metadata();
+
+    /**
+     * Validate metadata (config) of the driver
+     *
+     * @param array $metadata Driver metadata
+     *
+     * @return array Driver meta data to be stored in configuration
+     * @throws Exception
+     */
+    public function driver_validate($metadata);
+
+    /**
+     * Update configuration of external driver (mount point)
+     *
+     * @param string $title  Driver instance title
+     * @param array  $driver Driver data
+     *
+     * @throws Exception
+     */
+    public function driver_update($title, $driver);
+
+    /**
      * Create a file.
      *
      * @param string $file_name Name of a file (with folder path)
-     * @param array  $file      File data (path/content, type)
+     * @param array  $file      File data (path/content, type), where
+     *                          content might be a string or resource
      *
      * @throws Exception
      */
@@ -143,7 +224,7 @@ interface file_storage
      * List files in a folder.
      *
      * @param string $folder_name Name of a folder with full path
-     * @param array  $params      List parameters ('sort', 'reverse', 'search')
+     * @param array  $params      List parameters ('sort', 'reverse', 'search', 'prefix')
      *
      * @return array List of files (file properties array indexed by filename)
      * @throws Exception
@@ -179,12 +260,41 @@ interface file_storage
     public function folder_move($folder_name, $new_name);
 
     /**
+     * Subscribe a folder.
+     *
+     * @param string $folder_name Name of a folder with full path
+     *
+     * @throws Exception
+     */
+    public function folder_subscribe($folder_name);
+
+    /**
+     * Unsubscribe a folder.
+     *
+     * @param string $folder_name Name of a folder with full path
+     *
+     * @throws Exception
+     */
+    public function folder_unsubscribe($folder_name);
+
+    /**
      * Returns list of folders.
+     *
+     * @param array $params List parameters ('type', 'search', 'extended', 'permissions')
      *
      * @return array List of folders
      * @throws Exception
      */
-    public function folder_list();
+    public function folder_list($params = array());
+
+    /**
+     * Check folder rights.
+     *
+     * @param string $folder_name Name of a folder with full path
+     *
+     * @return int Folder rights (sum of file_storage::ACL_*)
+     */
+    public function folder_rights($folder_name);
 
     /**
      * Returns a list of locks
@@ -237,4 +347,24 @@ interface file_storage
      * @throws Exception
      */
     public function quota($folder);
+
+    /**
+     * Convert file/folder path into a global URI.
+     *
+     * @param string $path File/folder path
+     *
+     * @return string URI
+     * @throws Exception
+     */
+    public function path2uri($path);
+
+    /**
+     * Convert global URI into file/folder path.
+     *
+     * @param string $uri URI
+     *
+     * @return string File/folder path
+     * @throws Exception
+     */
+    public function uri2path($uri);
 }

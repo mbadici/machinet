@@ -60,9 +60,7 @@ class file_viewer_image extends file_viewer
      */
     public function href($file, $mimetype = null)
     {
-        $href = file_utils::script_uri() . '?method=file_get'
-            . '&file=' . urlencode($file)
-            . '&token=' . urlencode(session_id());
+        $href = $this->api->file_url($file);
 
         // we redirect to self only images with types unsupported
         // by browser
@@ -76,14 +74,14 @@ class file_viewer_image extends file_viewer
     /**
      * Print output and exit
      *
-     * @param string $file     File name
-     * @param string $mimetype File type
+     * @param string $file      File name
+     * @param array  $file_info File metadata (e.g. type)
      */
-    public function output($file, $mimetype = null)
+    public function output($file, $file_info = array())
     {
 /*
         // conversion not needed
-        if (preg_match('/^image/p?jpe?g$/i', $mimetype)) {
+        if (preg_match('/^image/p?jpe?g$/i', $file_info['type'])) {
             $this->api->api->file_get($file);
             return;
         }
@@ -92,9 +90,11 @@ class file_viewer_image extends file_viewer
         $temp_dir  = unslashify($rcube->config->get('temp_dir'));
         $file_path = tempnam($temp_dir, 'rcmImage');
 
+        list($driver, $file) = $this->api->get_driver($file);
+
         // write content to temp file
         $fd = fopen($file_path, 'w');
-        $this->api->api->file_get($file, array(), $fd);
+        $driver->file_get($file, array(), $fd);
         fclose($fd);
 
         // convert image to jpeg and send it to the browser

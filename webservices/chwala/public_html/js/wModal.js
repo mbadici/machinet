@@ -228,7 +228,7 @@
 		 fxShowFade: function()
 		 {
 		 	var _this = this;
-		 	this.bg.fadeIn(100, function(){ _this.modal.fadeIn(300); });
+		 	this.bg.fadeIn(100, function(){ _this.modal.fadeIn(300, function() { if (_this.settings.fxOpen) _this.settings.fxOpen(_this); }); });
 		 },
 
 		 fxHideFade: function()

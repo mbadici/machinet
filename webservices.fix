@@ -14,7 +14,7 @@ cp webservices/httpd-machinet.conf /etc/apache2/sites-available
 a2ensite httpd-machinet.conf
 service apache2 restart
 echo "Enter mysql root password:"
-mysql -u root -p  < webservices/kolab-3.3.sql
+mysql -u root -p  < webservices/kolab16.sql
 cd /usr/share
 ln -s roundcubemail-* roundcubemail
 ln -s chwala* chwala

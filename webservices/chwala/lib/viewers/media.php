@@ -67,7 +67,7 @@ class file_viewer_media extends file_viewer
      */
     public function frame($file, $mimetype = null)
     {
-        $path     = file_utils::script_uri();
+        $path     = $this->api->api_url();
         $file_uri = htmlentities($this->api->file_url($file));
         $mimetype = htmlentities($mimetype);
         $source   = "<source src=\"$file_uri\" type=\"$mimetype\"></source>";
@@ -80,8 +80,8 @@ class file_viewer_media extends file_viewer
         }
 
         return <<<EOT
-    <link rel="stylesheet" type="text/css" href="{$path}viewers/media/mediaelementplayer.css" />
-    <script type="text/javascript" src="{$path}viewers/media/mediaelement-and-player.js"></script>
+    <link rel="stylesheet" type="text/css" href="$path/viewers/media/mediaelementplayer.css" />
+    <script type="text/javascript" src="$path/viewers/media/mediaelement-and-player.js"></script>
     <$tag id="media-player" controls preload="auto">$source</$tag>
     <style>
       .mejs-container { text-align: center; }

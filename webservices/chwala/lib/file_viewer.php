@@ -66,10 +66,10 @@ abstract class file_viewer
     /**
      * Print output and exit
      *
-     * @param string $file     File name
-     * @param string $mimetype File type
+     * @param string $file      File name
+     * @param array  $file_info File metadata (e.g. type)
      */
-    public function output($file, $mimetype = null)
+    public function output($file, $file_info = array())
     {
     }
 

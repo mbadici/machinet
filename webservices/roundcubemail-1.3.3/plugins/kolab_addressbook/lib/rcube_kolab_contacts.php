@@ -30,7 +30,7 @@ class rcube_kolab_contacts extends rcube_addressbook
 {
     public $primary_key = 'ID';
     public $rights   = 'lrs';
-    public $readonly = true;
+    public $readonly = false;
     public $undelete = true;
     public $groups = true;
     public $coltypes = array(

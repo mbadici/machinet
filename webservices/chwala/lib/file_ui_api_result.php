@@ -45,12 +45,12 @@ class file_ui_api_result
      */
     public function __construct($data = array(), $error_code = null, $error_str = null)
     {
-        if (is_array($data) && isset($data['result'])) {
-            $this->data = $data['result'];
+        if (is_array($data)) {
+            $this->data = $data;
         }
 
         $this->error_code = $error_code;
-        $this->error_str = $error_str;
+        $this->error_str  = $error_str;
     }
 
     /**

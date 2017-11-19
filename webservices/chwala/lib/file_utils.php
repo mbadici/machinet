@@ -68,6 +68,26 @@ class file_utils
         ),
     );
 
+    // list of known file extensions, more in Roundcube config
+    static $ext_map = array(
+        'doc'  => 'application/msword',
+        'eml'  => 'message/rfc822',
+        'gz'   => 'application/gzip',
+        'htm'  => 'text/html',
+        'html' => 'text/html',
+        'mp3'  => 'audio/mpeg',
+        'odp'  => 'application/vnd.oasis.opendocument.presentation',
+        'ods'  => 'application/vnd.oasis.opendocument.spreadsheet',
+        'odt'  => 'application/vnd.oasis.opendocument.text',
+        'ogg'  => 'application/ogg',
+        'pdf'  => 'application/pdf',
+        'ppt'  => 'application/vnd.ms-powerpoint',
+        'rar'  => 'application/x-rar-compressed',
+        'tgz'  => 'application/gzip',
+        'txt'  => 'text/plain',
+        'zip'  => 'application/zip',
+    );
+
 
     /**
      * Return list of mimetype prefixes for specified file class
@@ -121,20 +141,108 @@ class file_utils
     }
 
     /**
-     * Returns script URI
+     * Find mimetype from file name (extension)
      *
-     * @return string Script URI
+     * @param string $filename File name
+     * @param string $fallback Follback mimetype
+     *
+     * @return string File mimetype
      */
-    static function script_uri()
+    static function ext_to_type($filename, $fallback = 'application/octet-stream')
     {
-        if (!empty($_SERVER['SCRIPT_URI'])) {
-            return $_SERVER['SCRIPT_URI'];
+        static $mime_ext = array();
+
+        $config = rcube::get_instance()->config;
+        $ext    = substr($filename, strrpos($filename, '.') + 1);
+
+        if (empty($mime_ext)) {
+            $mime_ext = self::$ext_map;
+            foreach ($config->resolve_paths('mimetypes.php') as $fpath) {
+                $mime_ext = array_merge($mime_ext, (array) @include($fpath));
+            }
         }
 
-        $uri = $_SERVER['SERVER_PORT'] == 443 ? 'https://' : 'http://';
-        $uri .= $_SERVER['HTTP_HOST'];
-        $uri .= preg_replace('/\?.*$/', '', $_SERVER['REQUEST_URI']);
+        if (is_array($mime_ext) && $ext) {
+            $mimetype = $mime_ext[strtolower($ext)];
+        }
 
-        return $uri;
+        return $mimetype ?: $fallback;
+    }
+
+    /**
+     * Callback for uasort() that implements correct
+     * locale-aware case-sensitive sorting
+     */
+    public static function sort_folder_comparator($p1, $p2)
+    {
+        $ext   = is_array($p1); // folder can be a string or an array with 'folder' key
+        $path1 = explode(file_storage::SEPARATOR, $ext ? $p1['folder'] : $p1);
+        $path2 = explode(file_storage::SEPARATOR, $ext ? $p2['folder'] : $p2);
+
+        foreach ($path1 as $idx => $folder1) {
+            $folder2 = $path2[$idx];
+
+            if ($folder1 === $folder2) {
+                continue;
+            }
+
+            return strcoll($folder1, $folder2);
+        }
+
+        return 0;
+    }
+
+    /**
+     * Encode folder path for use in an URI
+     *
+     * @param string $path Folder path
+     *
+     * @return string Encoded path
+     */
+    public static function encode_path($path)
+    {
+        $items = explode(file_storage::SEPARATOR, $path);
+        $items = array_map('rawurlencode', $items);
+
+        return implode(file_storage::SEPARATOR, $items);
+    }
+
+    /**
+     * Decode an URI into folder path
+     *
+     * @param string $path Encoded folder path
+     *
+     * @return string Decoded path
+     */
+    public static function decode_path($path)
+    {
+        $items = explode(file_storage::SEPARATOR, $path);
+        $items = array_map('rawurldecode', $items);
+
+        return implode(file_storage::SEPARATOR, $items);
+    }
+
+    /**
+     *
+     * @return string Date time string in specified format and timezone
+     */
+    public static function date_format($datetime, $format = 'Y-m-d H:i', $timezone = null)
+    {
+        if (!$datetime instanceof DateTime) {
+            return '';
+        }
+
+        if ($timezone && $timezone != $datetime->getTimezone()) {
+            try {
+                $dt = clone $datetime;
+                $dt->setTimezone(new DateTimeZone($timezone));
+                $datetime = $dt;
+            }
+            catch (Exception $e) {
+                // ignore, return original timezone
+            }
+        }
+
+        return $datetime->format($format);
     }
 }

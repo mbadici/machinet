@@ -28,8 +28,8 @@
  * It stores all its data in a sql database. Derived from SabreDAV's
  * PDO Lock manager.
  */
-class file_locks {
-
+class file_locks
+{
     const SHARED    = 1;
     const EXCLUSIVE = 2;
     const INFINITE  = -1;
@@ -105,11 +105,11 @@ class file_locks {
             return $this->icache['list'];
         }
 
-        $query  = "SELECT * FROM " . $this->db->quote_identifier($this->table) . " WHERE (uri = ?";
+        $query  = "SELECT * FROM `{$this->table}` WHERE (`uri` = ?";
         $params = array($uri);
 
         if ($child_locks) {
-            $query   .= " OR uri LIKE ?";
+            $query   .= " OR `uri` LIKE ?";
             $params[] = $uri . '/%';
         }
 
@@ -151,12 +151,12 @@ class file_locks {
                     $path     .= '/';
                 }
 
-                $query .= " OR (uri IN (" . implode(',', array_pad(array(), count($path_parts), '?')) . ") AND depth <> 0)";
+                $query .= " OR (`uri` IN (" . implode(',', array_pad(array(), count($path_parts), '?')) . ") AND `depth` <> 0)";
             }
         }
 
         // finally, skip expired locks
-        $query .= ") AND expires > " . $this->db->now();
+        $query .= ") AND `expires` > " . $this->db->now();
 
         // run the query and parse result
         $result = $this->db->query($query, $params);
@@ -220,18 +220,18 @@ class file_locks {
                 $update_cols[] = "$key = ?";
             }
 
-            $result = $this->db->query("UPDATE " . $this->db->quote_identifier($this->table)
+            $result = $this->db->query("UPDATE `{$this->table}`"
                 . " SET " . implode(', ', $update_cols)
-                    . ", " . $this->db->quote_identifier('expires') . " = " . $this->db->now($timeout)
-                . " WHERE token = ?",
+                    . ", `expires` = " . $this->db->now($timeout)
+                . " WHERE `token` = ?",
                 array_merge(array_values($data), array($lock['token']))
             );
         }
         else {
             $data[$this->db->quote_identifier('token')] = $lock['token'];
 
-            $result = $this->db->query("INSERT INTO " . $this->db->quote_identifier($this->table)
-                . " (".join(', ', array_keys($data)) . ", " . $this->db->quote_identifier('expires') . ")"
+            $result = $this->db->query("INSERT INTO `{$this->table}`"
+                . " (".join(', ', array_keys($data)) . ", `expires`)"
                 . " VALUES (" . str_repeat('?, ', count($data)) . $this->db->now($timeout) . ")",
                 array_values($data)
             );
@@ -250,11 +250,11 @@ class file_locks {
      */
     public function unlock($uri, $lock)
     {
-        $stmt = $this->db->query("DELETE FROM " . $this->db->quote_identifier($this->table)
-            . " WHERE uri = ? AND token = ?",
+        $stmt = $this->db->query("DELETE FROM `{$this->table}`"
+            . " WHERE `uri` = ? AND `token` = ?",
             $uri, $lock['token']);
 
-        return $this->db->affected_rows();
+        return $this->db->affected_rows($stmt);
     }
 
     /**
@@ -262,7 +262,6 @@ class file_locks {
      */
     public function gc()
     {
-        $this->db->query("DELETE FROM " . $this->db->quote_identifier($this->table)
-            . " WHERE expires < " . $this->db->now());
+        $this->db->query("DELETE FROM `{$this->table}` WHERE `expires` < " . $this->db->now());
     }
 }

@@ -1,0 +1,892 @@
+[
+    {
+        "name": "pear/pear_exception",
+        "version": "v1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/pear/PEAR_Exception.git",
+            "reference": "8c18719fdae000b690e3912be401c76e406dd13b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/pear/PEAR_Exception/zipball/8c18719fdae000b690e3912be401c76e406dd13b",
+            "reference": "8c18719fdae000b690e3912be401c76e406dd13b",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=4.4.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "*"
+        },
+        "time": "2015-02-10T20:07:52+00:00",
+        "type": "class",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "PEAR": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "include-path": [
+            "."
+        ],
+        "license": [
+            "BSD-2-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Helgi Thormar",
+                "email": "dufuz@php.net"
+            },
+            {
+                "name": "Greg Beaver",
+                "email": "cellog@php.net"
+            }
+        ],
+        "description": "The PEAR Exception base class.",
+        "homepage": "https://github.com/pear/PEAR_Exception",
+        "keywords": [
+            "exception"
+        ]
+    },
+    {
+        "name": "pear/net_url2",
+        "version": "v2.2.2",
+        "version_normalized": "2.2.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/pear/Net_URL2.git",
+            "reference": "07fd055820dbf466ee3990abe96d0e40a8791f9d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/pear/Net_URL2/zipball/07fd055820dbf466ee3990abe96d0e40a8791f9d",
+            "reference": "07fd055820dbf466ee3990abe96d0e40a8791f9d",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.1.4"
+        },
+        "require-dev": {
+            "phpunit/phpunit": ">=3.3.0"
+        },
+        "time": "2017-08-25T06:16:11+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.2.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "Net/URL2.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "include-path": [
+            "./"
+        ],
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "David Coallier",
+                "email": "davidc@php.net"
+            },
+            {
+                "name": "Tom Klingenberg",
+                "email": "tkli@php.net"
+            },
+            {
+                "name": "Christian Schmidt",
+                "email": "chmidt@php.net"
+            }
+        ],
+        "description": "Class for parsing and handling URL. Provides parsing of URLs into their constituent parts (scheme, host, path etc.), URL generation, and resolving of relative URLs.",
+        "homepage": "https://github.com/pear/Net_URL2",
+        "keywords": [
+            "PEAR",
+            "net",
+            "networking",
+            "rfc3986",
+            "uri",
+            "url"
+        ]
+    },
+    {
+        "name": "pear/http_request2",
+        "version": "v2.3.0",
+        "version_normalized": "2.3.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/pear/HTTP_Request2.git",
+            "reference": "3599cf0fe455a4e281da464f6510bfc5c2ce54c4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/pear/HTTP_Request2/zipball/3599cf0fe455a4e281da464f6510bfc5c2ce54c4",
+            "reference": "3599cf0fe455a4e281da464f6510bfc5c2ce54c4",
+            "shasum": ""
+        },
+        "require": {
+            "pear/net_url2": "^2.2.0",
+            "pear/pear_exception": "^1.0.0",
+            "php": ">=5.2.0"
+        },
+        "suggest": {
+            "ext-fileinfo": "Adds support for looking up mime-types using finfo.",
+            "ext-zlib": "Allows handling gzip compressed responses.",
+            "lib-curl": "Allows using cURL as a request backend.",
+            "lib-openssl": "Allows handling SSL requests when not using cURL."
+        },
+        "time": "2016-02-13T20:20:39+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-trunk": "2.2-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "HTTP_Request2": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "include-path": [
+            "./"
+        ],
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Alexey Borzov",
+                "email": "avb@php.net"
+            }
+        ],
+        "description": "Provides an easy way to perform HTTP requests.",
+        "homepage": "http://pear.php.net/package/HTTP_Request2",
+        "keywords": [
+            "PEAR",
+            "curl",
+            "http",
+            "request"
+        ]
+    },
+    {
+        "name": "pear/auth_sasl",
+        "version": "v1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/pear/Auth_SASL.git",
+            "reference": "db1ead3dc0bf986d2bab0dbc04d114800cf91dee"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/pear/Auth_SASL/zipball/db1ead3dc0bf986d2bab0dbc04d114800cf91dee",
+            "reference": "db1ead3dc0bf986d2bab0dbc04d114800cf91dee",
+            "shasum": ""
+        },
+        "require": {
+            "pear/pear_exception": "@stable"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "@stable"
+        },
+        "time": "2017-03-07T14:37:05+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Auth": "./"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "include-path": [
+            "./"
+        ],
+        "license": [
+            "BSD"
+        ],
+        "authors": [
+            {
+                "name": "Anish Mistry",
+                "email": "amistry@am-productions.biz",
+                "role": "Lead"
+            },
+            {
+                "name": "Richard Heyes",
+                "email": "richard@php.net",
+                "role": "Lead"
+            },
+            {
+                "name": "Michael Bretterklieber",
+                "email": "michael@bretterklieber.com",
+                "role": "Lead"
+            }
+        ],
+        "description": "Abstraction of various SASL mechanism responses"
+    },
+    {
+        "name": "pear/net_idna2",
+        "version": "v0.2.0",
+        "version_normalized": "0.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/pear/Net_IDNA2.git",
+            "reference": "51734eaf8be2df58e8aad5835b9966459b2fb37c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/pear/Net_IDNA2/zipball/51734eaf8be2df58e8aad5835b9966459b2fb37c",
+            "reference": "51734eaf8be2df58e8aad5835b9966459b2fb37c",
+            "shasum": ""
+        },
+        "require": {
+            "pear/pear_exception": "@stable"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4"
+        },
+        "time": "2017-03-06T20:46:41+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Net": "./"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "include-path": [
+            "./"
+        ],
+        "license": [
+            "LGPL"
+        ],
+        "authors": [
+            {
+                "name": "Stefan Neufeind",
+                "email": "pear.neufeind@speedpartner.de",
+                "role": "Lead"
+            },
+            {
+                "name": "Daniel O'Connor",
+                "email": "daniel.oconnor@gmail.com",
+                "role": "Lead"
+            }
+        ],
+        "description": "More info available on: https://pear.php.net/package/Net_IDNA2"
+    },
+    {
+        "name": "pear/net_socket",
+        "version": "v1.2.1",
+        "version_normalized": "1.2.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/pear/Net_Socket.git",
+            "reference": "f31d75ac352d49908f8987bbb1496c02a409812a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/pear/Net_Socket/zipball/f31d75ac352d49908f8987bbb1496c02a409812a",
+            "reference": "f31d75ac352d49908f8987bbb1496c02a409812a",
+            "shasum": ""
+        },
+        "require": {
+            "pear/pear_exception": "@stable",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4"
+        },
+        "time": "2017-04-06T15:16:38+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Net": "./"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "include-path": [
+            "./"
+        ],
+        "license": [
+            "BSD-2-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Chuck Hagenbuch",
+                "email": "chuck@horde.org",
+                "role": "Lead"
+            },
+            {
+                "name": "Aleksander Machniak",
+                "email": "alec@php.net",
+                "role": "Lead"
+            },
+            {
+                "name": "Stig Bakken",
+                "email": "stig@php.net",
+                "role": "Lead"
+            }
+        ],
+        "description": "More info available on: http://pear.php.net/package/Net_Socket"
+    },
+    {
+        "name": "pear/console_getopt",
+        "version": "v1.4.1",
+        "version_normalized": "1.4.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/pear/Console_Getopt.git",
+            "reference": "82f05cd1aa3edf34e19aa7c8ca312ce13a6a577f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/pear/Console_Getopt/zipball/82f05cd1aa3edf34e19aa7c8ca312ce13a6a577f",
+            "reference": "82f05cd1aa3edf34e19aa7c8ca312ce13a6a577f",
+            "shasum": ""
+        },
+        "time": "2015-07-20T20:28:12+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Console": "./"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "include-path": [
+            "./"
+        ],
+        "license": [
+            "BSD-2-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Greg Beaver",
+                "email": "cellog@php.net",
+                "role": "Helper"
+            },
+            {
+                "name": "Andrei Zmievski",
+                "email": "andrei@php.net",
+                "role": "Lead"
+            },
+            {
+                "name": "Stig Bakken",
+                "email": "stig@php.net",
+                "role": "Developer"
+            }
+        ],
+        "description": "More info available on: http://pear.php.net/package/Console_Getopt"
+    },
+    {
+        "name": "pear/pear-core-minimal",
+        "version": "v1.10.3",
+        "version_normalized": "1.10.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/pear/pear-core-minimal.git",
+            "reference": "070f0b600b2caca2501e2c9b7e553016e4b0d115"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/pear/pear-core-minimal/zipball/070f0b600b2caca2501e2c9b7e553016e4b0d115",
+            "reference": "070f0b600b2caca2501e2c9b7e553016e4b0d115",
+            "shasum": ""
+        },
+        "require": {
+            "pear/console_getopt": "~1.4",
+            "pear/pear_exception": "~1.0"
+        },
+        "replace": {
+            "rsky/pear-core-min": "self.version"
+        },
+        "time": "2017-02-28T16:46:11+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "include-path": [
+            "src/"
+        ],
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Christian Weiske",
+                "email": "cweiske@php.net",
+                "role": "Lead"
+            }
+        ],
+        "description": "Minimal set of PEAR core files to be used as composer dependency"
+    },
+    {
+        "name": "pear/net_smtp",
+        "version": "1.7.3",
+        "version_normalized": "1.7.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/pear/Net_SMTP.git",
+            "reference": "e066e5ee011ae056c03db1a95d210fc09649b477"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/pear/Net_SMTP/zipball/e066e5ee011ae056c03db1a95d210fc09649b477",
+            "reference": "e066e5ee011ae056c03db1a95d210fc09649b477",
+            "shasum": ""
+        },
+        "require": {
+            "pear/net_socket": "*",
+            "pear/pear-core-minimal": "*",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "*"
+        },
+        "suggest": {
+            "pear/auth_sasl": "Install optionally via your project's composer.json"
+        },
+        "time": "2017-01-14T18:19:55+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Net": "./"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "include-path": [
+            "./"
+        ],
+        "license": [
+            "PHP-3.01"
+        ],
+        "authors": [
+            {
+                "name": "Jon Parise",
+                "email": "jon@php.net",
+                "homepage": "http://www.indelible.org",
+                "role": "Lead"
+            },
+            {
+                "name": "Chuck Hagenbuch",
+                "email": "chuck@horde.org",
+                "role": "Lead"
+            }
+        ],
+        "description": "An implementation of the SMTP protocol",
+        "homepage": "http://pear.github.io/Net_SMTP/",
+        "keywords": [
+            "email",
+            "mail",
+            "smtp"
+        ]
+    },
+    {
+        "name": "sabre/vobject",
+        "version": "3.5.3",
+        "version_normalized": "3.5.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/sabre-io/vobject.git",
+            "reference": "129d80533a9ec0d9cacfb50b51180c34edb6874c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/sabre-io/vobject/zipball/129d80533a9ec0d9cacfb50b51180c34edb6874c",
+            "reference": "129d80533a9ec0d9cacfb50b51180c34edb6874c",
+            "shasum": ""
+        },
+        "require": {
+            "ext-mbstring": "*",
+            "php": ">=5.3.1"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "*",
+            "squizlabs/php_codesniffer": "*"
+        },
+        "time": "2016-10-07T03:20:40+00:00",
+        "bin": [
+            "bin/vobject",
+            "bin/generate_vcards"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.2.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Sabre\\VObject\\": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Evert Pot",
+                "email": "me@evertpot.com",
+                "homepage": "http://evertpot.com/",
+                "role": "Developer"
+            },
+            {
+                "name": "Dominik Tobschall",
+                "email": "dominik@fruux.com",
+                "homepage": "http://tobschall.de/",
+                "role": "Developer"
+            }
+        ],
+        "description": "The VObject library for PHP allows you to easily parse and manipulate iCalendar and vCard objects",
+        "homepage": "http://sabre.io/vobject/",
+        "keywords": [
+            "VObject",
+            "iCalendar",
+            "jCal",
+            "jCard",
+            "vCard"
+        ]
+    },
+    {
+        "name": "sabre/event",
+        "version": "2.0.2",
+        "version_normalized": "2.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/sabre-io/event.git",
+            "reference": "337b6f5e10ea6e0b21e22c7e5788dd3883ae73ff"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/sabre-io/event/zipball/337b6f5e10ea6e0b21e22c7e5788dd3883ae73ff",
+            "reference": "337b6f5e10ea6e0b21e22c7e5788dd3883ae73ff",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.1"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "*",
+            "sabre/cs": "~0.0.1"
+        },
+        "time": "2015-05-19T10:24:22+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Sabre\\Event\\": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Evert Pot",
+                "email": "me@evertpot.com",
+                "homepage": "http://evertpot.com/",
+                "role": "Developer"
+            }
+        ],
+        "description": "sabre/event is a library for lightweight event-based programming",
+        "homepage": "http://sabre.io/event/",
+        "keywords": [
+            "EventEmitter",
+            "events",
+            "hooks",
+            "plugin",
+            "promise",
+            "signal"
+        ]
+    },
+    {
+        "name": "sabre/http",
+        "version": "3.0.5",
+        "version_normalized": "3.0.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/sabre-io/http.git",
+            "reference": "6b06c03376219b3d608e1f878514ec105ed1b577"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/sabre-io/http/zipball/6b06c03376219b3d608e1f878514ec105ed1b577",
+            "reference": "6b06c03376219b3d608e1f878514ec105ed1b577",
+            "shasum": ""
+        },
+        "require": {
+            "ext-mbstring": "*",
+            "php": ">=5.4",
+            "sabre/event": ">=1.0.0,<3.0.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.3",
+            "squizlabs/php_codesniffer": "~1.5.3"
+        },
+        "suggest": {
+            "ext-curl": " to make http requests with the Client class"
+        },
+        "time": "2015-05-11T15:25:57+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Sabre\\HTTP\\": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Evert Pot",
+                "email": "me@evertpot.com",
+                "homepage": "http://evertpot.com/",
+                "role": "Developer"
+            }
+        ],
+        "description": "The sabre/http library provides utilities for dealing with http requests and responses. ",
+        "homepage": "https://github.com/fruux/sabre-http",
+        "keywords": [
+            "http"
+        ]
+    },
+    {
+        "name": "sabre/dav",
+        "version": "2.1.11",
+        "version_normalized": "2.1.11.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/sabre-io/dav.git",
+            "reference": "fa10928802aea9b3136519640aa3c3c59e9e1084"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/sabre-io/dav/zipball/fa10928802aea9b3136519640aa3c3c59e9e1084",
+            "reference": "fa10928802aea9b3136519640aa3c3c59e9e1084",
+            "shasum": ""
+        },
+        "require": {
+            "ext-ctype": "*",
+            "ext-date": "*",
+            "ext-dom": "*",
+            "ext-iconv": "*",
+            "ext-libxml": "*",
+            "ext-mbstring": "*",
+            "ext-pcre": "*",
+            "ext-simplexml": "*",
+            "ext-spl": "*",
+            "php": ">=5.4.1",
+            "sabre/event": "^2.0.0",
+            "sabre/http": "^3.0.0",
+            "sabre/vobject": "^3.3.4"
+        },
+        "require-dev": {
+            "evert/phpdoc-md": "~0.1.0",
+            "phpunit/phpunit": "~4.2",
+            "squizlabs/php_codesniffer": "~1.5.3"
+        },
+        "suggest": {
+            "ext-curl": "*",
+            "ext-pdo": "*"
+        },
+        "time": "2016-10-07T03:29:06+00:00",
+        "bin": [
+            "bin/sabredav",
+            "bin/naturalselection"
+        ],
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Sabre\\DAV\\": "lib/DAV/",
+                "Sabre\\DAVACL\\": "lib/DAVACL/",
+                "Sabre\\CalDAV\\": "lib/CalDAV/",
+                "Sabre\\CardDAV\\": "lib/CardDAV/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Evert Pot",
+                "email": "me@evertpot.com",
+                "homepage": "http://evertpot.com/",
+                "role": "Developer"
+            }
+        ],
+        "description": "WebDAV Framework for PHP",
+        "homepage": "http://sabre.io/",
+        "keywords": [
+            "CalDAV",
+            "CardDAV",
+            "WebDAV",
+            "framework",
+            "iCalendar"
+        ]
+    },
+    {
+        "name": "pear/mail_mime",
+        "version": "1.10.1",
+        "version_normalized": "1.10.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/pear/Mail_Mime.git",
+            "reference": "3d4e33a6879cbb4c71684a282750b7bb072a121e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/pear/Mail_Mime/zipball/3d4e33a6879cbb4c71684a282750b7bb072a121e",
+            "reference": "3d4e33a6879cbb4c71684a282750b7bb072a121e",
+            "shasum": ""
+        },
+        "require": {
+            "pear/pear-core-minimal": "*"
+        },
+        "time": "2017-05-21T10:43:06+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Mail": "./"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "include-path": [
+            "./"
+        ],
+        "license": [
+            "BSD-3-clause"
+        ],
+        "authors": [
+            {
+                "name": "Cipriano Groenendal",
+                "email": "cipri@php.net",
+                "role": "Lead"
+            },
+            {
+                "name": "Aleksander Machniak",
+                "email": "alec@php.net",
+                "role": "Lead"
+            }
+        ],
+        "description": "Mail_Mime provides classes to create MIME messages",
+        "homepage": "http://pear.php.net/package/Mail_Mime"
+    },
+    {
+        "name": "pear/net_ldap2",
+        "version": "v2.2.0",
+        "version_normalized": "2.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/pear/Net_LDAP2.git",
+            "reference": "38f1b22a96dfbd7ec53852f0e1e7ec1a9a5eb0e8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/pear/Net_LDAP2/zipball/38f1b22a96dfbd7ec53852f0e1e7ec1a9a5eb0e8",
+            "reference": "38f1b22a96dfbd7ec53852f0e1e7ec1a9a5eb0e8",
+            "shasum": ""
+        },
+        "require": {
+            "ext-ldap": "*",
+            "pear/pear-core-minimal": "^1.10.1"
+        },
+        "time": "2015-10-30T20:34:22+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "Net/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "include-path": [
+            "."
+        ],
+        "license": [
+            "LGPL-3.0"
+        ],
+        "description": "Object oriented interface for searching and manipulating LDAP-entries",
+        "homepage": "http://pear.php.net/package/Net_LDAP2",
+        "keywords": [
+            "PEAR",
+            "ldap"
+        ]
+    },
+    {
+        "name": "kolab/net_ldap3",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://git.kolab.org/diffusion/PNL/php-net_ldap.git",
+            "reference": "4c21bdebaa62d05a36f3ef3eee4e9742875d7e57"
+        },
+        "require": {
+            "pear/net_ldap2": ">=2.0.12",
+            "php": ">=5.3.3"
+        },
+        "time": "2017-08-07T12:48:10+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "lib/"
+            ]
+        },
+        "license": [
+            "GPL-3.0+"
+        ],
+        "authors": [
+            {
+                "name": "Jeroen van Meeuwen",
+                "email": "vanmeeuwen@kolabsys.com",
+                "role": "Lead"
+            },
+            {
+                "name": "Aleksander Machniak",
+                "email": "machniak@kolabsys.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Thomas Bruederli",
+                "email": "roundcube@gmail.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "A successor of the PEAR:Net_LDAP2 module providing advanced functionality for accessing LDAP directories",
+        "homepage": "http://git.kolab.org/pear/Net_LDAP3/",
+        "keywords": [
+            "ldap",
+            "pear",
+            "vlv"
+        ]
+    }
+]
