@@ -5,17 +5,46 @@
 #cp openldap/slapd.conf /etc/ldap/
 #cp openldap/ldap.conf /etc/ldap/
 #cp openldap/DB_CONFIG /var/lib/ldap/
-mkdir /etc/ldap/users
+# /etc/ldap or /etc/openldap
+if [ -d "/etc/ldap" ]; then
+CONF="/etc/ldap"
+mkdir $CONF/users
 echo "backup the old config"
-cp /etc/ldap/slapd.d /etc/ldap/slapd.d.back-machinet
-#mkdir /etc/ldap/slapd.d
-#chown  -R openldap:openldap /etc/ldap/slapd.d
-echo "restarting slapd...."
+cp $CONF/slapd.d $CONF/slapd.d.back-machinet
+
+else 
+CONF="/etc/openldap"
+cp $CONF/schema  $CONF/schema.back
+cp openldap/rc.slapd /etc/rc.d/rc.slapd
+cp openldap/ISPEnv2.schema $CONF/schema/
+cp openldap/slapd.conf $CONF/
+cp openldap/ldap.conf $CONF/
+cp openldap/DB_CONFIG /var/lib/ldap/
+mkdir /etc/ldap/slapd.d
+chown  -R openldap:openldap /etc/ldap/slapd.d
+mkdir $CONF/users
+echo "backup the old config"
+cp $CONF/slapd.d $CONF/slapd.d.back-machinet
+
+slaptest -f /etc/ldap/slapd.conf -F /etc/ldap/slapd.d
+mkdir /var/run/slapd
+
+chown -R openldap:openldap /etc/ldap/slapd.d
+/etc/rc.d/rc.slapd start
+sleep 1
+
+ldapadd -Y EXTERNAL -H ldapi:/// -D "cn=admin,cn=config" -W -f openldap/ispenv2.ldif
+
+
+fi
+
+
+#echo "restarting slapd...."
 #slaptest -f /etc/ldap/slapd.conf -F /etc/ldap/slapd.d
 #chown -R openldap:openldap /etc/ldap/slapd.d
 ldapadd -Y EXTERNAL -H ldapi:/// -D "cn=admin,cn=config" -W -f openldap/ispenv2.ldif
 
-service slapd restart
+#service slapd restart
 #/usr/libexec/slapd
 echo populate the directory:
 #rootpass=`cat /etc/openldap/slapd.conf|grep rootpw|cut -f3`
