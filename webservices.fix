@@ -1,6 +1,6 @@
 #!/bin/bash
-apt-get install mariadb-server libapache2-mod-php  php-mysql php-mbstring php-ldap php-pear zend-framework 
-
+apt-get install apache2 mariadb-server libapache2-mod-php  php-mysql php-mbstring php-ldap php-pear zend-framework mysql-client
+apt-get install php php-mysql php-mbstring php-ldap php-pear
 rsync -av webservices/roundcubemail*  /usr/share/
 rsync -av webservices/mcConsolette  /usr/share/
 rsync -av webservices/chwala*  /usr/share/
@@ -14,7 +14,8 @@ cp webservices/httpd-machinet.conf /etc/apache2/sites-available
 a2ensite httpd-machinet.conf
 service apache2 restart
 echo "Enter mysql root password:"
-mysql -u root -p  < webservices/kolab16.sql
+mysql -u root -p < webservices/database.sql
+mysql -u root -p  roundcubemail < webservices/kolab16.sql
 cd /usr/share
 ln -s roundcubemail-* roundcubemail
 ln -s chwala* chwala

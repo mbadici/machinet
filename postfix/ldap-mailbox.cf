@@ -1,10 +1,10 @@
 server_host = localhost
-search_base  =  ou=users,dc=machinet       
+search_base  =  dc=machinet       
 version = 3
 bind = no
 #domain = machinet.local
 search_attribute = mail mailforward
-query_filter = (&(uid=%u)(objectclass=mailaccount)(!(billpaid=FALSE)))
+query_filter = (&(mail=%s)(objectclass=mailaccount)(!(billpaid=FALSE)))
 result_attribute = uid
 result_format =%s/
 

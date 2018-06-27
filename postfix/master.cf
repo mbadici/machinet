@@ -86,7 +86,7 @@ scache    unix  -       -       n       -       1       scache
 
 dovecot     unix  -       n       n       -       -       pipe
     flags=DRhu user=mailbox:mailbox 
-    argv=/usr/lib/dovecot/deliver -f ${sender} -d  ${user} -a ${recipient}
+    argv=/usr/lib/dovecot/deliver -f ${sender} -d  ${recipient} -a ${recipient}
 
 #cyrus     unix  -       n       n       -       -       pipe
 #  user=cyrus argv=/cyrus/bin/deliver -e -r ${sender} -m ${extension} ${user}
