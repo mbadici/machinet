@@ -1,17 +1,32 @@
 #!/bin/bash
 
-echo "temporary disabled since there are no packages available for sketch on kolabsys"
-echo "please enable it manually"
+#echo "temporary disabled since there are no packages available for sketch on kolabsys"
+#echo "please enable it manually"
 #add kolab repository
 #echo "deb http://xi.rename-it.nl/debian/ stable-auto/dovecot-2.2  main" > /etc/apt/sources.list.d/dovecot-2.2.15.list
 #echo "deb http://obs.kolabsys.com/repositories/Kolab:/3.3/Debian_8.1/ ./
 #deb http://obs.kolabsys.com/repositories/Kolab:/3.3:/Updates/Debian_8.1/ ./
 #" > /etc/apt/sources.list.d/kolab-3.3.list
 # activate dovecot metadata
-#sed -i s/#machinet-disabled#//g  /etc/dovecot/conf.d/20-imap.conf
-#sed -i s/#machinet-disabled#//g  /etc/dovecot/conf.d/10-mail.conf
+sed -i s/#machinet-disabled#//g  /etc/dovecot/conf.d/20-imap.conf
+sed -i s/#machinet-disabled#//g  /etc/dovecot/conf.d/10-mail.conf
+which apt-get
+if [ $? == 0 ]; then
+echo "debian based system"
 
 apt-get update
 apt-get install php-kolabformat
 apt-get install php-pear
+fi
+
+which slackpkg
+if [ $? == 0 ]; then
+echo "slackware system, you are brave :)"
+git clone https://git.kolab.org/diffusion/LKX/libkolabxml.git
+wget http://mirrors.hostingromania.ro/apache.org//xerces/c/3/sources/xerces-c-3.2.2.tar.xz
+
+fi
 pear install HTTP_Request2
+
+git clone https://gitlab.com/roundcube/net_ldap3
+#mv kolabformat.php /usr/lib/php/

@@ -6,8 +6,10 @@
 #cp openldap/ldap.conf /etc/ldap/
 #cp openldap/DB_CONFIG /var/lib/ldap/
 # /etc/ldap or /etc/openldap
+
 if [ -d "/etc/ldap" ]; then
 CONF="/etc/ldap"
+#this is debian based
 mkdir $CONF/users
 echo "backup the old config"
 cp $CONF/slapd.d $CONF/slapd.d.back-machinet

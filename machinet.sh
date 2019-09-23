@@ -10,7 +10,7 @@ apt-get install php5-ldap  smarty  mysql-server mysql-client php5-mysql
 else 
 which slackpkg
 if [ $? == 0 ]; then
-echo "this is a slackware system"
+echo "this is a slackware system, congrats"
 slackpkg update
 slackpkg install mariadb php-5.6
 echo "download packages "

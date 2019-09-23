@@ -123,7 +123,7 @@ $config['plugins'] = array(
     'zipdownload',
     'acl' ,
   'calendar' , 'kolab_auth',   'kolab_activesync' ,'kolab_addressbook' , 'kolab_config'  , 'kolab_notes' , 'ldap_authentication' , 'kolab_folders' , 'kolab_files' ,  'libcalendaring' , 
-      'libkolab'  , 'tasklist' ,  'jqueryui'  , 'password' , 'managesieve' , 'markasjunk' , 'pdfviewer' , 'odfviewer' , 'message_label' 
+      'libkolab'  , 'tasklist' ,  'jqueryui'  , 'password' , 'managesieve' , 'markasjunk' , 'pdfviewer' , 'odfviewer'  
 );
 
 // skin name: folder from skins/
