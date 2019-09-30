@@ -520,6 +520,10 @@ smtpd_sasl_auth_enable = yes
 smtpd_sasl_type = dovecot
 smtpd_sasl_path = private/auth
 enable_original_recipient = yes
+#smtpd_tls_cert_file                     = /etc/letsencrypt/live/machinet.ro/cert.pem
+#smtpd_tls_key_file                      = /etc/letsencrypt/live/machinet.ro/privkey.pem
+#smtpd_use_tls=yes
+#smtpd_tls_security_level=may
 
 #smtpd_sasl_application_name = smtpd
 #smtpd_sasl_path = smtpd
