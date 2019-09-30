@@ -1,13 +1,13 @@
--- MySQL dump 10.16  Distrib 10.1.26-MariaDB, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.15  Distrib 10.0.38-MariaDB, for Linux (i686)
 --
 -- Host: localhost    Database: roundcubemail
 -- ------------------------------------------------------
--- Server version	10.1.26-MariaDB-0+deb9u1
+-- Server version	10.0.37-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -63,11 +63,11 @@ DROP TABLE IF EXISTS `cache_index`;
 CREATE TABLE `cache_index` (
   `user_id` int(10) unsigned NOT NULL,
   `mailbox` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `expires` datetime DEFAULT NULL,
+  `changed` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
   `valid` tinyint(1) NOT NULL DEFAULT '0',
   `data` longtext NOT NULL,
   PRIMARY KEY (`user_id`,`mailbox`),
-  KEY `expires_index` (`expires`),
+  KEY `changed_index` (`changed`),
   CONSTRAINT `user_id_fk_cache_index` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -83,11 +83,11 @@ CREATE TABLE `cache_messages` (
   `user_id` int(10) unsigned NOT NULL,
   `mailbox` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `uid` int(11) unsigned NOT NULL DEFAULT '0',
-  `expires` datetime DEFAULT NULL,
+  `changed` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
   `data` longtext NOT NULL,
   `flags` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`,`mailbox`,`uid`),
-  KEY `expires_index` (`expires`),
+  KEY `changed_index` (`changed`),
   CONSTRAINT `user_id_fk_cache_messages` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -118,10 +118,10 @@ DROP TABLE IF EXISTS `cache_thread`;
 CREATE TABLE `cache_thread` (
   `user_id` int(10) unsigned NOT NULL,
   `mailbox` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `expires` datetime DEFAULT NULL,
+  `changed` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
   `data` longtext NOT NULL,
   PRIMARY KEY (`user_id`,`mailbox`),
-  KEY `expires_index` (`expires`),
+  KEY `changed_index` (`changed`),
   CONSTRAINT `user_id_fk_cache_thread` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -142,7 +142,7 @@ CREATE TABLE `calendars` (
   PRIMARY KEY (`calendar_id`),
   KEY `user_name_idx` (`user_id`,`name`),
   CONSTRAINT `fk_calendars_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -221,7 +221,7 @@ CREATE TABLE `contactgroupmembers` (
   KEY `contactgroupmembers_contact_index` (`contact_id`),
   CONSTRAINT `contact_id_fk_contacts` FOREIGN KEY (`contact_id`) REFERENCES `contacts` (`contact_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `contactgroup_id_fk_contactgroups` FOREIGN KEY (`contactgroup_id`) REFERENCES `contactgroups` (`contactgroup_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -255,7 +255,7 @@ CREATE TABLE `contacts` (
   `changed` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
   `del` tinyint(1) NOT NULL DEFAULT '0',
   `name` varchar(128) NOT NULL DEFAULT '',
-  `email` varchar(255) NOT NULL,
+  `email` text NOT NULL,
   `firstname` varchar(128) NOT NULL DEFAULT '',
   `surname` varchar(128) NOT NULL DEFAULT '',
   `vcard` longtext,
@@ -344,13 +344,13 @@ CREATE TABLE `identities` (
   `email` varchar(128) NOT NULL,
   `reply-to` varchar(128) NOT NULL DEFAULT '',
   `bcc` varchar(128) NOT NULL DEFAULT '',
-  `signature` longtext,
+  `signature` text,
   `html_signature` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`identity_id`),
   KEY `user_identities_index` (`user_id`,`del`),
   KEY `email_identities_index` (`email`,`del`),
   CONSTRAINT `user_id_fk_identities` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -368,9 +368,28 @@ CREATE TABLE `itipinvitations` (
   `expires` datetime DEFAULT NULL,
   `cancelled` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`token`),
-  KEY `uid_idx` (`user_id`,`event_uid`),
+  KEY `uid_idx` (`event_uid`,`user_id`),
+  KEY `fk_itipinvitations_user_id` (`user_id`),
   CONSTRAINT `fk_itipinvitations_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `kolab_alarms`
+--
+
+DROP TABLE IF EXISTS `kolab_alarms`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `kolab_alarms` (
+  `event_id` varchar(255) NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  `notifyat` datetime DEFAULT NULL,
+  `dismissed` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`event_id`),
+  KEY `fk_kolab_alarms_user_id` (`user_id`),
+  CONSTRAINT `fk_kolab_alarms_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -383,17 +402,16 @@ DROP TABLE IF EXISTS `kolab_cache_configuration`;
 CREATE TABLE `kolab_cache_configuration` (
   `folder_id` bigint(20) unsigned NOT NULL,
   `msguid` bigint(20) unsigned NOT NULL,
-  `uid` varchar(512) CHARACTER SET ascii NOT NULL,
+  `uid` varchar(128) CHARACTER SET ascii NOT NULL,
   `created` datetime DEFAULT NULL,
   `changed` datetime DEFAULT NULL,
-  `data` longtext NOT NULL,
+  `data` text NOT NULL,
   `xml` longblob NOT NULL,
   `tags` text NOT NULL,
   `words` text NOT NULL,
   `type` varchar(32) CHARACTER SET ascii NOT NULL,
   PRIMARY KEY (`folder_id`,`msguid`),
   KEY `configuration_type` (`folder_id`,`type`),
-  KEY `configuration_uid2msguid` (`folder_id`,`uid`,`msguid`),
   CONSTRAINT `fk_kolab_cache_configuration_folder` FOREIGN KEY (`folder_id`) REFERENCES `kolab_folders` (`folder_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -408,10 +426,10 @@ DROP TABLE IF EXISTS `kolab_cache_contact`;
 CREATE TABLE `kolab_cache_contact` (
   `folder_id` bigint(20) unsigned NOT NULL,
   `msguid` bigint(20) unsigned NOT NULL,
-  `uid` varchar(512) CHARACTER SET ascii NOT NULL,
+  `uid` varchar(128) CHARACTER SET ascii NOT NULL,
   `created` datetime DEFAULT NULL,
   `changed` datetime DEFAULT NULL,
-  `data` longtext NOT NULL,
+  `data` text NOT NULL,
   `xml` longblob NOT NULL,
   `tags` text NOT NULL,
   `words` text NOT NULL,
@@ -422,7 +440,6 @@ CREATE TABLE `kolab_cache_contact` (
   `email` varchar(255) NOT NULL,
   PRIMARY KEY (`folder_id`,`msguid`),
   KEY `contact_type` (`folder_id`,`type`),
-  KEY `contact_uid2msguid` (`folder_id`,`uid`,`msguid`),
   CONSTRAINT `fk_kolab_cache_contact_folder` FOREIGN KEY (`folder_id`) REFERENCES `kolab_folders` (`folder_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -437,17 +454,16 @@ DROP TABLE IF EXISTS `kolab_cache_event`;
 CREATE TABLE `kolab_cache_event` (
   `folder_id` bigint(20) unsigned NOT NULL,
   `msguid` bigint(20) unsigned NOT NULL,
-  `uid` varchar(512) CHARACTER SET ascii NOT NULL,
+  `uid` varchar(128) CHARACTER SET ascii NOT NULL,
   `created` datetime DEFAULT NULL,
   `changed` datetime DEFAULT NULL,
-  `data` longtext NOT NULL,
+  `data` text NOT NULL,
   `xml` longblob NOT NULL,
   `tags` text NOT NULL,
   `words` text NOT NULL,
   `dtstart` datetime DEFAULT NULL,
   `dtend` datetime DEFAULT NULL,
   PRIMARY KEY (`folder_id`,`msguid`),
-  KEY `event_uid2msguid` (`folder_id`,`uid`,`msguid`),
   CONSTRAINT `fk_kolab_cache_event_folder` FOREIGN KEY (`folder_id`) REFERENCES `kolab_folders` (`folder_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -462,17 +478,16 @@ DROP TABLE IF EXISTS `kolab_cache_file`;
 CREATE TABLE `kolab_cache_file` (
   `folder_id` bigint(20) unsigned NOT NULL,
   `msguid` bigint(20) unsigned NOT NULL,
-  `uid` varchar(512) CHARACTER SET ascii NOT NULL,
+  `uid` varchar(128) CHARACTER SET ascii NOT NULL,
   `created` datetime DEFAULT NULL,
   `changed` datetime DEFAULT NULL,
-  `data` longtext NOT NULL,
+  `data` text NOT NULL,
   `xml` longblob NOT NULL,
   `tags` text NOT NULL,
   `words` text NOT NULL,
   `filename` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`folder_id`,`msguid`),
   KEY `folder_filename` (`folder_id`,`filename`),
-  KEY `file_uid2msguid` (`folder_id`,`uid`,`msguid`),
   CONSTRAINT `fk_kolab_cache_file_folder` FOREIGN KEY (`folder_id`) REFERENCES `kolab_folders` (`folder_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -487,17 +502,16 @@ DROP TABLE IF EXISTS `kolab_cache_freebusy`;
 CREATE TABLE `kolab_cache_freebusy` (
   `folder_id` bigint(20) unsigned NOT NULL,
   `msguid` bigint(20) unsigned NOT NULL,
-  `uid` varchar(512) CHARACTER SET ascii NOT NULL,
+  `uid` varchar(128) CHARACTER SET ascii NOT NULL,
   `created` datetime DEFAULT NULL,
   `changed` datetime DEFAULT NULL,
-  `data` longtext NOT NULL,
+  `data` text NOT NULL,
   `xml` longblob NOT NULL,
   `tags` text NOT NULL,
   `words` text NOT NULL,
   `dtstart` datetime DEFAULT NULL,
   `dtend` datetime DEFAULT NULL,
   PRIMARY KEY (`folder_id`,`msguid`),
-  KEY `freebusy_uid2msguid` (`folder_id`,`uid`,`msguid`),
   CONSTRAINT `fk_kolab_cache_freebusy_folder` FOREIGN KEY (`folder_id`) REFERENCES `kolab_folders` (`folder_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -512,17 +526,16 @@ DROP TABLE IF EXISTS `kolab_cache_journal`;
 CREATE TABLE `kolab_cache_journal` (
   `folder_id` bigint(20) unsigned NOT NULL,
   `msguid` bigint(20) unsigned NOT NULL,
-  `uid` varchar(512) CHARACTER SET ascii NOT NULL,
+  `uid` varchar(128) CHARACTER SET ascii NOT NULL,
   `created` datetime DEFAULT NULL,
   `changed` datetime DEFAULT NULL,
-  `data` longtext NOT NULL,
+  `data` text NOT NULL,
   `xml` longblob NOT NULL,
   `tags` text NOT NULL,
   `words` text NOT NULL,
   `dtstart` datetime DEFAULT NULL,
   `dtend` datetime DEFAULT NULL,
   PRIMARY KEY (`folder_id`,`msguid`),
-  KEY `journal_uid2msguid` (`folder_id`,`uid`,`msguid`),
   CONSTRAINT `fk_kolab_cache_journal_folder` FOREIGN KEY (`folder_id`) REFERENCES `kolab_folders` (`folder_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -537,15 +550,14 @@ DROP TABLE IF EXISTS `kolab_cache_note`;
 CREATE TABLE `kolab_cache_note` (
   `folder_id` bigint(20) unsigned NOT NULL,
   `msguid` bigint(20) unsigned NOT NULL,
-  `uid` varchar(512) CHARACTER SET ascii NOT NULL,
+  `uid` varchar(128) CHARACTER SET ascii NOT NULL,
   `created` datetime DEFAULT NULL,
   `changed` datetime DEFAULT NULL,
-  `data` longtext NOT NULL,
+  `data` text NOT NULL,
   `xml` longblob NOT NULL,
   `tags` text NOT NULL,
   `words` text NOT NULL,
   PRIMARY KEY (`folder_id`,`msguid`),
-  KEY `note_uid2msguid` (`folder_id`,`uid`,`msguid`),
   CONSTRAINT `fk_kolab_cache_note_folder` FOREIGN KEY (`folder_id`) REFERENCES `kolab_folders` (`folder_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -560,17 +572,16 @@ DROP TABLE IF EXISTS `kolab_cache_task`;
 CREATE TABLE `kolab_cache_task` (
   `folder_id` bigint(20) unsigned NOT NULL,
   `msguid` bigint(20) unsigned NOT NULL,
-  `uid` varchar(512) CHARACTER SET ascii NOT NULL,
+  `uid` varchar(128) CHARACTER SET ascii NOT NULL,
   `created` datetime DEFAULT NULL,
   `changed` datetime DEFAULT NULL,
-  `data` longtext NOT NULL,
+  `data` text NOT NULL,
   `xml` longblob NOT NULL,
   `tags` text NOT NULL,
   `words` text NOT NULL,
   `dtstart` datetime DEFAULT NULL,
   `dtend` datetime DEFAULT NULL,
   PRIMARY KEY (`folder_id`,`msguid`),
-  KEY `task_uid2msguid` (`folder_id`,`uid`,`msguid`),
   CONSTRAINT `fk_kolab_cache_task_folder` FOREIGN KEY (`folder_id`) REFERENCES `kolab_folders` (`folder_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -592,7 +603,7 @@ CREATE TABLE `kolab_folders` (
   `objectcount` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`folder_id`),
   KEY `resource_type` (`resource`,`type`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1673 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -642,7 +653,7 @@ CREATE TABLE `syncroton_content` (
   `id` varchar(40) NOT NULL,
   `device_id` varchar(40) NOT NULL,
   `folder_id` varchar(40) NOT NULL,
-  `contentid` varchar(128) DEFAULT NULL,
+  `contentid` varchar(128) NOT NULL,
   `creation_time` datetime DEFAULT NULL,
   `creation_synckey` int(11) NOT NULL,
   `is_deleted` tinyint(1) DEFAULT '0',
@@ -757,7 +768,7 @@ DROP TABLE IF EXISTS `syncroton_modseq`;
 CREATE TABLE `syncroton_modseq` (
   `device_id` varchar(40) NOT NULL,
   `folder_id` varchar(40) NOT NULL,
-  `synctime` datetime NOT NULL,
+  `synctime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `data` longblob,
   PRIMARY KEY (`device_id`,`folder_id`,`synctime`),
   KEY `syncroton_modseq::device_id` (`device_id`),
@@ -850,7 +861,7 @@ CREATE TABLE `tasklists` (
   PRIMARY KEY (`tasklist_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `fk_tasklist_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -887,7 +898,7 @@ CREATE TABLE `tasks` (
   KEY `tasklisting` (`tasklist_id`,`del`,`date`),
   KEY `uid` (`uid`),
   CONSTRAINT `fk_tasks_tasklist_id` FOREIGN KEY (`tasklist_id`) REFERENCES `tasklists` (`tasklist_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -903,13 +914,13 @@ CREATE TABLE `users` (
   `mail_host` varchar(128) NOT NULL,
   `created` datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
   `last_login` datetime DEFAULT NULL,
+  `language` varchar(5) DEFAULT NULL,
+  `preferences` text,
   `failed_login` datetime DEFAULT NULL,
   `failed_login_counter` int(10) unsigned DEFAULT NULL,
-  `language` varchar(5) DEFAULT NULL,
-  `preferences` longtext,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `username` (`username`,`mail_host`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -921,4 +932,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-19 12:04:45
+-- Dump completed on 2019-09-30  8:31:11
