@@ -1,26 +1,43 @@
 #!/bin/bash
-apt-get install apache2 mariadb-server libapache2-mod-php  php-mysql php-mbstring php-ldap php-pear zend-framework mysql-client
-apt-get install php php-mysql php-mbstring php-ldap php-pear
-rsync -av webservices/roundcubemail*  /usr/share/
-rsync -av webservices/mcConsolette  /usr/share/
-rsync -av webservices/chwala*  /usr/share/
-#rsync -av webservices/kolab-syncroton*  /usr/share/
+which apt-get >/dev/null
+if [ $? == 0 ]; then
+echo "debian based system"
+apt-get install apache2 mariadb-server libapache2-mod-php  php-mysql php-mbstring php-ldap php-pear zend-framework mariadb-client
+apt-get install php php-mysql php-mbstring php-ldap php-pear php-zip php-curl php-gd
+apt-get install smarty3
+fi
+#rsync -av webservices/roundcubemail*  /usr/share/
+git clone https://github.com/roundcube/roundcubemail.git /usr/share/roundcubemail
+/usr/share/roundcubemail/bin/install-jsdeps.sh
+#rsync -av webservices/mcConsolette  /usr/share/
+git clone https://github.com/mbadici/mcConsolette.git
+#rsync -av webservices/chwala*  /usr/share/
+git clone https://git.kolab.org/diffusion/C/chwala.git         /usr/share/chwala
 git clone https://git.kolab.org/diffusion/S/syncroton.git         /usr/share/syncroton
 chown -R www-data:www-data /usr/share/mcConsolette
 chown -R www-data:www-data /usr/share/roundcubemail
 chown -R www-data:www-data /usr/share/chwala
 chown -R www-data:www-data /usr/share/syncroton
-
 cp webservices/httpd-machinet.conf /etc/apache2/sites-available
-a2ensite httpd-machinet.conf
-service apache2 restart
+which apt-get >/dev/null
+if [ $? == 0 ]; then
+/sbin/a2ensite httpd-machinet.conf
+#service apache2 restart
+systemctl  restart apache2
+else
 /etc/rc.d/rc.httpd restart
+fi
 echo "Enter mysql root password:"
 mysql -u root -p < webservices/database.sql
 mysql -u root -p  roundcubemail < webservices/kolab16.sql
+mkdir /etc/machinet/roundcubemail
+cp webservices/roundcubemail/config/config.inc.php /etc/machinet/roundcubemail/
+ln -s /etc/machinet/roundcubemail/config.inc.php /usr/share/roundcubemail/config/
 cd /usr/share
-ln -s roundcubemail-* roundcubemail
+#ln -s roundcubemail-* roundcubemail
 ln -s chwala* chwala
 mkdir /var/log/roundcubemail/
 chown www-data:www-data /var/log/roundcubemail
+rm /usr/share/roundcubemail/logs
 ln -s /var/log/roundcubemail /usr/share/roundcubemail/logs
+cd /usr/share/roundcubemail/plugins

@@ -24,4 +24,4 @@ VERSION=SLACK
 fi
 fi
 
-
+mkdir /etc/machinet

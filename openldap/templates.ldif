@@ -5,6 +5,8 @@ objectclass: organizationalunit
 dn: cn= Doae Ion,ou=templates,dc=machinet
 objectclass: inetorgperson
 objectclass: accountable
+objectclass: mailaccount
+
 cn: Doae Ion
 sn: Doae
 givenname: Ion
