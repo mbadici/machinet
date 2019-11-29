@@ -18,20 +18,21 @@ else
 CONF="/etc/openldap"
 cp $CONF/schema  $CONF/schema.back
 cp openldap/rc.slapd /etc/rc.d/rc.slapd
+mkdir $CONF/schema
 cp openldap/ISPEnv2.schema $CONF/schema/
 cp openldap/slapd.conf $CONF/
 cp openldap/ldap.conf $CONF/
 cp openldap/DB_CONFIG /var/lib/ldap/
-mkdir /etc/ldap/slapd.d
-chown  -R openldap:openldap /etc/ldap/slapd.d
+mkdir /etc/$CONF/slapd.d
+chown  -R openldap:openldap /etc/$CONF/slapd.d
 mkdir $CONF/users
 echo "backup the old config"
 cp $CONF/slapd.d $CONF/slapd.d.back-machinet
 
-slaptest -f /etc/ldap/slapd.conf -F /etc/ldap/slapd.d
+slaptest -f /etc/$CONF/slapd.conf -F /etc/$CONF/slapd.d
 mkdir /var/run/slapd
 
-chown -R openldap:openldap /etc/ldap/slapd.d
+chown -R openldap:openldap /etc/$CONF/slapd.d
 /etc/rc.d/rc.slapd start
 sleep 1
 
