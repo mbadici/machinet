@@ -6,6 +6,16 @@ echo "debian based system"
 apt-get install apache2 mariadb-server libapache2-mod-php  php-mysql php-mbstring php-ldap php-pear zend-framework mariadb-client
 apt-get install php php-mysql php-mbstring php-ldap php-pear php-zip php-curl php-gd
 apt-get install smarty3
+else
+which yum >//dev/null
+if [ $? == 0 ]; then
+echo "centos based system"
+yum install apache2 mariadb-server libapache2-mod-php  php-mysql php-mbstring php-ldap php-pear zend-framework mariadb-client
+yum install php php-mysql php-mbstring php-ldap php-pear php-zip php-curl php-gd
+yum install smarty3
+
+
+fi
 fi
 #rsync -av webservices/roundcubemail*  /usr/share/
 git clone https://github.com/roundcube/roundcubemail.git /usr/share/roundcubemail

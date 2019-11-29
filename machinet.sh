@@ -21,7 +21,23 @@ installpkg /tmp/dovecot*mb.t*z
 installpkg /tmp/postfix*mb.t*z
 installpkg /tmp/openldap-server*.t*z
 VERSION=SLACK
+else
+
+which yum >/dev/null
+if [ $? == 0 ]; then
+echo "centos system"
+yum install postfix 
+yum  install dovecot
+yum  install  dovecot-dev
+yum  install openldap  openldap-clients
+yum install   mariadb-server mysql-client php
+
 fi
+
+
+fi
+
+
 fi
 
 mkdir /etc/machinet
