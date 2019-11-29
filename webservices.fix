@@ -1,4 +1,5 @@
 #!/bin/bash
+ROOT=/usr/share
 which apt-get >/dev/null
 if [ $? == 0 ]; then
 echo "debian based system"
@@ -14,10 +15,21 @@ git clone https://github.com/mbadici/mcConsolette.git
 #rsync -av webservices/chwala*  /usr/share/
 git clone https://git.kolab.org/diffusion/C/chwala.git         /usr/share/chwala
 git clone https://git.kolab.org/diffusion/S/syncroton.git         /usr/share/syncroton
+mkdir /usr/share/syncroton/lib/plugins
+mkdir /usr/share/chwala/lib/drivers/kolab/plugins
+mkdir /usr/share/chwala/lib/ext
 chown -R www-data:www-data /usr/share/mcConsolette
 chown -R www-data:www-data /usr/share/roundcubemail
 chown -R www-data:www-data /usr/share/chwala
 chown -R www-data:www-data /usr/share/syncroton
+ln -s /usr/share/roundcubemail/program/lib/Roundcube /usr/share/syncroton/lib
+ln -s /usr/share/roundcubemail/program/lib/Roundcube $ROOT/chwala/lib/ext/
+for plug in `ls /usr/share/roundcubemail/plugins|grep kolab`; 
+do ln -s $ROOT/roundcubemail/plugins/$plug $ROOT/syncroton/lib/plugins/ 
+ln -s $ROOT/roundcubemail/plugins/$plug $ROOT/chwala/lib/drivers/kolab/plugins/ 
+
+
+done
 cp webservices/httpd-machinet.conf /etc/apache2/sites-available
 which apt-get >/dev/null
 if [ $? == 0 ]; then
