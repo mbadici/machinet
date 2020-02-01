@@ -33,13 +33,18 @@ wget http://mirrors.hostingromania.ro/apache.org//xerces/c/3/sources/xerces-c-3.
 fi
 pear install HTTP_Request2
 
-git clone https://gitlab.com/roundcube/net_ldap3
+git clone https://gitlab.com/roundcube/net_ldap3 /tmp/net_ldap3
+cp -R /tmp/net_ldap3/lib/Net/* /usr/share/php/Net/
 
 #mv kolabformat.php /usr/lib/php/
 git clone https://git.kolab.org/diffusion/LKX/libkolabxml.git /tmp/libkolabxml
 cd /tmp/libkolabxml
+
+
 ./autogen.sh
+sed -i.bak 's/-php/-php7/g' src/php/CMakeLists.txt; \
 cd build
-cmake ..
+ cmake .. -DBUILD_TESTS=FALSE ;  \
+
 make;make install
 cp src/libkolab*  /lib/x86_64-linux-gnu/
