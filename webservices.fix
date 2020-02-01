@@ -5,7 +5,7 @@ if [ $? == 0 ]; then
 echo "debian based system"
 apt-get install apache2 mariadb-server libapache2-mod-php  php-mysql php-mbstring php-ldap php-pear zend-framework mariadb-client
 apt-get install php php-mysql php-mbstring php-ldap php-pear php-zip php-curl php-gd
-apt-get install smarty3
+apt-get install smarty3 php-sabre-vobject
 else
 which yum >//dev/null
 if [ $? == 0 ]; then

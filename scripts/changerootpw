@@ -1,0 +1,15 @@
+
+#ldapsearch -H ldapi:// -LLL -Q -Y EXTERNAL -b "cn=config" "(olcRootDN=*)" dn olcRootDN olcRootPW | tee ~/newpasswd.ldif
+#!bin/bash
+echo "dn: olcDatabase={2}mdb,cn=config
+#olcRootDN: cn=Manager,dc=machinet" > /tmp/pass.ldif
+echo "changetype: modify
+replace: olcRootPW
+olcRootPW:"    >> /tmp/pass.ldif
+#sed -i.bak s/$//g /tmp/pass.ldif
+truncate --size=-1 /tmp/pass.ldif
+/usr/sbin/slappasswd -h {SSHA}  >> /tmp/pass.ldif
+ldapmodify -Y EXTERNAL -H ldapi:/// -D "cn=admin,cn=config" -W -f /tmp/pass.ldif
+rm /tmp/pass.ldif
+
+
