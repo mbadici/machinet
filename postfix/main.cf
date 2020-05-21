@@ -520,10 +520,15 @@ smtpd_sasl_auth_enable = yes
 smtpd_sasl_type = dovecot
 smtpd_sasl_path = private/auth
 enable_original_recipient = yes
-#smtpd_tls_cert_file                     = /etc/letsencrypt/live/machinet.ro/cert.pem
+#smtpd_
+tls_cert_file                     = /etc/letsencrypt/live/machinet.ro/cert.pem
 #smtpd_tls_key_file                      = /etc/letsencrypt/live/machinet.ro/privkey.pem
 #smtpd_use_tls=yes
 #smtpd_tls_security_level=may
+#smtp_tls_security_level = may
+#smtp_tls_note_starttls_offer = yes
+
+
 
 #smtpd_sasl_application_name = smtpd
 #smtpd_sasl_path = smtpd
@@ -534,4 +539,7 @@ smtpd_recipient_restrictions =permit_mynetworks, permit_sasl_authenticated, reje
  
 broken_sasl_auth_clients = yes
 html_directory = no
-#End of added lines
+
+#milter_protocol = 6
+#smtpd_milters = unix:/var/spool/postfix/BitDefender/bdmilterd.sock, local:opendkim/opendkim.sock
+#non_smtpd_milters = local:opendkim/opendkim.sock
