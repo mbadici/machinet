@@ -42,7 +42,7 @@ cd /tmp/libkolabxml
 
 
 ./autogen.sh
-sed -i.bak 's/-php/-php7/g' src/php/CMakeLists.txt; \
+sed -i.bak 's/-php /-php7 /g' src/php/CMakeLists.txt; \
 cd build
  cmake .. -DBUILD_TESTS=FALSE ;  \
 
