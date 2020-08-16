@@ -17,38 +17,38 @@ yum install smarty3
 
 fi
 fi
-#rsync -av webservices/roundcubemail*  /usr/share/
-git clone https://github.com/roundcube/roundcubemail.git /usr/share/roundcubemail
-/usr/share/roundcubemail/bin/install-jsdeps.sh
-
-#rsync -av webservices/mcConsolette  /usr/share/
+#rsync -av webservices/roundcubemail*  $ROOT/
+git clone https://github.com/roundcube/roundcubemail.git $ROOT/roundcubemail
+$ROOT/roundcubemail/bin/install-jsdeps.sh
+ lessc --relative-urls -x $ROOT/roundcubemail/plugins/libkolab/skins/elastic/libkolab.less > $ROOT/roundcubemail/plugins/libkolab/skins/elastic/libkolab.min.css
+#rsync -av webservices/mcConsolette  $ROOT/
 git clone https://github.com/mbadici/mcConsolette.git
-#rsync -av webservices/chwala*  /usr/share/
-git clone https://git.kolab.org/diffusion/C/chwala.git         /usr/share/chwala
-git clone https://git.kolab.org/diffusion/S/syncroton.git         /usr/share/syncroton
-git clone https://git.kolab.org/source/iRony.git                            /usr/share/iRony
-#mkdir /usr/share/syncroton/lib/plugins
+#rsync -av webservices/chwala*  $ROOT/
+git clone https://git.kolab.org/diffusion/C/chwala.git         $ROOT/chwala
+git clone https://git.kolab.org/diffusion/S/syncroton.git         $ROOT/syncroton
+git clone https://git.kolab.org/source/iRony.git                            $ROOT/iRony
+#mkdir $ROOT/syncroton/lib/plugins
 ln -s $ROOT/roundcubemail/plugins $ROOT/syncroton/lib/
-mkdir /usr/share/chwala/lib/drivers/kolab/plugins
-mkdir /usr/share/chwala/lib/ext
-chown -R www-data:www-data /usr/share/mcConsolette
-chown -R www-data:www-data /usr/share/roundcubemail
-chown -R www-data:www-data /usr/share/chwala
-chown -R www-data:www-data /usr/share/syncroton
-ln -s /usr/share/roundcubemail/program/lib/Roundcube /usr/share/syncroton/lib
-ln -s /usr/share/roundcubemail/program/lib/Roundcube $ROOT/chwala/lib/ext/
-for plug in `ls /usr/share/roundcubemail/plugins|grep kolab`; 
+mkdir $ROOT/chwala/lib/drivers/kolab/plugins
+mkdir $ROOT/chwala/lib/ext
+chown -R www-data:www-data $ROOT/mcConsolette
+chown -R www-data:www-data $ROOT/roundcubemail
+chown -R www-data:www-data $ROOT/chwala
+chown -R www-data:www-data $ROOT/syncroton
+ln -s $ROOT/roundcubemail/program/lib/Roundcube $ROOT/syncroton/lib/ext/
+ln -s $ROOT/roundcubemail/program/lib/Roundcube $ROOT/chwala/lib/ext/
+for plug in `ls $ROOT/roundcubemail/plugins|grep kolab`; 
 do ln -s $ROOT/roundcubemail/plugins/$plug $ROOT/syncroton/lib/plugins/ 
 ln -s $ROOT/roundcubemail/plugins/$plug $ROOT/chwala/lib/drivers/kolab/plugins/ 
-cp webservices/rc-config/ldap-authentication-config.inc.php /usr/share/roundcubemail/plugins/ldap-authentication/config.inc.php
+cp webservices/rc-config/ldap-authentication-config.inc.php $ROOT/roundcubemail/plugins/ldap-authentication/config.inc.php
 
 done
 echo "configuring iRony"
-ln -s /usr/share/roundcubemail/program/lib/Roundcube /usr/share/iRony/lib/
-ln -s /usr/share/roundcubemail/config/config.inc.php /usr/share/iRony/config
-ln -s /usr/share/roundcubemail/plugins /usr/share/iRony/lib/
-ln -s /usr/share/chwala/lib /usr/share/iRony/lib/FileAPI
-cp webservices/rc-config/iRony-config.inc.php /usr/share/iRony/config/dav.inc.php
+ln -s $ROOT/roundcubemail/program/lib/Roundcube $ROOT/iRony/lib/
+ln -s $ROOT/roundcubemail/config/config.inc.php $ROOT/iRony/config
+ln -s $ROOT/roundcubemail/plugins $ROOT/iRony/lib/
+ln -s $ROOT/chwala/lib $ROOT/iRony/lib/FileAPI
+cp webservices/rc-config/iRony-config.inc.php $ROOT/iRony/config/dav.inc.php
 
 
 
@@ -66,12 +66,12 @@ mysql -u root -p < webservices/database.sql
 mysql -u root -p  roundcubemail < webservices/kolab16.sql
 mkdir /etc/machinet/roundcubemail
 cp webservices/roundcubemail/config/config.inc.php /etc/machinet/roundcubemail/
-ln -s /etc/machinet/roundcubemail/config.inc.php /usr/share/roundcubemail/config/
-cd /usr/share
+ln -s /etc/machinet/roundcubemail/config.inc.php $ROOT/roundcubemail/config/
+cd $ROOT
 #ln -s roundcubemail-* roundcubemail
 ln -s chwala* chwala
 mkdir /var/log/roundcubemail/
 chown www-data:www-data /var/log/roundcubemail
-rm /usr/share/roundcubemail/logs
-ln -s /var/log/roundcubemail /usr/share/roundcubemail/logs
-cd /usr/share/roundcubemail/plugins
+rm $ROOT/roundcubemail/logs
+ln -s /var/log/roundcubemail $ROOT/roundcubemail/logs
+cd $ROOT/roundcubemail/plugins
