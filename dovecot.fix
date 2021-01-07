@@ -1,7 +1,7 @@
 #!/bin/bash
 #useradd dovecot -s /bin/false
 mkdir /var/dovecot
-/sbin/useradd -u 10000 -U mailbox  -s /bin/false
+/usr/sbin/useradd -u 10000 -U mailbox  -s /bin/false
 chown 10000.10000 /var/dovecot
 mv /etc/dovecot /etc/dovecot.back-machinet
 cp -r dovecot/ /etc/

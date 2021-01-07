@@ -17,11 +17,11 @@ if [ $? == 0 ]; then
 echo "debian based system"
 
 apt-get update
-apt-get install php-kolabformat
+#apt-get install php-kolabformat
 apt-get install php-pear
 apt-get install cmake libboost-dev g++ libboost-thread1.67-dev libboost-system1.67-dev libxerces-c-dev xsdcxx libcurl4-openssl-dev swig libpython-dev php-dev
 echo "extension=libkolab.so" > /etc/php/7.3/modules-available/libkolab.ini
-ln -s /etc/php/7.3/modules-available/libkolab.ini /etc/php/7.3/apache2/conf.d/30-libkolab.ini
+ln -s /etc/php/7.3/mods-available/libkolab.ini /etc/php/7.3/apache2/conf.d/30-libkolab.ini
 fi
 
 which slackpkg

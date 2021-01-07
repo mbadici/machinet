@@ -35,8 +35,7 @@ $config['kolab_http_request'] = array();
 
 // When kolab_cache is enabled Roundcube's messages cache will be redundant
 // when working on kolab folders. Here we can:
-// 3 - bypass only indexes, but use messages cache
-// 2 - bypass both messages and indexes cache
+// 2 - bypass messages/indexes cache completely
 // 1 - bypass only messages, but use index cache
 $config['kolab_messages_cache_bypass'] = 0;
 
@@ -65,21 +64,7 @@ $config['kolab_users_id_attrib'] = null;
 // Use these attributes when searching users in LDAP
 $config['kolab_users_search_attrib'] = array('cn','mail','alias');
 
-// Which property of the LDAP user record to use as a display name.
-// Defaults to the 'kolab_auth_name' configuration option.
-$config['kolab_users_name_field'] = null;
-
-// Type of cache for uid-to-user map. Supported: 'db', 'apc', 'memcache' and 'memcached'.
-// Note: This stores only other user folder identifier to user attributes map.
-$config['kolab_users_cache'] = null;
-
-// lifetime of shared folder mapping cache
-// possible units: s, m, h, d, w
-$config['kolab_users_cache_ttl'] = '10d';
-
 // JSON-RPC endpoint configuration of the Bonnie web service providing historic data for groupware objects
-$config['kolab_bonnie_api'] = null;
-/*
 $config['kolab_bonnie_api'] = array(
     'uri'    => 'https://<kolab-hostname>:8080/api/rpc',
     'user'   => 'webclient',
@@ -88,4 +73,3 @@ $config['kolab_bonnie_api'] = array(
     'debug'  => true,   // logs requests/responses to <log-dir>/bonnie
     'timeout' => 30,
 );
-*/

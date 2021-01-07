@@ -16,10 +16,10 @@
 $config['kolab_auth_addressbook'] = 'GAL';
 
 // This will overwrite defined filter
-$config['kolab_auth_filter'] = '(&(objectClass=InetOrgPerson)(|(uid=%fu)(mail=%fu)(alias=%fu)))';
+$config['kolab_auth_filter'] = '(&(objectClass=InetOrgPerson)(|(uid=%u)(mail=%fu)(alias=%fu)))';
 
 // Use this field (from fieldmap configuration) to get authentication ID. Don't use an array here!
-$config['kolab_auth_login'] = 'uid';
+$config['kolab_auth_login'] = 'email';
 
 // Use these fields (from fieldmap configuration) for default identity.
 // If the value array contains more than one field, first non-empty will be used

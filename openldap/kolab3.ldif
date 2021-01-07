@@ -1,0 +1,384 @@
+# $Id$
+# (c) 2003, 2004 Tassilo Erlewein <tassilo.erlewein@erfrakon.de>
+# (c) 2003-2009  Martin Konold <martin.konold@erfrakon.de>
+# (c) 2003 Achim Frank <achim.frank@erfrakon.de>
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# Redistributions of source code must retain the above copyright notice, this
+# list of conditions and the following disclaimer.
+#
+# Redistributions in binary form must reproduce the above copyright notice,
+# this list of conditions and the following disclaimer in the documentation
+# and/or other materials provided with the distribution.
+#
+# The name of the author may not be used to endorse or promote products derived
+# from this software without specific prior written permission.
+#
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+# EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+# This schema highly depends on the core.schema, cosine.schema and the inetorgperson.schema
+# as provided by 3rd parties like OpenLDAP.
+#
+# slapd.conf then looks like
+# include /kolab/etc/openldap/schema/core.schema
+# include /kolab/etc/openldap/schema/cosine.schema
+# include /kolab/etc/openldap/schema/inetorgperson.schema
+# include /kolab/etc/openldap/schema/rfc2739.schema
+# include /kolab/etc/openldap/schema/kolab3.schema
+# Prefix for OIDs: 1.3.6.1.4.1.19414 <- registered
+# Prefix for OIDs: 1.3.6.1.4.1.19414.2000 <-- temporarily reserved for ob
+# Prefix for attributes: 1.3.6.1.4.1.19414.1
+# Prefix for attributes: 1.3.6.1.4.1.19414.2
+# Prefix for objectclasses: 1.3.6.1.4.1.19414.3
+# nameprefix: kolab
+#
+dn: cn=kolab,cn=schema,cn=config
+####################
+# kolab attributes #
+####################
+# kolabDeleteflag used to be a boolean but describes with Kolab 2
+# the fqdn of the server which is requested to delete this objects
+# in its local store
+attributeTypes: ( 1.3.6.1.4.1.19414.2.1.2
+  NAME 'kolabDeleteflag'
+  DESC 'Per host deletion status'
+  EQUALITY caseIgnoreIA5Match
+  SUBSTR caseIgnoreIA5SubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{256} )
+# alias used to provide alternative rfc822 email addresses for kolab users
+attributeTypes: ( 1.3.6.1.4.1.19414.2.1.3
+  NAME 'alias'
+  DESC 'RFC1274: RFC822 Mailbox'
+  EQUALITY caseIgnoreIA5Match
+  SUBSTR caseIgnoreIA5SubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{256} )
+# Specifies the email delegates.
+# An email delegate can send email on behalf of the account
+# which means using the "from" of the account.
+# Delegates are specified by the syntax of rfc822 email addresses.
+attributeTypes: ( 1.3.6.1.4.1.19414.1.1.1.3
+  NAME 'kolabDelegate'
+  DESC 'Kolab user allowed to act as delegates - RFC822 Mailbox/Alias'
+  EQUALITY caseIgnoreIA5Match
+  SUBSTR caseIgnoreIA5SubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{256} )
+# For user, group and resource Kolab accounts
+# Describes how to respond to invitations
+# We keep the attribute as a string, but actually it can only have one
+# of the following values:
+#
+#  ACT_ALWAYS_ACCEPT
+#  ACT_ALWAYS_REJECT
+#  ACT_REJECT_IF_CONFLICTS
+#  ACT_MANUAL_IF_CONFLICTS
+#  ACT_MANUAL
+# In addition one of these values may be prefixed with a primary email
+# address followed by a colon like
+# user@domain.tld: ACT_ALWAYS_ACCEPT
+attributeTypes: ( 1.3.6.1.4.1.19414.1.1.1.4
+  NAME ( 'kolabInvitationPolicy' 'kolabResourceAction' )
+  DESC 'defines how to respond to invitations'
+  EQUALITY caseIgnoreIA5Match
+  SUBSTR caseIgnoreIA5SubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{256} )
+# Begin date of Kolab vacation period. Sender will
+# be notified every kolabVacationResendIntervall days
+# that recipient is absent until kolabVacationEnd.
+# Values in this syntax are encoded as printable strings,
+# represented as specified in X.208.
+# Note that the time zone must be specified.
+# For Kolab we limit ourself to  GMT
+# YYYYMMDDHHMMZ e.g. 200512311458Z.
+# see also: rfc 2252.
+# Currently this attribute is not used in Kolab.
+attributeTypes: ( 1.3.6.1.4.1.19414.1.1.1.8
+  NAME 'kolabVacationBeginDateTime'
+  DESC 'Begin date of vacation'
+  EQUALITY generalizedTimeMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.24
+  SINGLE-VALUE )
+# End date of Kolab vacation period. Sender will
+# be notified every kolabVacationResendIntervall days
+# that recipient is absent starting from kolabVacationBeginDateTime.
+# Values in this syntax are encoded as printable strings,
+# represented as specified in X.208.
+# Note that the time zone must be specified.
+# For Kolab we limit ourself to  GMT
+# YYYYMMDDHHMMZ e.g. 200601012258Z.
+# see also: rfc 2252.
+# Currently this attribute is not used in Kolab.
+attributeTypes: ( 1.3.6.1.4.1.19414.1.1.1.9
+  NAME 'kolabVacationEndDateTime'
+  DESC 'End date of vacation'
+  EQUALITY generalizedTimeMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.24
+  SINGLE-VALUE )
+# Intervall in days after which senders get
+# another vacation message.
+# Currently this attribute is not used in Kolab.
+attributeTypes: ( 1.3.6.1.4.1.19414.1.1.1.10
+  NAME 'kolabVacationResendInterval'
+  DESC 'Vacation notice interval in days'
+  EQUALITY integerMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+  SINGLE-VALUE )
+# Email recipient addresses which are handled by the
+# vacation script. There can be multiple kolabVacationAddress
+# entries for each kolabInetOrgPerson.
+# Default is the primary email address and all
+# email aliases of the kolabInetOrgPerson.
+# Currently this attribute is not used in Kolab.
+attributeTypes: ( 1.3.6.1.4.1.19414.1.1.1.11
+  NAME 'kolabVacationAddress'
+  DESC 'Email address for vacation to response upon'
+  EQUALITY caseIgnoreIA5Match
+  SUBSTR caseIgnoreIA5SubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{256} )
+# Enable sending vacation notices in reaction
+# unsolicited commercial email.
+# Default is no.
+# Currently this attribute is not used in Kolab.
+attributeTypes: ( 1.3.6.1.4.1.19414.1.1.1.12
+  NAME 'kolabVacationReplyToUCE'
+  DESC 'Enable vacation notices to UCE'
+  EQUALITY booleanMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+  SINGLE-VALUE )
+# Email recipient domains which are handled by the
+# vacation script. There can be multiple kolabVacationReactDomain
+# entries for each kolabInetOrgPerson
+# Default is to handle all domains.
+# Currently this attribute is not used in Kolab.
+attributeTypes: ( 1.3.6.1.4.1.19414.1.1.1.13
+  NAME 'kolabVacationReactDomain'
+  DESC 'Multivalued -- Email domain for vacation to response upon'
+  EQUALITY caseIgnoreIA5Match
+  SUBSTR caseIgnoreIA5SubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{256} )
+# Keep local copy when forwarding emails to list of
+# kolabForwardAddress.
+# Default is no.
+# Currently this attribute is not used in Kolab.
+attributeTypes: ( 1.3.6.1.4.1.19414.1.1.1.15
+  NAME 'kolabForwardKeepCopy'
+  DESC 'Keep copy when forwarding'
+  EQUALITY booleanMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+  SINGLE-VALUE )
+# Enable forwarding of UCE.
+# Default is yes.
+# Currently this attribute is not used in Kolab.
+attributeTypes: ( 1.3.6.1.4.1.19414.1.1.1.16
+  NAME 'kolabForwardUCE'
+  DESC 'Enable forwarding of mails known as UCE'
+  EQUALITY booleanMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+  SINGLE-VALUE )
+# Describes the allowed or disallowed smtp recipient addresses for mail sent
+# by the user associated with the LDAP object this attribute is associated with.
+#
+# If this attribute is not set for a user or distribution group,
+# no Kolab recipient policy does apply.
+#
+# Example entries:
+# .tld             - allow mail to every recipient for this tld
+# domain.tld       - allow mail to everyone in domain.tld
+# .domain.tld      - allow mail to everyone in domain.tld and its subdomains
+# user@domain.tld  - allow mail to explicit user@domain.tld
+# user@            - allow mail to this user but any domain
+# -.tld            - disallow mail to every recipient for this tld
+# -domain.tld      - disallow mail to everyone in domain.tld
+# -.domain.tld     - disallow mail to everyone in domain.tld and its subdomains
+# -user@domain.tld - disallow mail to explicit user@domain.tld
+# -user@           - disallow mail to this user but any domain
+attributeTypes: ( 1.3.6.1.4.1.19414.1.1.1.18
+  NAME 'kolabAllowSMTPRecipient'
+  DESC 'SMTP address allowed for destination (multi-valued)'
+  EQUALITY caseIgnoreIA5Match
+  SUBSTR caseIgnoreIA5SubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{512} )
+# Jeroen van Meeuwen (Kolab Systems): Unnecessary in this deployment, as users
+# will be created on one server only, however we keep this in here to allow the
+# mail server to use to be specified from the user provisioning batch operation.
+#
+# Create the user mailbox on the kolabHomeServer only.
+# Default is no.
+attributeTypes: ( 1.3.6.1.4.1.19414.1.1.1.19
+  NAME 'kolabHomeServerOnly'
+  DESC 'Create the user mailbox on the kolabHomeServer only'
+  EQUALITY booleanMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+  SINGLE-VALUE )
+# Describes the allowed or disallowed smtp envelope sender addresses used for
+# the recipient this attribute is associated with.
+#
+# If this attribute is not set for a user or distribution
+# kolab sender policy does apply.
+#
+# Example entries:
+# .tld             - allow mail to every recipient for this tld
+# domain.tld       - allow mail to everyone in domain.tld
+# .domain.tld      - allow mail to everyone in domain.tld and its subdomains
+# user@domain.tld  - allow mail to explicit user@domain.tld
+# user@            - allow mail to this user but any domain
+# -.tld            - disallow mail to every recipient for this tld
+# -domain.tld      - disallow mail to everyone in domain.tld
+# -.domain.tld     - disallow mail to everyone in domain.tld and its subdomains
+# -user@domain.tld - disallow mail to explicit user@domain.tld
+# -user@           - disallow mail to this user but any domain
+attributeTypes: ( 1.3.6.1.4.1.19414.1.1.1.43
+  NAME 'kolabAllowSMTPSender'
+  DESC 'SMTP envelope sender address accepted for delivery (multi-valued)'
+  EQUALITY caseIgnoreIA5Match
+  SUBSTR caseIgnoreIA5SubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{512} )
+# kolabFolderType describes the kind of Kolab folder
+# as defined in the kolab format specification.
+# We will annotate all folders with an entry
+# /vendor/kolab/folder-type containing the attribute
+# value.shared set to: <type>[.<subtype>].
+# The <type> can be: mail, event, journal, task, note,
+# or contact. The <subtype> for a mail folder can be
+# inbox, drafts, sentitems, or junkemail (this one holds
+# spam mails). For the other <type>s, it can only be
+# default, or not set.  For other types of folders
+# supported by the clients, these should be prefixed with
+# "k-" for KMail, "h-" for Horde and "o-" for Outlook, and
+# look like for example "kolab.o-voicemail". Other third-party
+# clients shall use the "x-" prefix.
+# We then use the ANNOTATEMORE IMAP extension to
+# associate the folder type with a folder.
+attributeTypes: ( 1.3.6.1.4.1.19414.2.1.7
+  NAME 'kolabFolderType'
+  DESC 'type of a kolab folder'
+  EQUALITY caseIgnoreIA5Match
+  SUBSTR caseIgnoreIA5SubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{256}
+  SINGLE-VALUE )
+attributeTypes: ( 1.3.6.1.4.1.19414.2.1.8
+  NAME 'kolabTargetFolder'
+  DESC 'Target for a Kolab Shared Folder delivery'
+  EQUALITY caseExactMatch
+  SUBSTR caseExactSubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{512}
+  SINGLE-VALUE )
+# cyrus imapd access control list
+# acls work with users and groups
+attributeTypes: ( 1.3.6.1.4.1.19414.2.1.651
+  NAME 'acl'
+  EQUALITY caseIgnoreIA5Match
+  SUBSTR caseIgnoreIA5SubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{256} )
+# Extended attributes for Resources
+attributeTypes: ( 1.3.6.1.4.1.19414.3.1.1
+  NAME 'kolabDescAttribute'
+  DESC 'Descriptive attribute or parameter for a Resource'
+  EQUALITY caseIgnoreIA5Match
+  SUBSTR caseIgnoreIA5SubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{256} )
+##########################
+# kolabfilter attributes #
+##########################
+# enable trustable From:
+attributeTypes: ( 1.3.6.1.4.1.19414.2.1.750
+  NAME 'kolabfilter-verify-from-header'
+  EQUALITY booleanMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 )
+# should Sender header be allowed instead of From
+# when present?
+attributeTypes: ( 1.3.6.1.4.1.19414.2.1.751
+  NAME 'kolabfilter-allow-sender-header'
+  EQUALITY booleanMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 )
+# Should reject messages with From headers that dont match
+# the envelope? Default is to rewrite the header
+attributeTypes: ( 1.3.6.1.4.1.19414.2.1.752
+  NAME 'kolabfilter-reject-forged-from-header'
+  EQUALITY booleanMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 )
+########################
+# kolab object classes #
+########################
+# public folders are typically visible to everyone subscribed to
+# the server without the need for an extra login. Subfolders are
+# defined using the hiarchy seperator '/' e.g. "sf/sub1". Please note
+# that the term public folder is prefered to shared folder because
+# normal user mailboxes can also share folders using acls.
+objectClasses: ( 1.3.6.1.4.1.19414.2.2.9
+  NAME 'kolabSharedFolder'
+  DESC 'Kolab public shared folder'
+  SUP top AUXILIARY
+  MUST cn
+  MAY ( acl $
+        alias $
+        mailHost $
+        kolabFolderType $
+        kolabDeleteflag $
+        kolabDelegate $
+        kolabTargetFolder $
+        kolabAllowSMTPRecipient $
+        kolabAllowSMTPSender $
+        owner ) )
+# kolab account
+# we use an auxiliary in order to ease integration
+# with existing inetOrgPerson objects
+# Please note that userPassword is a may
+# attribute in the schema but is mandatory for
+# Kolab
+objectClasses: ( 1.3.6.1.4.1.19414.3.2.2
+  NAME 'kolabInetOrgPerson'
+  DESC 'Kolab Internet Organizational Person'
+  SUP top AUXILIARY
+  MAY ( alias $
+        mailHost $
+        kolabHomeServerOnly $
+        kolabDelegate $
+        kolabInvitationPolicy $
+        kolabVacationBeginDateTime $
+        kolabVacationEndDateTime $
+        kolabVacationResendInterval $
+        kolabVacationAddress $
+        kolabVacationReplyToUCE $
+        kolabVacationReactDomain $
+        kolabForwardKeepCopy $
+        kolabForwardUCE $
+        kolabAllowSMTPRecipient $
+        kolabAllowSMTPSender $
+        kolabDeleteflag ) )
+# kolab groupOfNames with extra kolabDeleteflag and the required
+# attribute mail.
+# The mail attribute for kolab objects of the type kolabGroupOfNames
+# is not arbitrary but MUST be a single attribute of the form
+# of an valid SMTP address with the CN as the local part.
+# E.g cn@kolabdomain (e.g. employees@mydomain.com). The
+# mail attribute MUST be globally unique.
+objectClasses: ( 1.3.6.1.4.1.19414.3.2.8
+  NAME 'kolabGroupOfUniqueNames'
+  DESC 'Kolab group of names (DNs) derived from RFC2256'
+  SUP top AUXILIARY
+  MAY ( mail $
+        alias $
+        kolabDelegate $
+        kolabDeleteflag $
+        kolabAllowSMTPRecipient $
+        kolabAllowSMTPSender ) )
+# kolab resources 
+objectClasses: ( 1.3.6.1.4.1.19414.3.2.9
+  NAME 'kolabResource'
+  DESC 'Kolab Resource'
+  SUP top AUXILIARY
+  MAY ( kolabInvitationPolicy $
+        kolabDescAttribute $
+        description $
+        owner ) )

@@ -7,7 +7,7 @@
 // 1 - "Personal address book(s) first". Use all address books, starting with the personal (Kolab)
 // 2 - "Global address book(s) only". Use the global (LDAP) addressbook. Disable the personal.
 // 3 - "Personal address book(s) only". Use the personal (Kolab) addressbook(s). Disable the global.
-$config['kolab_addressbook_prio'] = 0;
+$config['kolab_addressbook_prio'] = 1;
 
 // Base URL to build fully qualified URIs to access address books via CardDAV
 // The following replacement variables are supported:
@@ -30,6 +30,6 @@ $config['kolab_addressbook_prio'] = 0;
 // Although correctly stated in the CardDAV properties, some clients (e.g. the Thunderbird SoGO connector)
 // ignore these properties and allow modifications which then result in sync errors because the server
 // denies such updates.
-$config['kolab_addressbook_carddav_ldap'] = 'GAL';
+$config['kolab_addressbook_carddav_ldap'] = '';
 
 ?>

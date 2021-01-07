@@ -1,8 +1,7 @@
 #!/bin/bash
 RC_PATH="/usr/share/roundcubemail/"
-for conf in `ls *.cfg`; do
-echo $conf
-plug="${conf%.*}"
-echo $plug
-cp $conf $RC_PATH/plugins/$plug/config.inc.php
+for plugin in `ls *`; do
+echo $plugin
+
+cp $plugin/config.inc.php $RC_PATH/plugins/$plugin/
 done
