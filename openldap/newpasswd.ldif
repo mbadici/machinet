@@ -2,4 +2,4 @@ dn: olcDatabase={2}mdb,cn=config
 #olcRootDN: cn=Manager,dc=machinet
 changetype: modify
 replace: olcRootPW
-olcRootPW: {SSHA}8lR3Oss2knP0yRdbtqFi41U14HvyqqMy
+olcRootPW: {SSHA}8K20M69QzjmkDKfSbi7rZb2n3jYyqr4d

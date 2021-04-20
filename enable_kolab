@@ -31,6 +31,12 @@ git clone https://git.kolab.org/diffusion/LKX/libkolabxml.git
 wget http://mirrors.hostingromania.ro/apache.org//xerces/c/3/sources/xerces-c-3.2.2.tar.xz
 
 fi
+
+pear channel-delete zend.googlecode.com/svn
+pear channel-discover pear.dotkernel.com/zf1/svn
+pear install zend/zend
+
+
 pear install HTTP_Request2
 
 git clone https://gitlab.com/roundcube/net_ldap3 /tmp/net_ldap3
