@@ -1,8 +1,12 @@
 #!/bin/bash
 ROOT=/usr/share
+export apache_user=apache
+export apache_group=apache
 which apt-get >/dev/null
 if [ $? == 0 ]; then
 echo "debian based system"
+export apache_user=www-data
+export apache_group=www-data
 apt-get install apache2 mariadb-server libapache2-mod-php  php-mysql php-mbstring php-ldap php-pear zend-framework mariadb-client
 apt-get install php php-mysql php-mbstring php-ldap php-pear php-zip php-curl php-gd
 apt-get install smarty3 php-sabre-vobject
@@ -17,6 +21,7 @@ yum install smarty3
 
 fi
 fi
+echo 
 #rsync -av webservices/roundcubemail*  $ROOT/
 git clone https://github.com/roundcube/roundcubemail.git $ROOT/roundcubemail
 $ROOT/roundcubemail/bin/install-jsdeps.sh
@@ -24,7 +29,7 @@ $ROOT/roundcubemail/bin/install-jsdeps.sh
 #rsync -av webservices/mcConsolette  $ROOT/
 git clone https://github.com/mbadici/mcConsolette.git    $ROOT/mcConsolette
 mkdir $ROOT/mcConsolette/templates_c
-chown www-data:www-data $ROOT/mcConsolette/templates_c
+chown $apache_user:$apache_group $ROOT/mcConsolette/templates_c
 #rsync -av webservices/chwala*  $ROOT/
 git clone https://git.kolab.org/diffusion/C/chwala.git         $ROOT/chwala
 git clone https://git.kolab.org/diffusion/S/syncroton.git         $ROOT/syncroton
@@ -33,10 +38,10 @@ git clone https://git.kolab.org/source/iRony.git                            $ROO
 ln -s $ROOT/roundcubemail/plugins $ROOT/syncroton/lib/
 mkdir $ROOT/chwala/lib/drivers/kolab/plugins
 mkdir $ROOT/chwala/lib/ext
-chown -R www-data:www-data $ROOT/mcConsolette
-chown -R www-data:www-data $ROOT/roundcubemail
-chown -R www-data:www-data $ROOT/chwala
-chown -R www-data:www-data $ROOT/syncroton
+chown -R $apache_user:$apache_group $ROOT/mcConsolette
+chown -R $apache_user:$apache_group $ROOT/roundcubemail
+chown -R $apache_user:$apache_group $ROOT/chwala
+chown -R $apache_user:$apache_group $ROOT/syncroton
 ln -s $ROOT/roundcubemail/program/lib/Roundcube $ROOT/syncroton/lib/ext/
 ln -s $ROOT/roundcubemail/program/lib/Roundcube $ROOT/chwala/lib/ext/
 for plug in `ls $ROOT/roundcubemail/plugins|grep kolab`; 
@@ -73,7 +78,7 @@ cd $ROOT
 #ln -s roundcubemail-* roundcubemail
 ln -s chwala* chwala
 mkdir /var/log/roundcubemail/
-chown www-data:www-data /var/log/roundcubemail
+chown $apache_user:$apache_group /var/log/roundcubemail
 rm $ROOT/roundcubemail/logs
 ln -s /var/log/roundcubemail $ROOT/roundcubemail/logs
 cd $ROOT/roundcubemail/plugins
