@@ -1,4 +1,4 @@
-server_host = 172.30.0.5
+server_host = localhost
 search_base  =  ou=domains,dc=machinet       
 version = 3
 bind = no

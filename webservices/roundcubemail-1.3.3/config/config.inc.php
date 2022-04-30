@@ -42,6 +42,9 @@ $config['debug_level'] = 8;
 // log driver:  'syslog' or 'file'.
 $config['log_driver'] = 'file';
 $config['mail_host']='%d';
+
+//use this for default domain:
+//$config['mail_domain'] = 'machinet.ro';
 // date format for log entries
 // (read http://php.net/manual/en/function.date.php for all format characters)  
 $config['log_date_format'] = 'd-M-Y H:i:s O';
