@@ -52,7 +52,7 @@ cp webservices/rc-config/ldap-authentication-config.inc.php $ROOT/roundcubemail/
 done
 echo "configuring iRony"
 ln -s $ROOT/roundcubemail/program/lib/Roundcube $ROOT/iRony/lib/
-ln -s $ROOT/roundcubemail/config/config.inc.php $ROOT/iRony/config
+ln -s $ROOT/roundcubemail/config/config.inc.php $ROOT/iRony/config/
 ln -s $ROOT/roundcubemail/plugins $ROOT/iRony/lib/
 ln -s $ROOT/chwala/lib $ROOT/iRony/lib/FileAPI
 cp webservices/rc-config/iRony-config.inc.php $ROOT/iRony/config/dav.inc.php
@@ -79,6 +79,6 @@ cd $ROOT
 ln -s chwala* chwala
 mkdir /var/log/roundcubemail/
 chown $apache_user:$apache_group /var/log/roundcubemail
-rm $ROOT/roundcubemail/logs
+rm -rf $ROOT/roundcubemail/logs
 ln -s /var/log/roundcubemail $ROOT/roundcubemail/logs
 cd $ROOT/roundcubemail/plugins

@@ -29,7 +29,7 @@ find_program(PHP_EXECUTABLE NAMES php)
 set(PHP_MIN_VERSION 50300)
 
 # Find where to install the extension files if it's not defined
-if(NOT DEFINED PHP_INSTALL_DIR)
+#if(NOT DEFINED PHP_INSTALL_DIR)
   find_program(PHP_CONFIG_EXECUTABLE NAMES php-config)
   if(PHP_CONFIG_EXECUTABLE)
     execute_process(COMMAND ${PHP_CONFIG_EXECUTABLE} --extension-dir
@@ -46,12 +46,15 @@ if(NOT DEFINED PHP_INSTALL_DIR)
 	)
   message("version a: ${PHP_VERSION_ID}")
  
+ message("version a: ${PHP_CONFIG_EXECUTABLE}")
+
+
 execute_process(COMMAND ${PHP_CONFIG_EXECUTABLE} --include-dir
                     OUTPUT_VARIABLE PHP_INCLUDE_DIR
 
         )
 
-  message("version: ${PHP_INCLUDE_DIR}")
+  message("versionaa: ${PHP_INCLUDE_DIR}")
 
 
 string(REGEX REPLACE "\n" "" PHP_INCLUDE_DIR "${PHP_INCLUDE_DIR}")
@@ -63,7 +66,7 @@ string(REGEX REPLACE "\n" "" PHP_VERSION_ID "${PHP_VERSION_ID}")
   else()
     set(PHP_INSTALL_DIR ${LIB_INSTALL_DIR}/extensions)
   endif()
-endif()
+#endif()
 
 if(PHP_INCLUDE_DIR AND PHP_EXECUTABLE)
   file(READ ${PHP_INCLUDE_DIR}/main/php_version.h PHP_VERSION_CONTENT)

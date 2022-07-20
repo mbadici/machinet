@@ -130,7 +130,7 @@ $config['plugins'] = array(
 );
 
 // skin name: folder from skins/
-$config['skin'] = 'larry';
+$config['skin'] = 'elastic';
 
 // path to imagemagick convert binary
 $rcmail_config['im_convert_path'] = null;
