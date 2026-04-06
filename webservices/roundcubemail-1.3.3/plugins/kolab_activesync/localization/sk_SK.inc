@@ -1,3 +1,0 @@
-<?php
-$labels['event'] = 'Kalendáre';
-?>
