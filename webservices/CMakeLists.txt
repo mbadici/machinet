@@ -3,7 +3,7 @@ include_directories(../)
 
 set(KOLAB_SWIG_PHP_SOURCE_FILE php_kolabformat_wrapper.cpp)
 add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${KOLAB_SWIG_PHP_SOURCE_FILE} ${CMAKE_CURRENT_BINARY_DIR}/kolabformat.php
-        COMMAND ${SWIG} -v -c++ -php7 -o ${CMAKE_CURRENT_BINARY_DIR}/${KOLAB_SWIG_PHP_SOURCE_FILE}  ../kolabformat.i
+        COMMAND ${SWIG} -v -c++ -php -o ${CMAKE_CURRENT_BINARY_DIR}/${KOLAB_SWIG_PHP_SOURCE_FILE}  ../kolabformat.i
         COMMENT "Generating php bindings"
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
         DEPENDS ../kolabformat.i kolabxml

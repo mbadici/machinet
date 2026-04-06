@@ -1,0 +1,13 @@
+#dn: cn=module{0}, cn=config
+#changetype: modify
+#add: olcModuleLoad
+#olcModuleLoad: sssvlv.la
+
+#changetype:modify
+dn: olcOverlay=sssvlv, olcDatabase={1}mdb,cn=config
+#objectclass: olcSssVlvConfig
+#olcOverlay: sssvlv
+#olcSssVlvMax: 10
+#olcSssVlvMaxKeys: 5
+#olcOverlay: valsort
+ValSort-Attr: uid dc=machinet alpha-ascend

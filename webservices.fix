@@ -23,7 +23,7 @@ fi
 fi
 echo 
 #rsync -av webservices/roundcubemail*  $ROOT/
-git clone https://github.com/roundcube/roundcubemail.git $ROOT/roundcubemail
+#git clone https://github.com/roundcube/roundcubemail.git $ROOT/roundcubemail
 $ROOT/roundcubemail/bin/install-jsdeps.sh
  lessc --relative-urls -x $ROOT/roundcubemail/plugins/libkolab/skins/elastic/libkolab.less > $ROOT/roundcubemail/plugins/libkolab/skins/elastic/libkolab.min.css
 #rsync -av webservices/mcConsolette  $ROOT/
